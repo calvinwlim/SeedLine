@@ -14,9 +14,14 @@ import type {
   EventSchedule,
   EventStatus,
   EventSummary,
+  MatControl,
   OrganizerProfile,
   RegistrationInput,
   RegistrationSummary,
+  ScoreAction,
+  ScoreMethod,
+  ScoreSide,
+  ScoreableMatch,
 } from '@openmat/types';
 
 /**
@@ -31,6 +36,19 @@ export interface ApiClient {
   getDivision(eventSlug: string, divisionId: string): Promise<DivisionDetail | null>;
   getEventSchedule(slug: string): Promise<EventSchedule | null>;
   createRegistration(input: RegistrationInput): Promise<RegistrationSummary>;
+
+  // Matside scoring
+  getMatControls(slug: string): Promise<MatControl[]>;
+  getScoreableMatch(slug: string, matchId: string): Promise<ScoreableMatch | null>;
+  applyScore(slug: string, matchId: string, action: ScoreAction): Promise<ScoreableMatch | null>;
+  startMatch(slug: string, matchId: string): Promise<ScoreableMatch | null>;
+  resetMatch(slug: string, matchId: string): Promise<ScoreableMatch | null>;
+  finishMatch(
+    slug: string,
+    matchId: string,
+    winnerSide: ScoreSide,
+    method: ScoreMethod,
+  ): Promise<ScoreableMatch | null>;
   listAcademies(search?: string): Promise<AcademySummary[]>;
   getAcademy(slug: string): Promise<AcademyDetail | null>;
   listAthletes(search?: string): Promise<AthleteSummary[]>;

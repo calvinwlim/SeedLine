@@ -14,9 +14,14 @@ import type {
   EventSchedule,
   EventStatus,
   EventSummary,
+  MatControl,
   OrganizerProfile,
   RegistrationInput,
   RegistrationSummary,
+  ScoreAction,
+  ScoreMethod,
+  ScoreSide,
+  ScoreableMatch,
 } from '@openmat/types';
 import type { ApiClient } from '../api-types';
 import {
@@ -29,7 +34,15 @@ import {
   slugify,
 } from './data';
 import { buildEntrants } from './entrants';
-import { buildSchedule } from './schedule';
+import {
+  applyScore as storeApplyScore,
+  finishMatch as storeFinishMatch,
+  getMatControls as storeGetMatControls,
+  getSchedule as storeGetSchedule,
+  getScoreableMatch as storeGetScoreableMatch,
+  resetMatch as storeResetMatch,
+  startMatch as storeStartMatch,
+} from './live-store';
 
 /** Simulate a little network latency so loading states are exercised in dev. */
 function delay<T>(value: T, ms = 180): Promise<T> {
@@ -196,7 +209,42 @@ export const mockClient: ApiClient = {
   getEventSchedule(slug: string) {
     const event = events.find((e) => e.slug === slug);
     if (!event) return delay<EventSchedule | null>(null);
-    return delay<EventSchedule | null>(buildSchedule(event));
+    return delay<EventSchedule | null>(storeGetSchedule(event));
+  },
+
+  // --- Matside scoring ----------------------------------------------------
+
+  getMatControls(slug: string) {
+    const event = events.find((e) => e.slug === slug);
+    return delay<MatControl[]>(event ? storeGetMatControls(event) : []);
+  },
+
+  getScoreableMatch(slug: string, matchId: string) {
+    const event = events.find((e) => e.slug === slug);
+    return delay<ScoreableMatch | null>(event ? storeGetScoreableMatch(event, matchId) : null);
+  },
+
+  applyScore(slug: string, matchId: string, action: ScoreAction) {
+    const event = events.find((e) => e.slug === slug);
+    return delay<ScoreableMatch | null>(event ? storeApplyScore(event, matchId, action) : null, 40);
+  },
+
+  startMatch(slug: string, matchId: string) {
+    const event = events.find((e) => e.slug === slug);
+    return delay<ScoreableMatch | null>(event ? storeStartMatch(event, matchId) : null, 60);
+  },
+
+  resetMatch(slug: string, matchId: string) {
+    const event = events.find((e) => e.slug === slug);
+    return delay<ScoreableMatch | null>(event ? storeResetMatch(event, matchId) : null, 60);
+  },
+
+  finishMatch(slug: string, matchId: string, winnerSide: ScoreSide, method: ScoreMethod) {
+    const event = events.find((e) => e.slug === slug);
+    return delay<ScoreableMatch | null>(
+      event ? storeFinishMatch(event, matchId, winnerSide, method) : null,
+      120,
+    );
   },
 
   // --- Organizer ----------------------------------------------------------

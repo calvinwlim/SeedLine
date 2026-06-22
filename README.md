@@ -124,8 +124,12 @@ The frontend covers, end to end on mock data:
 - **Event pages** — detail, divisions, venue map, a multi-step **registration flow** that writes
   back to your account, and per-division **bracket viewer** rendered with the real
   `@openmat/bracket-engine` (single elimination + round robin, with podium results).
-- **Live schedule & results** — a per-mat running order with live/on-deck/done states and a
-  completion bar (`/events/[slug]/schedule`).
+- **Live schedule & results** — a per-mat running order with live/on-deck/done states, live
+  scores, and a completion bar (`/events/[slug]/schedule`).
+- **Matside scoring** — a mat-control staff view (`/events/[slug]/control`) and a full scoring
+  console (`/events/[slug]/score/[matchId]`) with IBJJF points/advantages/penalties, a match
+  clock, and submission/points finishes. Results are held in a stateful in-memory store and
+  flow straight back to the live board.
 - **Account area** — dashboard, registrations, profile, settings.
 - **Organizer side** — a dashboard, event creation, status lifecycle control, division
   management, and a registrations roster (`/organizer`).

@@ -11,6 +11,12 @@ import { Card, EmptyState } from '../../../../components/ui/card';
 import { api } from '../../../../lib/api';
 import { eventStatusLabel, eventStatusTone } from '../../../../lib/format';
 
+function scoreText(match: ScheduleMatch): string | null {
+  if (!match.score) return null;
+  if (match.status === 'pending' || match.status === 'ready') return null;
+  return `${match.score.a.points}–${match.score.b.points}`;
+}
+
 function MatchRow({ match }: { match: ScheduleMatch }) {
   const live = match.status === 'in_progress';
   const ready = match.status === 'ready';
@@ -41,7 +47,12 @@ function MatchRow({ match }: { match: ScheduleMatch }) {
           {match.divisionName} · {match.roundLabel}
         </p>
       </div>
-      <div className="shrink-0">
+      <div className="flex shrink-0 items-center gap-2">
+        {scoreText(match) && (
+          <span className="font-display text-sm font-bold tabular-nums text-podium">
+            {scoreText(match)}
+          </span>
+        )}
         {live && <Badge tone="gold">On the mat</Badge>}
         {ready && <Badge tone="outline">On deck</Badge>}
         {done && <Badge tone="muted">Done</Badge>}
@@ -111,12 +122,17 @@ export default function SchedulePage() {
                 )}
               </div>
             </div>
-            <div className="text-right">
-              <p className="font-display text-2xl font-bold">
-                {schedule.completedMatches}
-                <span className="text-muted">/{schedule.totalMatches}</span>
-              </p>
-              <p className="text-xs uppercase tracking-wide text-muted">matches complete</p>
+            <div className="flex items-center gap-4">
+              <div className="text-right">
+                <p className="font-display text-2xl font-bold">
+                  {schedule.completedMatches}
+                  <span className="text-muted">/{schedule.totalMatches}</span>
+                </p>
+                <p className="text-xs uppercase tracking-wide text-muted">matches complete</p>
+              </div>
+              <ButtonLink href={`/events/${schedule.eventSlug}/control`} variant="secondary">
+                Mat control
+              </ButtonLink>
             </div>
           </div>
           <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">

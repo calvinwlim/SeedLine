@@ -312,6 +312,7 @@ export interface ScheduleMatch {
   competitorB: string | null;
   status: MatchStatus;
   winner: string | null;
+  score?: MatchScore;
 }
 
 /** A mat (ring) with its running order of matches. */
@@ -329,6 +330,59 @@ export interface EventSchedule {
   mats: ScheduleMat[];
   totalMatches: number;
   completedMatches: number;
+}
+
+// --- Matside scoring -------------------------------------------------------
+
+/** How a match was decided. */
+export type ScoreMethod = 'points' | 'submission' | 'decision' | 'dq' | 'forfeit';
+
+/** Which competitor a scoring action applies to. */
+export type ScoreSide = 'a' | 'b';
+
+/** IBJJF-style running tally for one competitor. */
+export interface CompetitorScore {
+  points: number;
+  advantages: number;
+  penalties: number;
+}
+
+/** The live score for a match. */
+export interface MatchScore {
+  a: CompetitorScore;
+  b: CompetitorScore;
+  method: ScoreMethod | null;
+}
+
+/** A single increment/decrement applied at the scoring table. */
+export interface ScoreAction {
+  side: ScoreSide;
+  field: keyof CompetitorScore;
+  delta: number;
+}
+
+/** A match as seen by the scoring console / mat control. */
+export interface ScoreableMatch {
+  id: string;
+  eventId: string;
+  eventSlug: string;
+  matName: string;
+  divisionName: string;
+  roundLabel: string;
+  competitorA: string;
+  competitorB: string;
+  status: MatchStatus;
+  score: MatchScore;
+  winner: string | null;
+}
+
+/** Per-mat snapshot for the mat-control view: who's on now and on deck. */
+export interface MatControl {
+  name: string;
+  current: ScoreableMatch | null;
+  onDeck: ScoreableMatch | null;
+  remaining: number;
+  completed: number;
 }
 
 /** Standard error envelope returned by the API. */
