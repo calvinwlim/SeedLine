@@ -112,7 +112,10 @@ export default function EventDetailPage() {
                 {formatDateRange(event.startDate, event.endDate)}
               </p>
             </div>
-            <div className="shrink-0">
+            <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+              <ButtonLink href={`/events/${event.slug}/schedule`} variant="secondary">
+                Schedule &amp; results
+              </ButtonLink>
               <ButtonLink href={registrationOpen ? `/events/${event.slug}/register` : `#divisions`}>
                 {registrationOpen ? 'Register' : 'View divisions'}
               </ButtonLink>

@@ -117,9 +117,18 @@ The data source is controlled by `NEXT_PUBLIC_DATA_SOURCE` (see `apps/web/.env.e
 Both modes implement the same `ApiClient` interface (`apps/web/src/lib/api-types.ts`), so
 moving an endpoint from mock to live is a drop-in change rather than a rewrite.
 
-The frontend covers the public directory (events, academies, athletes) with search, filters,
-and interactive maps (Leaflet + OpenStreetMap, no API key required), full event and profile
-pages, and a signed-in account area.
+The frontend covers, end to end on mock data:
+
+- **Public directory** — events, academies, and athletes with search, filters, and interactive
+  maps (Leaflet + OpenStreetMap, no API key required).
+- **Event pages** — detail, divisions, venue map, a multi-step **registration flow** that writes
+  back to your account, and per-division **bracket viewer** rendered with the real
+  `@openmat/bracket-engine` (single elimination + round robin, with podium results).
+- **Live schedule & results** — a per-mat running order with live/on-deck/done states and a
+  completion bar (`/events/[slug]/schedule`).
+- **Account area** — dashboard, registrations, profile, settings.
+- **Organizer side** — a dashboard, event creation, status lifecycle control, division
+  management, and a registrations roster (`/organizer`).
 
 ## Scripts
 

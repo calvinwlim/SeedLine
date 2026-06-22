@@ -255,6 +255,82 @@ export interface EventListQuery {
   country?: string;
 }
 
+/** An organizer profile with aggregate stats, for the organizer dashboard. */
+export interface OrganizerProfile extends OrganizerSummary {
+  eventCount: number;
+  athleteCount: number;
+  upcomingCount: number;
+}
+
+/** Payload for creating an event from the organizer side. */
+export interface CreateEventInput {
+  name: string;
+  venueName: string | null;
+  address: string | null;
+  city: string | null;
+  country: string | null;
+  startDate: string;
+  endDate: string;
+  registrationOpensAt: string | null;
+  registrationClosesAt: string | null;
+  description: string;
+  disciplines: Discipline[];
+}
+
+/** Payload for adding a division to an event. */
+export interface CreateDivisionInput {
+  name: string;
+  discipline: Discipline;
+  gender: Gender;
+  beltRank: BeltRank | null;
+  ageCategory: string | null;
+  weightClass: string | null;
+  ruleset: Ruleset;
+  format: BracketFormat;
+  priceCents: number;
+  capacity: number | null;
+}
+
+/** A roster row in the organizer's view of an event's registrations. */
+export interface EventRegistration {
+  id: string;
+  athleteName: string;
+  athleteSlug: string | null;
+  academyName: string | null;
+  beltRank: BeltRank | null;
+  divisionName: string;
+  status: RegistrationStatus;
+}
+
+/** One scheduled match on a mat, for the live schedule/results view. */
+export interface ScheduleMatch {
+  id: string;
+  order: number;
+  divisionName: string;
+  roundLabel: string;
+  competitorA: string | null;
+  competitorB: string | null;
+  status: MatchStatus;
+  winner: string | null;
+}
+
+/** A mat (ring) with its running order of matches. */
+export interface ScheduleMat {
+  name: string;
+  matches: ScheduleMatch[];
+}
+
+/** The full day-of schedule / live results board for an event. */
+export interface EventSchedule {
+  eventId: string;
+  eventSlug: string;
+  eventName: string;
+  status: EventStatus;
+  mats: ScheduleMat[];
+  totalMatches: number;
+  completedMatches: number;
+}
+
 /** Standard error envelope returned by the API. */
 export interface ApiError {
   statusCode: number;

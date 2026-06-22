@@ -4,16 +4,32 @@ import type {
   AcademySummary,
   AthleteProfile,
   AthleteSummary,
+  CreateDivisionInput,
+  CreateEventInput,
   DivisionDetail,
+  DivisionSummary,
   EventDetail,
   EventListQuery,
+  EventRegistration,
+  EventSchedule,
+  EventStatus,
   EventSummary,
+  OrganizerProfile,
   RegistrationInput,
   RegistrationSummary,
 } from '@openmat/types';
 import type { ApiClient } from '../api-types';
-import { academies, athletes, currentAccountAthleteId, events } from './data';
+import {
+  academies,
+  athletes,
+  currentAccountAthleteId,
+  currentOrganizer,
+  currentOrganizerId,
+  events,
+  slugify,
+} from './data';
 import { buildEntrants } from './entrants';
+import { buildSchedule } from './schedule';
 
 /** Simulate a little network latency so loading states are exercised in dev. */
 function delay<T>(value: T, ms = 180): Promise<T> {
@@ -169,11 +185,118 @@ export const mockClient: ApiClient = {
       id: 'usr_demo',
       name: athlete ? `${athlete.firstName} ${athlete.lastName}` : 'Demo Athlete',
       email: 'demo@openmat.dev',
-      role: 'athlete',
+      role: 'organizer',
       memberSince: '2023-02-14T00:00:00.000Z',
       avatarUrl: null,
       athlete,
     };
     return delay(account);
+  },
+
+  getEventSchedule(slug: string) {
+    const event = events.find((e) => e.slug === slug);
+    if (!event) return delay<EventSchedule | null>(null);
+    return delay<EventSchedule | null>(buildSchedule(event));
+  },
+
+  // --- Organizer ----------------------------------------------------------
+
+  getOrganizer() {
+    const owned = events.filter((e) => e.organizer.id === currentOrganizerId);
+    const athleteIds = new Set<string>();
+    for (const e of owned) {
+      for (const a of athletes) {
+        if (a.registrations.some((r) => r.eventSlug === e.slug)) athleteIds.add(a.id);
+      }
+    }
+    const profile: OrganizerProfile = {
+      ...currentOrganizer,
+      eventCount: owned.length,
+      athleteCount: athleteIds.size,
+      upcomingCount: owned.filter((e) => new Date(e.startDate) >= new Date()).length,
+    };
+    return delay(profile);
+  },
+
+  listOrganizerEvents() {
+    const list = events
+      .filter((e) => e.organizer.id === currentOrganizerId)
+      .sort((a, b) => b.startDate.localeCompare(a.startDate))
+      .map(toEventSummary);
+    return delay(list);
+  },
+
+  createEvent(input: CreateEventInput) {
+    const id = `evt_${Date.now()}`;
+    const event: EventDetail = {
+      id,
+      slug: slugify(input.name),
+      name: input.name,
+      venueName: input.venueName,
+      address: input.address,
+      city: input.city,
+      country: input.country,
+      coordinates: null,
+      startDate: input.startDate,
+      endDate: input.endDate,
+      registrationOpensAt: input.registrationOpensAt,
+      registrationClosesAt: input.registrationClosesAt,
+      status: 'draft',
+      coverImageUrl: null,
+      disciplines: input.disciplines,
+      rulesets: ['ibjjf'],
+      divisionCount: 0,
+      registeredCount: 0,
+      startingPriceCents: 0,
+      description: input.description,
+      scheduleNote: null,
+      organizer: currentOrganizer,
+      divisions: [],
+    };
+    events.unshift(event);
+    return delay(event, 400);
+  },
+
+  updateEventStatus(eventId: string, status: EventStatus) {
+    const event = events.find((e) => e.id === eventId);
+    if (!event) return Promise.reject(new Error('Event not found'));
+    event.status = status;
+    return delay(event);
+  },
+
+  addDivision(eventId: string, input: CreateDivisionInput) {
+    const event = events.find((e) => e.id === eventId);
+    if (!event) return Promise.reject(new Error('Event not found'));
+    const division: DivisionSummary = {
+      id: `${eventId}_div_${event.divisions.length + 1}`,
+      registeredCount: 0,
+      ...input,
+    };
+    event.divisions.push(division);
+    event.divisionCount = event.divisions.length;
+    const prices = event.divisions.map((d) => d.priceCents).filter((p) => p > 0);
+    event.startingPriceCents = prices.length ? Math.min(...prices) : 0;
+    return delay(division, 300);
+  },
+
+  listEventRegistrations(eventId: string) {
+    const event = events.find((e) => e.id === eventId);
+    if (!event) return delay<EventRegistration[]>([]);
+    const rows: EventRegistration[] = [];
+    for (const athlete of athletes) {
+      for (const reg of athlete.registrations) {
+        if (reg.eventSlug !== event.slug) continue;
+        rows.push({
+          id: reg.id,
+          athleteName: `${athlete.firstName} ${athlete.lastName}`,
+          athleteSlug: athlete.slug,
+          academyName: athlete.academyName,
+          beltRank: athlete.beltRank,
+          divisionName: reg.divisionName,
+          status: reg.status,
+        });
+      }
+    }
+    return delay(rows);
   },
 };

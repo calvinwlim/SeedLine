@@ -9,6 +9,7 @@ const NAV = [
   { href: '/events', label: 'Events' },
   { href: '/academies', label: 'Academies' },
   { href: '/athletes', label: 'Athletes' },
+  { href: '/organizer', label: 'Organize' },
 ];
 
 function Wordmark() {

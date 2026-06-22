@@ -1,7 +1,6 @@
 import type {
   AcademyDetail,
   AthleteProfile,
-  Coordinates,
   DivisionSummary,
   EventDetail,
   MedalResult,
@@ -384,12 +383,7 @@ export const events: MockEvent[] = [
     description:
       'A no-gi only championship under ADCC and submission-only rulesets, with a black-belt absolute superfight to close the night.',
     scheduleNote: 'Absolute and superfight brackets seeded from division results.',
-    organizer: {
-      id: 'org_westcoast',
-      slug: 'west-coast-grappling',
-      name: 'West Coast Grappling',
-      logoUrl: null,
-    },
+    organizer: { id: 'org_openmat', slug: 'openmat-events', name: 'OpenMat Events', logoUrl: null },
     divisions: divisions('evt_no_gi_worlds', [
       {
         name: 'Adult / No-Gi / Male / Advanced / Light',
@@ -495,11 +489,11 @@ export const events: MockEvent[] = [
     city: 'San Jose',
     country: 'United States',
     coordinates: { latitude: 37.3352, longitude: -121.8811 },
-    startDate: daysFromToday(8),
-    endDate: daysFromToday(8),
+    startDate: daysFromToday(0),
+    endDate: daysFromToday(0),
     registrationOpensAt: daysFromToday(-40),
-    registrationClosesAt: daysFromToday(2),
-    status: 'registration_closed',
+    registrationClosesAt: daysFromToday(-2),
+    status: 'in_progress',
     coverImageUrl: null,
     disciplines: ['gi'],
     rulesets: ['ibjjf'],
@@ -507,14 +501,9 @@ export const events: MockEvent[] = [
     registeredCount: 156,
     startingPriceCents: usd(55),
     description:
-      'A friendly, well-run kids and juvenile gi tournament. Registration is now closed; brackets are being finalized.',
+      'A friendly, well-run kids and juvenile gi tournament — happening today. Follow the live mat schedule and results.',
     scheduleNote: 'Check-in opens 7:30am. Coaches meeting at 8:15am.',
-    organizer: {
-      id: 'org_norcal',
-      slug: 'norcal-bjj-circuit',
-      name: 'NorCal BJJ Circuit',
-      logoUrl: null,
-    },
+    organizer: { id: 'org_openmat', slug: 'openmat-events', name: 'OpenMat Events', logoUrl: null },
     divisions: divisions('evt_kids_classic', [
       {
         name: 'Kids / Gi / Male / Gray / 6-7yo',
@@ -778,6 +767,20 @@ for (const academy of academies) {
 
 export const currentAccountAthleteId = 'ath_haddad';
 
-export function eventCenter(): Coordinates {
-  return { latitude: 20, longitude: -40 };
+/** The organizer the demo account manages, for the organizer dashboard. */
+export const currentOrganizerId = 'org_openmat';
+export const currentOrganizer = {
+  id: 'org_openmat',
+  slug: 'openmat-events',
+  name: 'OpenMat Events',
+  logoUrl: null as string | null,
+};
+
+/** Make a URL-safe slug, with a short suffix to avoid collisions. */
+export function slugify(input: string): string {
+  const base = input
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return `${base || 'event'}-${Math.random().toString(36).slice(2, 6)}`;
 }
