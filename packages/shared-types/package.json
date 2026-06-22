@@ -21,8 +21,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "devDependencies": {
-    "@openmat/eslint-config": "workspace:*",
-    "@openmat/tsconfig": "workspace:*",
+    "@openmat/eslint-config": "*",
+    "@openmat/tsconfig": "*",
     "eslint": "^8.57.0",
     "typescript": "^5.5.4"
   }

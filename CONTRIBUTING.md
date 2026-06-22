@@ -2,18 +2,18 @@
 
 ## Setup
 
-See the Quick start in [README.md](./README.md). In short: `pnpm install`,
-`docker compose up -d`, copy the `.env.example` files, `pnpm build`, `pnpm db:push`, `pnpm dev`.
+See the Quick start in [README.md](./README.md). In short: `npm install`,
+`docker compose up -d`, copy the `.env.example` files, `npm run build`, `npm run db:push`, `npm run dev`.
 
 ## Before opening a pull request
 
 Everything CI runs, you can run locally from the root:
 
 ```bash
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
+npm run lint
+npm run typecheck
+npm test
+npm run build
 ```
 
 ## Conventions
@@ -23,8 +23,8 @@ pnpm build
   comes with a test.
 - Domain enums live in `@openmat/types` and are mirrored by the database enums in
   `apps/api/src/database/schema/enums.ts`. Change both together.
-- Prefer generating Drizzle migrations (`pnpm db:generate`) over editing the database by hand.
-- Formatting is handled by Prettier (`pnpm format`); don't hand-format.
+- Prefer generating Drizzle migrations (`npm run db:generate`) over editing the database by hand.
+- Formatting is handled by Prettier (`npm run format`); don't hand-format.
 
 ## Branches & commits
 

@@ -2,15 +2,13 @@
 #   docker build -f apps/web/Dockerfile -t openmat-web .
 
 FROM node:20-slim AS base
-ENV PNPM_HOME="/pnpm" PATH="/pnpm:$PATH"
-RUN corepack enable
 WORKDIR /app
 
 FROM base AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY . .
-RUN pnpm install --frozen-lockfile
-RUN pnpm exec turbo run build --filter=@openmat/web
+RUN npm ci
+RUN npx turbo run build --filter=@openmat/web
 
 FROM base AS runtime
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1

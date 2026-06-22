@@ -3,18 +3,16 @@
 
 # ---- Base ----
 FROM node:20-slim AS base
-ENV PNPM_HOME="/pnpm" PATH="/pnpm:$PATH"
-RUN corepack enable
 WORKDIR /app
 
 # ---- Build ----
 FROM base AS build
 COPY . .
-RUN pnpm install --frozen-lockfile
+RUN npm ci
 # Turbo builds workspace dependencies (bracket-engine, types) before the API.
-RUN pnpm exec turbo run build --filter=@openmat/api
+RUN npx turbo run build --filter=@openmat/api
 # Drop dev dependencies to slim the runtime image.
-RUN pnpm prune --prod
+RUN npm prune --omit=dev
 
 # ---- Runtime ----
 FROM base AS runtime

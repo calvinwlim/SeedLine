@@ -23,8 +23,9 @@
     "clean": "rm -rf dist coverage .turbo"
   },
   "devDependencies": {
-    "@openmat/eslint-config": "workspace:*",
-    "@openmat/tsconfig": "workspace:*",
+    "@openmat/eslint-config": "*",
+    "@openmat/tsconfig": "*",
+    "@types/node": "^20.16.5",
     "eslint": "^8.57.0",
     "typescript": "^5.5.4",
     "vitest": "^2.1.1"

@@ -10,7 +10,7 @@ Wi-Fi does not.
 
 ## What's in here
 
-This is a TypeScript monorepo (pnpm workspaces + Turborepo). The headline decision is that
+This is a TypeScript monorepo (npm workspaces + Turborepo). The headline decision is that
 **everything is TypeScript end-to-end**, so the bracket logic is a single shared package that
 runs identically on the server (authoritative) and, later, on the offline scoring tablet
 (optimistic), then reconciles.
@@ -58,20 +58,20 @@ bracket = applyResult(bracket, 'W-R1-M1', 'a'); // immutable: returns a new brac
 Run the engine's tests:
 
 ```bash
-pnpm --filter @openmat/bracket-engine test
+npm test --workspace @openmat/bracket-engine
 ```
 
 ## Prerequisites
 
 - Node.js 20+ (`.nvmrc` pins 20)
-- pnpm 9+ (`corepack enable` will provide it)
+- npm 10+ (ships with Node 20)
 - Docker (for local Postgres and Redis)
 
 ## Quick start
 
 ```bash
 # 1. Install
-pnpm install
+npm install
 
 # 2. Start Postgres + Redis
 docker compose up -d
@@ -81,35 +81,35 @@ cp apps/api/.env.example apps/api/.env
 cp apps/web/.env.example apps/web/.env
 
 # 4. Build shared packages once (so the apps can resolve them)
-pnpm build
+npm run build
 
 # 5. Push the schema to the database
-pnpm db:push
+npm run db:push
 
 # 6. Run everything in watch mode
-pnpm dev
+npm run dev
 ```
 
 - API: http://localhost:4000/api (health at `/api/health`)
 - Web: http://localhost:3000
 
-`pnpm dev` runs the apps and the shared packages' watch builds together via Turborepo.
+`npm run dev` runs the apps and the shared packages' watch builds together via Turborepo.
 
 ## Scripts
 
 Run from the repo root; Turborepo fans them out across the workspace.
 
-| Command            | Description                                  |
-| ------------------ | -------------------------------------------- |
-| `pnpm dev`         | Run all apps and package watchers            |
-| `pnpm build`       | Build every package and app                  |
-| `pnpm lint`        | Lint the whole workspace                     |
-| `pnpm typecheck`   | Type-check the whole workspace               |
-| `pnpm test`        | Run tests (the bracket engine has the suite) |
-| `pnpm format`      | Format with Prettier                         |
-| `pnpm db:generate` | Generate a Drizzle migration from the schema |
-| `pnpm db:migrate`  | Apply migrations                             |
-| `pnpm db:push`     | Push the schema directly (good for dev)      |
+| Command                | Description                                  |
+| ---------------------- | -------------------------------------------- |
+| `npm run dev`          | Run all apps and package watchers            |
+| `npm run build`        | Build every package and app                  |
+| `npm run lint`         | Lint the whole workspace                     |
+| `npm run typecheck`    | Type-check the whole workspace               |
+| `npm test`             | Run tests (the bracket engine has the suite) |
+| `npm run format`       | Format with Prettier                         |
+| `npm run db:generate`  | Generate a Drizzle migration from the schema |
+| `npm run db:migrate`   | Apply migrations                             |
+| `npm run db:push`      | Push the schema directly (good for dev)      |
 
 ## Database
 
@@ -124,8 +124,8 @@ linked back to the engine via `engine_match_id`.
 For schema changes, prefer generating migrations:
 
 ```bash
-pnpm db:generate   # writes SQL + metadata to apps/api/drizzle/
-pnpm db:migrate    # applies them
+npm run db:generate   # writes SQL + metadata to apps/api/drizzle/
+npm run db:migrate    # applies them
 ```
 
 ## What is real vs. scaffold
