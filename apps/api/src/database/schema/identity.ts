@@ -54,7 +54,7 @@ export const athletes = pgTable(
   }),
 );
 
-export const usersRelations = relations(users, ({ many, one }) => ({
+export const usersRelations = relations(users, ({ one }) => ({
   organizer: one(organizers, { fields: [users.id], references: [organizers.userId] }),
   athlete: one(athletes, { fields: [users.id], references: [athletes.userId] }),
 }));

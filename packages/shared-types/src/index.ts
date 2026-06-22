@@ -28,11 +28,7 @@ export type BeltRank = (typeof BELT_RANKS)[number];
 export const RULESETS = ['ibjjf', 'adcc', 'ebi', 'submission_only', 'points'] as const;
 export type Ruleset = (typeof RULESETS)[number];
 
-export const BRACKET_FORMATS = [
-  'single_elimination',
-  'double_elimination',
-  'round_robin',
-] as const;
+export const BRACKET_FORMATS = ['single_elimination', 'double_elimination', 'round_robin'] as const;
 export type BracketFormat = (typeof BRACKET_FORMATS)[number];
 
 export const EVENT_STATUSES = [
@@ -64,7 +60,19 @@ export type PaymentStatus = (typeof PAYMENT_STATUSES)[number];
 export const USER_ROLES = ['athlete', 'organizer', 'staff', 'admin'] as const;
 export type UserRole = (typeof USER_ROLES)[number];
 
-/** Minimal event shape returned by the public events list endpoint. */
+/** A geographic point. Used for maps and distance search. */
+export interface Coordinates {
+  latitude: number;
+  longitude: number;
+}
+
+/**
+ * Minimal event shape returned by the public events list endpoint.
+ *
+ * The required fields are what the API guarantees today; the optional fields
+ * are progressive enhancements the directory/cards use when present. Keeping
+ * them optional lets the API fill in a subset without breaking the contract.
+ */
 export interface EventSummary {
   id: string;
   slug: string;
@@ -74,6 +82,147 @@ export interface EventSummary {
   startDate: string;
   endDate: string;
   status: EventStatus;
+  country?: string | null;
+  coordinates?: Coordinates | null;
+  coverImageUrl?: string | null;
+  disciplines?: Discipline[];
+  rulesets?: Ruleset[];
+  divisionCount?: number;
+  registeredCount?: number;
+  startingPriceCents?: number;
+}
+
+/** A short reference to an organizer (the entity that runs an event). */
+export interface OrganizerSummary {
+  id: string;
+  slug: string;
+  name: string;
+  logoUrl?: string | null;
+}
+
+/** A single competition slot within an event. */
+export interface DivisionSummary {
+  id: string;
+  name: string;
+  discipline: Discipline;
+  gender: Gender;
+  beltRank: BeltRank | null;
+  ageCategory: string | null;
+  weightClass: string | null;
+  ruleset: Ruleset;
+  format: BracketFormat;
+  priceCents: number;
+  capacity: number | null;
+  registeredCount: number;
+}
+
+/** Full event detail used by the event page. */
+export interface EventDetail extends EventSummary {
+  description: string;
+  address: string | null;
+  registrationOpensAt: string | null;
+  registrationClosesAt: string | null;
+  organizer: OrganizerSummary;
+  divisions: DivisionSummary[];
+  scheduleNote?: string | null;
+}
+
+/** A short reference to a competitor. */
+export interface AthleteSummary {
+  id: string;
+  slug: string;
+  firstName: string;
+  lastName: string;
+  beltRank: BeltRank;
+  discipline: Discipline;
+  academyId: string | null;
+  academyName: string | null;
+  academySlug: string | null;
+  country: string | null;
+  avatarUrl?: string | null;
+}
+
+/** A competitor's aggregate competition record. */
+export interface AthleteRecord {
+  matches: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  submissions: number;
+  goldMedals: number;
+}
+
+/** A podium result an athlete or academy earned at an event. */
+export interface MedalResult {
+  eventName: string;
+  eventSlug: string;
+  divisionName: string;
+  place: number;
+  date: string;
+}
+
+/** Full competitor profile used by the athlete page. */
+export interface AthleteProfile extends AthleteSummary {
+  bio: string | null;
+  weightClass: string | null;
+  ageCategory: string | null;
+  record: AthleteRecord;
+  registrations: RegistrationSummary[];
+  achievements: MedalResult[];
+}
+
+/** A short reference to an academy/team. */
+export interface AcademySummary {
+  id: string;
+  slug: string;
+  name: string;
+  city: string | null;
+  country: string | null;
+  logoUrl?: string | null;
+  memberCount: number;
+}
+
+/** Full academy profile used by the academy page. */
+export interface AcademyDetail extends AcademySummary {
+  description: string;
+  headCoach: string | null;
+  foundedYear: number | null;
+  affiliation: string | null;
+  website: string | null;
+  coordinates: Coordinates | null;
+  athletes: AthleteSummary[];
+  achievements: MedalResult[];
+}
+
+/** One row in a user's registration history. */
+export interface RegistrationSummary {
+  id: string;
+  eventId: string;
+  eventName: string;
+  eventSlug: string;
+  divisionName: string;
+  status: RegistrationStatus;
+  startDate: string;
+  city: string | null;
+}
+
+/** The signed-in user's account, with the linked athlete profile when present. */
+export interface AccountProfile {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  memberSince: string;
+  avatarUrl?: string | null;
+  athlete: AthleteProfile | null;
+}
+
+/** Query parameters accepted by the public events list endpoint. */
+export interface EventListQuery {
+  search?: string;
+  discipline?: Discipline;
+  status?: EventStatus;
+  country?: string;
 }
 
 /** Standard error envelope returned by the API. */

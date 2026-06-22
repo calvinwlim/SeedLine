@@ -95,6 +95,32 @@ npm run dev
 
 `npm run dev` runs the apps and the shared packages' watch builds together via Turborepo.
 
+### Frontend on its own (no API, no database)
+
+The web app ships with a built-in mock data layer, so you can develop and test the
+entire frontend without running the API, Postgres, or Docker:
+
+```bash
+npm install
+npm run build --workspace @openmat/types   # build the shared types once
+npm run dev:web                             # web + its watchers only, on :3000
+```
+
+The data source is controlled by `NEXT_PUBLIC_DATA_SOURCE` (see `apps/web/.env.example`):
+
+- `mock` (default) — runs entirely on fixtures in `apps/web/src/lib/mock`. Every page
+  (events, event detail, academies, athlete profiles, account) renders real-looking data.
+- `live` — calls the NestJS API for the endpoints it serves today (the public events list)
+  and falls back to mock data for everything the backend hasn't implemented yet, so the UI
+  keeps working as the API catches up.
+
+Both modes implement the same `ApiClient` interface (`apps/web/src/lib/api-types.ts`), so
+moving an endpoint from mock to live is a drop-in change rather than a rewrite.
+
+The frontend covers the public directory (events, academies, athletes) with search, filters,
+and interactive maps (Leaflet + OpenStreetMap, no API key required), full event and profile
+pages, and a signed-in account area.
+
 ## Scripts
 
 Run from the repo root; Turborepo fans them out across the workspace.
@@ -102,6 +128,8 @@ Run from the repo root; Turborepo fans them out across the workspace.
 | Command                | Description                                  |
 | ---------------------- | -------------------------------------------- |
 | `npm run dev`          | Run all apps and package watchers            |
+| `npm run dev:web`      | Run only the web app (mock data, no API)     |
+| `npm run dev:api`      | Run only the API and its watchers            |
 | `npm run build`        | Build every package and app                  |
 | `npm run lint`         | Lint the whole workspace                     |
 | `npm run typecheck`    | Type-check the whole workspace               |
@@ -135,8 +163,11 @@ This is a foundation, and it is honest about its edges:
 - **Real and tested:** the bracket engine (single elimination, round robin), the database
   schema, the shared config, and the build/lint/test/CI pipeline.
 - **Wired but minimal:** the API (`/api/health` pings the database; `/api/events` reads from
-  the events table) and the web app (a landing page plus an events page that fetches the API
-  through TanStack Query).
+  the events table).
+- **Built out on the frontend, served by mock data:** the web app is a full standalone
+  experience — landing page, event directory with search/filters/maps, event detail pages,
+  academy and athlete profiles, and a signed-in account area — all developable with no
+  backend via the mock data layer, ready to be wired to real endpoints as the API grows.
 - **Deliberately not done yet:** double elimination, authentication, payments (Stripe Connect),
   the offline scoring/sync layer, and real-time spectator updates. The structure leaves clear
   seams for each.
