@@ -4,9 +4,12 @@ import type {
   AcademySummary,
   AthleteProfile,
   AthleteSummary,
+  DivisionDetail,
   EventDetail,
   EventListQuery,
   EventSummary,
+  RegistrationInput,
+  RegistrationSummary,
 } from '@openmat/types';
 
 /**
@@ -17,6 +20,8 @@ import type {
 export interface ApiClient {
   listEvents(query?: EventListQuery): Promise<EventSummary[]>;
   getEvent(slug: string): Promise<EventDetail | null>;
+  getDivision(eventSlug: string, divisionId: string): Promise<DivisionDetail | null>;
+  createRegistration(input: RegistrationInput): Promise<RegistrationSummary>;
   listAcademies(search?: string): Promise<AcademySummary[]>;
   getAcademy(slug: string): Promise<AcademyDetail | null>;
   listAthletes(search?: string): Promise<AthleteSummary[]>;

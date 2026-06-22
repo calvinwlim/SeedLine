@@ -20,12 +20,17 @@ import {
   humanize,
 } from '../../../lib/format';
 
-function DivisionRow({ division }: { division: DivisionSummary }) {
+function DivisionRow({ division, eventSlug }: { division: DivisionSummary; eventSlug: string }) {
   const full = division.capacity != null && division.registeredCount >= division.capacity;
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-3.5">
+    <Link
+      href={`/events/${eventSlug}/divisions/${division.id}`}
+      className="group flex items-center justify-between gap-4 px-5 py-3.5 transition-colors hover:bg-white/[0.03]"
+    >
       <div className="min-w-0">
-        <p className="truncate text-sm font-medium text-chalk">{division.name}</p>
+        <p className="truncate text-sm font-medium text-chalk group-hover:text-podium">
+          {division.name}
+        </p>
         <p className="mt-0.5 text-xs text-muted">
           {humanize(division.ruleset)} · {humanize(division.format)} · {division.registeredCount}
           {division.capacity != null ? ` / ${division.capacity}` : ''} registered
@@ -34,8 +39,9 @@ function DivisionRow({ division }: { division: DivisionSummary }) {
       <div className="flex shrink-0 items-center gap-3">
         <span className="text-sm text-chalk">{formatPrice(division.priceCents)}</span>
         {full ? <Badge tone="muted">Full</Badge> : <Badge tone="green">Open</Badge>}
+        <span className="text-muted transition-colors group-hover:text-podium">→</span>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -107,7 +113,7 @@ export default function EventDetailPage() {
               </p>
             </div>
             <div className="shrink-0">
-              <ButtonLink href={`/events/${event.slug}#divisions`}>
+              <ButtonLink href={registrationOpen ? `/events/${event.slug}/register` : `#divisions`}>
                 {registrationOpen ? 'Register' : 'View divisions'}
               </ButtonLink>
             </div>
@@ -135,7 +141,7 @@ export default function EventDetailPage() {
             </div>
             <Card className="mt-4 divide-y divide-white/10">
               {event.divisions.map((division) => (
-                <DivisionRow key={division.id} division={division} />
+                <DivisionRow key={division.id} division={division} eventSlug={event.slug} />
               ))}
             </Card>
           </section>
@@ -183,7 +189,7 @@ export default function EventDetailPage() {
               )}
               <div className="mt-4">
                 {registrationOpen ? (
-                  <ButtonLink href={`/events/${event.slug}#divisions`} className="w-full">
+                  <ButtonLink href={`/events/${event.slug}/register`} className="w-full">
                     Register now
                   </ButtonLink>
                 ) : (

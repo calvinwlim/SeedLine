@@ -206,6 +206,36 @@ export interface RegistrationSummary {
   city: string | null;
 }
 
+/** A competitor placed into a division's bracket. */
+export interface BracketEntrant {
+  id: string;
+  name: string;
+  seed: number;
+  academyId: string | null;
+  academyName: string | null;
+}
+
+/** A division with its entrant list, used to generate and show a bracket. */
+export interface DivisionDetail extends DivisionSummary {
+  eventId: string;
+  eventSlug: string;
+  eventName: string;
+  entrants: BracketEntrant[];
+  /** True once the event is complete and results can be shown. */
+  resultsFinal: boolean;
+}
+
+/** Payload submitted when an athlete registers for a division. */
+export interface RegistrationInput {
+  eventId: string;
+  divisionId: string;
+  firstName: string;
+  lastName: string;
+  beltRank: BeltRank;
+  academyName: string | null;
+  weightClass: string | null;
+}
+
 /** The signed-in user's account, with the linked athlete profile when present. */
 export interface AccountProfile {
   id: string;

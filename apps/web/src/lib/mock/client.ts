@@ -4,12 +4,16 @@ import type {
   AcademySummary,
   AthleteProfile,
   AthleteSummary,
+  DivisionDetail,
   EventDetail,
   EventListQuery,
   EventSummary,
+  RegistrationInput,
+  RegistrationSummary,
 } from '@openmat/types';
 import type { ApiClient } from '../api-types';
 import { academies, athletes, currentAccountAthleteId, events } from './data';
+import { buildEntrants } from './entrants';
 
 /** Simulate a little network latency so loading states are exercised in dev. */
 function delay<T>(value: T, ms = 180): Promise<T> {
@@ -83,6 +87,46 @@ export const mockClient: ApiClient = {
   getEvent(slug: string) {
     const event = events.find((e) => e.slug === slug) ?? null;
     return delay<EventDetail | null>(event);
+  },
+
+  getDivision(eventSlug: string, divisionId: string) {
+    const event = events.find((e) => e.slug === eventSlug);
+    const division = event?.divisions.find((d) => d.id === divisionId);
+    if (!event || !division) return delay<DivisionDetail | null>(null);
+    const detail: DivisionDetail = {
+      ...division,
+      eventId: event.id,
+      eventSlug: event.slug,
+      eventName: event.name,
+      entrants: buildEntrants(event.slug, division),
+      resultsFinal: event.status === 'completed',
+    };
+    return delay<DivisionDetail | null>(detail);
+  },
+
+  createRegistration(input: RegistrationInput) {
+    const event = events.find((e) => e.id === input.eventId);
+    const division = event?.divisions.find((d) => d.id === input.divisionId);
+    if (!event || !division) {
+      return Promise.reject(new Error('Event or division not found'));
+    }
+    const athlete = athletes.find((a) => a.id === currentAccountAthleteId);
+    const registration: RegistrationSummary = {
+      id: `reg_${Date.now()}`,
+      eventId: event.id,
+      eventName: event.name,
+      eventSlug: event.slug,
+      divisionName: division.name,
+      status: 'confirmed',
+      startDate: event.startDate,
+      city: event.city,
+    };
+    // Persist into the in-memory store so it shows up in the account area.
+    if (athlete && !athlete.registrations.some((r) => r.id === registration.id)) {
+      athlete.registrations.unshift(registration);
+    }
+    division.registeredCount += 1;
+    return delay(registration, 400);
   },
 
   listAcademies(search?: string) {
