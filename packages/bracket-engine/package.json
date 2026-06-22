@@ -1,0 +1,32 @@
+{
+  "name": "@openmat/bracket-engine",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Pure, deterministic bracket generation and result propagation. Runs on both the server and the offline scoring client.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --max-warnings 0",
+    "clean": "rm -rf dist coverage .turbo"
+  },
+  "devDependencies": {
+    "@openmat/eslint-config": "workspace:*",
+    "@openmat/tsconfig": "workspace:*",
+    "eslint": "^8.57.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.1.1"
+  }
+}
