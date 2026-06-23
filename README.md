@@ -39,8 +39,10 @@ foundation. It is pure (no I/O, no dependencies) and covered by tests.
   round one.
 - **Round robin** — every entrant faces every other once, including the common 3-competitor
   division, via the circle method, plus basic standings.
-- **Double elimination** — intentionally a documented stub (`src/double-elimination.ts`). A
-  wrong implementation is worse than an honest gap; the design notes are in the file.
+- **Double elimination** — linked winners and losers brackets with a grand final and
+  conditional bracket reset. Non-power-of-two fields are handled by static bye folding, so an
+  odd entrant count still produces exactly the real matches it should (2N−2, plus the reset).
+  The losers-bracket drop pattern is reversed each drop round to avoid immediate rematches.
 
 ```ts
 import { generateBracket, applyResult } from '@openmat/bracket-engine';
@@ -123,7 +125,8 @@ The frontend covers, end to end on mock data:
   maps (Leaflet + OpenStreetMap, no API key required).
 - **Event pages** — detail, divisions, venue map, a multi-step **registration flow** that writes
   back to your account, and per-division **bracket viewer** rendered with the real
-  `@openmat/bracket-engine` (single elimination + round robin, with podium results).
+  `@openmat/bracket-engine` (single elimination, double elimination, and round robin, with
+  podium results).
 - **Live schedule & results** — a per-mat running order with live/on-deck/done states, live
   scores, and a completion bar (`/events/[slug]/schedule`).
 - **Matside scoring** — a mat-control staff view (`/events/[slug]/control`) and a full scoring
@@ -175,17 +178,16 @@ npm run db:migrate    # applies them
 
 This is a foundation, and it is honest about its edges:
 
-- **Real and tested:** the bracket engine (single elimination, round robin), the database
-  schema, the shared config, and the build/lint/test/CI pipeline.
+- **Real and tested:** the bracket engine (single elimination, double elimination, round
+  robin), the database schema, the shared config, and the build/lint/test/CI pipeline.
 - **Wired but minimal:** the API (`/api/health` pings the database; `/api/events` reads from
   the events table).
 - **Built out on the frontend, served by mock data:** the web app is a full standalone
   experience — landing page, event directory with search/filters/maps, event detail pages,
   academy and athlete profiles, and a signed-in account area — all developable with no
   backend via the mock data layer, ready to be wired to real endpoints as the API grows.
-- **Deliberately not done yet:** double elimination, authentication, payments (Stripe Connect),
-  the offline scoring/sync layer, and real-time spectator updates. The structure leaves clear
-  seams for each.
+- **Deliberately not done yet:** payments (Stripe Connect), the offline scoring/sync layer, and
+  real-time spectator updates. The structure leaves clear seams for each.
 
 ## Deployment notes
 

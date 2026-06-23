@@ -1,22 +1,14 @@
 import { resolveWinner } from './apply';
-import { nextPowerOfTwo, standardSeedOrder } from './seeding';
+import {
+  nextPowerOfTwo,
+  orderEntrants,
+  separateAcademiesInFirstRound,
+  standardSeedOrder,
+} from './seeding';
 import { Bracket, BracketMatch, Entrant, GenerateOptions } from './types';
 
 function buildMatchId(round: number, position: number): string {
   return `W-R${round}-M${position}`;
-}
-
-/** Order entrants by seed (1 = best). Unseeded entrants keep input order, last. */
-function orderEntrants(entrants: Entrant[]): Entrant[] {
-  return entrants
-    .map((entrant, index) => ({ entrant, index }))
-    .sort((a, b) => {
-      const seedA = a.entrant.seed ?? Number.POSITIVE_INFINITY;
-      const seedB = b.entrant.seed ?? Number.POSITIVE_INFINITY;
-      if (seedA !== seedB) return seedA - seedB;
-      return a.index - b.index;
-    })
-    .map(({ entrant }) => entrant);
 }
 
 /**
@@ -118,39 +110,4 @@ export function generateSingleElimination(
   }
 
   return { format: 'single_elimination', entrants: ordered, matches, rounds: totalRounds };
-}
-
-/**
- * Best-effort teammate separation in round one. Swaps clashing entrants into
- * other matches where they would not create a new clash. Preserves the full
- * entrant set (it only swaps positions, never drops anyone).
- */
-function separateAcademiesInFirstRound(slots: (string | null)[], ordered: Entrant[]): void {
-  const academyOf = new Map(ordered.map((e) => [e.id, e.academyId]));
-  const sameAcademy = (a: string | null, b: string | null): boolean =>
-    !!a && !!b && !!academyOf.get(a) && academyOf.get(a) === academyOf.get(b);
-
-  const pairCount = slots.length / 2;
-  for (let p = 0; p < pairCount; p++) {
-    const aIdx = p * 2;
-    const bIdx = p * 2 + 1;
-    if (!sameAcademy(slots[aIdx] ?? null, slots[bIdx] ?? null)) continue;
-
-    for (let q = 0; q < pairCount; q++) {
-      if (q === p) continue;
-      const otherAIdx = q * 2;
-      const otherBIdx = q * 2 + 1;
-      const candidate = slots[otherBIdx] ?? null;
-      if (!candidate) continue;
-
-      const clashHere = sameAcademy(slots[aIdx] ?? null, candidate);
-      const clashThere = sameAcademy(slots[otherAIdx] ?? null, slots[bIdx] ?? null);
-      if (!clashHere && !clashThere) {
-        const tmp = slots[bIdx]!;
-        slots[bIdx] = candidate;
-        slots[otherBIdx] = tmp;
-        break;
-      }
-    }
-  }
 }

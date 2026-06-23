@@ -390,6 +390,7 @@ export const events: MockEvent[] = [
         discipline: 'nogi',
         beltRank: null,
         ruleset: 'adcc',
+        format: 'double_elimination',
         registeredCount: 28,
         capacity: 32,
       },

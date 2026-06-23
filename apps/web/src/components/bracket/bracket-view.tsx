@@ -73,24 +73,33 @@ function MatchBox({
   );
 }
 
-function SingleElimination({ bracket }: { bracket: Bracket }) {
-  const names = nameMap(bracket);
-  const rounds = Array.from({ length: bracket.rounds }, (_, i) => i + 1);
+type NameMap = ReturnType<typeof nameMap>;
 
+/** A horizontally scrolling set of round columns, one column per round. */
+function RoundColumns({
+  matches,
+  names,
+  label,
+}: {
+  matches: BracketMatch[];
+  names: NameMap;
+  label: (round: number) => string;
+}) {
+  const rounds = [...new Set(matches.map((m) => m.round))].sort((a, b) => a - b);
   return (
     <div className="overflow-x-auto pb-2">
       <div className="flex min-w-max gap-6">
         {rounds.map((round) => {
-          const matches = bracket.matches
+          const inRound = matches
             .filter((m) => m.round === round)
             .sort((a, b) => a.position - b.position);
           return (
             <div key={round} className="flex flex-col">
               <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">
-                {roundLabel(round, bracket.rounds)}
+                {label(round)}
               </p>
               <div className="flex flex-1 flex-col justify-around gap-4">
-                {matches.map((match) => (
+                {inRound.map((match) => (
                   <MatchBox key={match.id} match={match} names={names} />
                 ))}
               </div>
@@ -98,6 +107,83 @@ function SingleElimination({ bracket }: { bracket: Bracket }) {
           );
         })}
       </div>
+    </div>
+  );
+}
+
+function SingleElimination({ bracket }: { bracket: Bracket }) {
+  const names = nameMap(bracket);
+  return (
+    <RoundColumns
+      matches={bracket.matches}
+      names={names}
+      label={(round) => roundLabel(round, bracket.rounds)}
+    />
+  );
+}
+
+function winnersLabel(round: number, totalRounds: number): string {
+  const fromEnd = totalRounds - round;
+  if (fromEnd === 0) return 'Winners Final';
+  if (fromEnd === 1) return 'Winners Semis';
+  return `Winners R${round}`;
+}
+
+function DoubleElimination({ bracket }: { bracket: Bracket }) {
+  const names = nameMap(bracket);
+  const winners = bracket.matches.filter((m) => m.bracketType === 'winners');
+  const losers = bracket.matches.filter((m) => m.bracketType === 'losers');
+  const finals = bracket.matches
+    .filter((m) => m.bracketType === 'final')
+    .sort((a, b) => a.round - b.round);
+
+  // Hide the bracket-reset card once the winners champion (side A of the first
+  // grand final) has clinched the title without it being played.
+  const grandFinal = finals.find((m) => m.round === 1);
+  const visibleFinals = finals.filter((m) => {
+    if (m.round !== 2) return true;
+    const clinched =
+      !!grandFinal?.winnerId && grandFinal.winnerId === grandFinal.entrantA && !m.winnerId;
+    return !clinched;
+  });
+
+  return (
+    <div className="space-y-8">
+      <section>
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
+          Winners bracket
+        </h3>
+        <RoundColumns
+          matches={winners}
+          names={names}
+          label={(round) => winnersLabel(round, bracket.rounds)}
+        />
+      </section>
+
+      {losers.length > 0 && (
+        <section>
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
+            Losers bracket
+          </h3>
+          <RoundColumns matches={losers} names={names} label={(round) => `Losers R${round}`} />
+        </section>
+      )}
+
+      <section>
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">
+          Grand final
+        </h3>
+        <div className="flex flex-wrap gap-6">
+          {visibleFinals.map((match) => (
+            <div key={match.id} className="flex flex-col">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted">
+                {match.round === 1 ? 'Grand Final' : 'Bracket Reset'}
+              </p>
+              <MatchBox match={match} names={names} />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
@@ -167,6 +253,9 @@ export function BracketView({ bracket }: { bracket: Bracket }) {
   }
   if (bracket.format === 'round_robin') {
     return <RoundRobin bracket={bracket} />;
+  }
+  if (bracket.format === 'double_elimination') {
+    return <DoubleElimination bracket={bracket} />;
   }
   return <SingleElimination bracket={bracket} />;
 }

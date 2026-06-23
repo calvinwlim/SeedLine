@@ -42,16 +42,20 @@ export function autoCompleteBracket(bracket: Bracket): Bracket {
     return result;
   }
 
-  // Elimination: resolve round by round so winners feed the next round.
-  for (let round = 1; round <= bracket.rounds; round++) {
-    const idsInRound = result.matches.filter((m) => m.round === round).map((m) => m.id);
-    for (const id of idsInRound) {
-      const match = result.matches.find((m) => m.id === id);
-      if (!match || match.winnerId) continue;
-      if (match.entrantA && match.entrantB) {
-        result = applyResult(result, id, better(match.entrantA, match.entrantB));
-      }
-    }
+  // Elimination (single or double): repeatedly resolve any match that has two
+  // known competitors. This is order-independent — applyResult propagates the
+  // result downstream — so it handles double elimination's winners/losers
+  // cross-feeding without tracking dependencies by hand. The grand-final reset
+  // (GF-R2) is skipped once the winners champion has clinched the first final.
+  const guard = result.matches.length * 4;
+  for (let step = 0; step < guard; step++) {
+    const gf1 = result.matches.find((m) => m.id === 'GF-R1-M1');
+    const resetVoid = !!gf1 && gf1.winnerId !== null && gf1.winnerId === gf1.entrantA;
+    const next = result.matches.find(
+      (m) => !m.winnerId && m.entrantA && m.entrantB && !(resetVoid && m.id === 'GF-R2-M1'),
+    );
+    if (!next) break;
+    result = applyResult(result, next.id, better(next.entrantA!, next.entrantB!));
   }
   return result;
 }
@@ -66,6 +70,25 @@ export function derivePodium(bracket: Bracket): PodiumEntry[] {
   if (bracket.format === 'round_robin') {
     const standings = computeRoundRobinStandings(bracket);
     return standings.slice(0, 3).map((s, i) => ({ place: i + 1, entrantId: s.entrantId }));
+  }
+
+  if (bracket.format === 'double_elimination') {
+    const gf1 = bracket.matches.find((m) => m.id === 'GF-R1-M1');
+    const gf2 = bracket.matches.find((m) => m.id === 'GF-R2-M1');
+    if (!gf1?.winnerId) return [];
+    // The reset decides it only when the losers champion (side B) won the first
+    // final; otherwise the first final stands.
+    const resetPlayed = gf1.winnerId === gf1.entrantB && !!gf2?.winnerId;
+    const decisive = resetPlayed ? gf2! : gf1;
+    const podium: PodiumEntry[] = [];
+    if (decisive.winnerId) podium.push({ place: 1, entrantId: decisive.winnerId });
+    if (decisive.loserId) podium.push({ place: 2, entrantId: decisive.loserId });
+    // Third place is the loser of the losers-bracket final (its last round).
+    const lbFinal = bracket.matches
+      .filter((m) => m.bracketType === 'losers')
+      .sort((a, b) => b.round - a.round || b.position - a.position)[0];
+    if (lbFinal?.loserId) podium.push({ place: 3, entrantId: lbFinal.loserId });
+    return podium;
   }
 
   const finalMatch = bracket.matches.find((m) => m.bracketType === 'final');

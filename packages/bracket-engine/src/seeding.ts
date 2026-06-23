@@ -1,4 +1,4 @@
-import { BracketError } from './types';
+import { BracketError, Entrant } from './types';
 
 /**
  * Standard single-elimination seed order for a bracket of `size` slots
@@ -35,4 +35,53 @@ export function standardSeedOrder(size: number): number[] {
 export function nextPowerOfTwo(n: number): number {
   if (n <= 1) return 1;
   return 2 ** Math.ceil(Math.log2(n));
+}
+
+/** Order entrants by seed (1 = best). Unseeded entrants keep input order, last. */
+export function orderEntrants(entrants: Entrant[]): Entrant[] {
+  return entrants
+    .map((entrant, index) => ({ entrant, index }))
+    .sort((a, b) => {
+      const seedA = a.entrant.seed ?? Number.POSITIVE_INFINITY;
+      const seedB = b.entrant.seed ?? Number.POSITIVE_INFINITY;
+      if (seedA !== seedB) return seedA - seedB;
+      return a.index - b.index;
+    })
+    .map(({ entrant }) => entrant);
+}
+
+/**
+ * Best-effort teammate separation in round one. Swaps clashing entrants into
+ * other matches where they would not create a new clash. Operates in place on a
+ * `slots` array (entrant id or null for a bye) laid out in standard seed order.
+ * Preserves the full entrant set (it only swaps positions, never drops anyone).
+ */
+export function separateAcademiesInFirstRound(slots: (string | null)[], ordered: Entrant[]): void {
+  const academyOf = new Map(ordered.map((e) => [e.id, e.academyId]));
+  const sameAcademy = (a: string | null, b: string | null): boolean =>
+    !!a && !!b && !!academyOf.get(a) && academyOf.get(a) === academyOf.get(b);
+
+  const pairCount = slots.length / 2;
+  for (let p = 0; p < pairCount; p++) {
+    const aIdx = p * 2;
+    const bIdx = p * 2 + 1;
+    if (!sameAcademy(slots[aIdx] ?? null, slots[bIdx] ?? null)) continue;
+
+    for (let q = 0; q < pairCount; q++) {
+      if (q === p) continue;
+      const otherAIdx = q * 2;
+      const otherBIdx = q * 2 + 1;
+      const candidate = slots[otherBIdx] ?? null;
+      if (!candidate) continue;
+
+      const clashHere = sameAcademy(slots[aIdx] ?? null, candidate);
+      const clashThere = sameAcademy(slots[otherAIdx] ?? null, slots[bIdx] ?? null);
+      if (!clashHere && !clashThere) {
+        const tmp = slots[bIdx]!;
+        slots[bIdx] = candidate;
+        slots[otherBIdx] = tmp;
+        break;
+      }
+    }
+  }
 }
