@@ -59,7 +59,7 @@ function MatCard({ mat, slug }: { mat: MatControl; slug: string }) {
         {mat.onDeck && (
           <div className="mt-4">
             <p className="text-xs uppercase tracking-wide text-muted">On deck</p>
-            <div className="mt-2 rounded-md border border-white/10 p-3">
+            <div className="mt-2 rounded-md border border-line/10 p-3">
               <p className="mb-2 truncate text-xs text-muted">
                 {mat.onDeck.divisionName} · {mat.onDeck.roundLabel}
               </p>
@@ -94,7 +94,7 @@ export default function MatControlPage() {
   return (
     <AuthGate roles={[...STAFF_ROLES]}>
       <main>
-        <div className="border-b border-white/10 bg-surface/40">
+        <div className="border-b border-line/10 bg-surface/40">
           <Container className="py-10">
             <Link href={`/events/${slug}/schedule`} className="text-sm text-muted hover:text-chalk">
               ← Schedule
@@ -112,7 +112,7 @@ export default function MatControlPage() {
               {[0, 1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="h-56 animate-pulse rounded-lg border border-white/10 bg-surface"
+                  className="h-56 animate-pulse rounded-lg border border-line/10 bg-surface"
                 />
               ))}
             </div>

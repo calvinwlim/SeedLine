@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { cn } from '../../lib/cn';
 import { useAuth } from '../../lib/auth/auth-context';
+import { ThemeToggle } from './theme-toggle';
 
 const BASE_NAV = [
   { href: '/events', label: 'Events' },
@@ -30,7 +31,7 @@ export function SiteHeader() {
   const nav = canOrganize ? [...BASE_NAV, { href: '/organizer', label: 'Organize' }] : BASE_NAV;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line/10 bg-bg/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <div className="flex items-center gap-8">
           <Wordmark />
@@ -51,6 +52,7 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle />
           {ready && user ? (
             <>
               <Link
@@ -65,7 +67,7 @@ export function SiteHeader() {
               <button
                 type="button"
                 onClick={signOut}
-                className="rounded-md border border-white/15 px-3 py-1.5 text-sm font-medium text-chalk transition-colors hover:border-white/40"
+                className="rounded-md border border-line/15 px-3 py-1.5 text-sm font-medium text-chalk transition-colors hover:border-line/40"
               >
                 Sign out
               </button>
@@ -80,31 +82,34 @@ export function SiteHeader() {
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-chalk md:hidden"
-          aria-label="Toggle navigation"
-          aria-expanded={open}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-line/10 text-chalk"
+            aria-label="Toggle navigation"
+            aria-expanded={open}
           >
-            {open ? (
-              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-            )}
-          </svg>
-        </button>
+            <svg
+              viewBox="0 0 24 24"
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {open && (
-        <nav className="border-t border-white/10 px-6 py-3 md:hidden">
+        <nav className="border-t border-line/10 px-6 py-3 md:hidden">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -118,7 +123,7 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <div className="mt-2 border-t border-white/10 pt-2">
+          <div className="mt-2 border-t border-line/10 pt-2">
             {ready && user ? (
               <>
                 <Link

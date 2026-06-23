@@ -30,7 +30,7 @@ function formatClock(seconds: number): string {
 }
 
 const tallyBtn =
-  'rounded-md border border-white/15 px-3 py-1.5 text-sm font-medium text-chalk transition-colors hover:border-podium hover:text-podium disabled:opacity-40';
+  'rounded-md border border-line/15 px-3 py-1.5 text-sm font-medium text-chalk transition-colors hover:border-podium hover:text-podium disabled:opacity-40';
 
 function ScorePanel({
   side,
@@ -86,7 +86,7 @@ function ScorePanel({
       </div>
 
       <div className="mt-4 grid grid-cols-2 gap-3 text-center">
-        <div className="rounded-md border border-white/10 p-3">
+        <div className="rounded-md border border-line/10 p-3">
           <div className="font-display text-2xl font-bold tabular-nums">{score.advantages}</div>
           <div className="text-[11px] uppercase tracking-wide text-muted">advantages</div>
           <div className="mt-2 flex justify-center gap-2">
@@ -108,7 +108,7 @@ function ScorePanel({
             </button>
           </div>
         </div>
-        <div className="rounded-md border border-white/10 p-3">
+        <div className="rounded-md border border-line/10 p-3">
           <div className="font-display text-2xl font-bold tabular-nums text-corner">
             {score.penalties}
           </div>
@@ -212,7 +212,7 @@ function ScoreConsole() {
   if (isLoading) {
     return (
       <Container className="py-12">
-        <div className="h-96 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-96 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }

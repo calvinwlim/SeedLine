@@ -15,7 +15,7 @@ function ToggleRow({ label, description }: { label: string; description: string 
         <p className="text-xs text-muted">{description}</p>
       </div>
       <span className="inline-flex h-6 w-11 items-center rounded-full bg-podium/80 px-0.5">
-        <span className="h-5 w-5 translate-x-5 rounded-full bg-ink transition-transform" />
+        <span className="h-5 w-5 translate-x-5 rounded-full bg-bg transition-transform" />
       </span>
     </div>
   );
@@ -25,7 +25,7 @@ export default function AccountSettingsPage() {
   const { data: account, isLoading } = useAccount();
 
   if (isLoading || !account) {
-    return <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />;
+    return <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />;
   }
 
   return (
@@ -59,7 +59,7 @@ export default function AccountSettingsPage() {
       <Card>
         <CardBody>
           <h2 className="font-display text-lg font-bold">Notifications</h2>
-          <div className="mt-2 divide-y divide-white/5">
+          <div className="mt-2 divide-y divide-line/5">
             <ToggleRow
               label="Event reminders"
               description="Get an email before events you've registered for."

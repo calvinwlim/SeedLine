@@ -45,7 +45,7 @@ export default function DivisionBracketPage() {
   if (isLoading) {
     return (
       <Container className="py-12">
-        <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }
@@ -63,7 +63,7 @@ export default function DivisionBracketPage() {
 
   return (
     <main>
-      <div className="border-b border-white/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface/40">
         <Container className="py-10">
           <Link
             href={`/events/${division.eventSlug}`}

@@ -16,7 +16,7 @@ export function EventCard({ event }: { event: EventSummary }) {
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="group flex flex-col rounded-lg border border-white/10 bg-surface p-5 transition-colors hover:border-podium/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-podium"
+      className="group flex flex-col rounded-lg border border-line/10 bg-surface p-5 transition-colors hover:border-podium/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-podium"
     >
       <div className="flex items-start justify-between gap-3">
         <Badge tone={eventStatusTone(event.status)}>{eventStatusLabel(event.status)}</Badge>
@@ -43,7 +43,7 @@ export function EventCard({ event }: { event: EventSummary }) {
         )}
       </div>
 
-      <p className="mt-4 border-t border-white/10 pt-3 text-sm font-medium text-podium">
+      <p className="mt-4 border-t border-line/10 pt-3 text-sm font-medium text-podium">
         {formatDateRange(event.startDate, event.endDate)}
       </p>
     </Link>

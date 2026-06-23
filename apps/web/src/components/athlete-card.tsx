@@ -8,7 +8,7 @@ export function AthleteCard({ athlete }: { athlete: AthleteSummary }) {
   return (
     <Link
       href={`/athletes/${athlete.slug}`}
-      className="group flex items-center gap-4 rounded-lg border border-white/10 bg-surface p-5 transition-colors hover:border-podium/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-podium"
+      className="group flex items-center gap-4 rounded-lg border border-line/10 bg-surface p-5 transition-colors hover:border-podium/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-podium"
     >
       <Avatar initials={initials(athlete.firstName, athlete.lastName)} />
       <div className="min-w-0">

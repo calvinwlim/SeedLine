@@ -18,7 +18,7 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 const inputClass =
-  'w-full rounded-md border border-white/10 bg-ink px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none';
+  'w-full rounded-md border border-line/10 bg-bg px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none';
 
 export default function AccountProfilePage() {
   const { data: account, isLoading } = useAccount();
@@ -40,7 +40,7 @@ export default function AccountProfilePage() {
   }, [account]);
 
   if (isLoading || !account) {
-    return <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />;
+    return <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />;
   }
 
   return (

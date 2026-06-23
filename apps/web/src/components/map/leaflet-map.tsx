@@ -1,6 +1,7 @@
 'use client';
 
-import 'leaflet/dist/leaflet.css';
+// Leaflet's stylesheet is imported once, globally, in the root layout so it is
+// not split into a lazily-loaded CSS chunk that can fail to load in dev.
 import { LatLngBounds } from 'leaflet';
 import { useEffect } from 'react';
 import { CircleMarker, MapContainer, Popup, TileLayer, Tooltip, useMap } from 'react-leaflet';

@@ -9,7 +9,7 @@ export default function AccountRegistrationsPage() {
   const { data: account, isLoading } = useAccount();
 
   if (isLoading || !account) {
-    return <div className="h-40 animate-pulse rounded-lg border border-white/10 bg-surface" />;
+    return <div className="h-40 animate-pulse rounded-lg border border-line/10 bg-surface" />;
   }
 
   const registrations = account.athlete?.registrations ?? [];

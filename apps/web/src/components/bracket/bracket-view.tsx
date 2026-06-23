@@ -55,14 +55,14 @@ function MatchBox({
   names: Map<string, { name: string; seed: number }>;
 }) {
   return (
-    <div className="w-52 overflow-hidden rounded-md border border-white/10 bg-surface">
+    <div className="w-52 overflow-hidden rounded-md border border-line/10 bg-surface">
       <Slot
         entrantId={match.entrantA}
         isBye={match.sideA.kind === 'bye'}
         isWinner={!!match.winnerId && match.winnerId === match.entrantA}
         names={names}
       />
-      <div className="border-t border-white/10" />
+      <div className="border-t border-line/10" />
       <Slot
         entrantId={match.entrantB}
         isBye={match.sideB.kind === 'bye'}
@@ -196,7 +196,7 @@ function RoundRobin({ bracket }: { bracket: Bracket }) {
     <div className="grid gap-8 lg:grid-cols-2">
       <div>
         <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted">Standings</h3>
-        <div className="overflow-hidden rounded-md border border-white/10">
+        <div className="overflow-hidden rounded-md border border-line/10">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-surface text-left text-xs uppercase tracking-wide text-muted">
@@ -206,7 +206,7 @@ function RoundRobin({ bracket }: { bracket: Bracket }) {
                 <th className="px-3 py-2 text-center font-medium">L</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5">
+            <tbody className="divide-y divide-line/5">
               {standings.map((s, i) => (
                 <tr key={s.entrantId} className={i === 0 ? 'text-chalk' : 'text-muted'}>
                   <td className="px-3 py-2">{i + 1}</td>
@@ -229,7 +229,7 @@ function RoundRobin({ bracket }: { bracket: Bracket }) {
             return (
               <div
                 key={match.id}
-                className="flex items-center justify-between rounded-md border border-white/10 bg-surface px-3 py-2 text-sm"
+                className="flex items-center justify-between rounded-md border border-line/10 bg-surface px-3 py-2 text-sm"
               >
                 <span className={match.winnerId === match.entrantA ? 'text-chalk' : 'text-muted'}>
                   {a}

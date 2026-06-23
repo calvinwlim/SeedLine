@@ -18,7 +18,7 @@ const STEPS = ['Division', 'Competitor', 'Review'] as const;
 const SERVICE_FEE_RATE = 0.05;
 
 const inputClass =
-  'w-full rounded-md border border-white/10 bg-ink px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none';
+  'w-full rounded-md border border-line/10 bg-bg px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none';
 
 function Stepper({ step }: { step: number }) {
   return (
@@ -32,7 +32,7 @@ function Stepper({ step }: { step: number }) {
                 'flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold',
                 state === 'active' && 'bg-podium text-ink',
                 state === 'done' && 'bg-emerald-400/20 text-emerald-300',
-                state === 'todo' && 'bg-white/5 text-muted',
+                state === 'todo' && 'bg-line/5 text-muted',
               )}
             >
               {state === 'done' ? '✓' : i + 1}
@@ -40,7 +40,7 @@ function Stepper({ step }: { step: number }) {
             <span className={cn('text-sm', state === 'todo' ? 'text-muted' : 'text-chalk')}>
               {label}
             </span>
-            {i < STEPS.length - 1 && <span className="mx-1 h-px w-6 bg-white/10" />}
+            {i < STEPS.length - 1 && <span className="mx-1 h-px w-6 bg-line/10" />}
           </li>
         );
       })}
@@ -96,7 +96,7 @@ function RegisterFlow() {
   if (isLoading) {
     return (
       <Container className="py-12">
-        <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }
@@ -186,8 +186,8 @@ function RegisterFlow() {
                   onClick={() => setDivisionId(d.id)}
                   className={cn(
                     'flex w-full items-center justify-between gap-4 rounded-lg border px-5 py-4 text-left transition-colors',
-                    selected ? 'border-podium bg-podium/5' : 'border-white/10 bg-surface',
-                    full ? 'cursor-not-allowed opacity-50' : 'hover:border-white/30',
+                    selected ? 'border-podium bg-podium/5' : 'border-line/10 bg-surface',
+                    full ? 'cursor-not-allowed opacity-50' : 'hover:border-line/30',
                   )}
                 >
                   <div className="min-w-0">
@@ -316,7 +316,7 @@ function RegisterFlow() {
                   <span className="text-muted">Service fee</span>
                   <span className="text-chalk">{formatPrice(fee)}</span>
                 </div>
-                <div className="flex justify-between border-t border-white/10 pt-2 font-semibold">
+                <div className="flex justify-between border-t border-line/10 pt-2 font-semibold">
                   <span>Total</span>
                   <span className="text-podium">{formatPrice(total)}</span>
                 </div>
@@ -346,7 +346,7 @@ export default function RegisterPage() {
     <Suspense
       fallback={
         <Container className="py-12">
-          <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+          <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
         </Container>
       }
     >

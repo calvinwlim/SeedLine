@@ -21,7 +21,7 @@ export default function OrganizerDashboardPage() {
 
   return (
     <main>
-      <div className="border-b border-white/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface/40">
         <Container className="py-10">
           <p className="text-sm text-muted">Organizer</p>
           <div className="mt-1 flex flex-wrap items-end justify-between gap-4">
@@ -42,7 +42,7 @@ export default function OrganizerDashboardPage() {
         <h2 className="font-display text-xl font-bold">Your events</h2>
         <div className="mt-4">
           {isLoading && (
-            <div className="h-40 animate-pulse rounded-lg border border-white/10 bg-surface" />
+            <div className="h-40 animate-pulse rounded-lg border border-line/10 bg-surface" />
           )}
 
           {events && events.length === 0 && (
@@ -54,12 +54,12 @@ export default function OrganizerDashboardPage() {
           )}
 
           {events && events.length > 0 && (
-            <Card className="divide-y divide-white/10">
+            <Card className="divide-y divide-line/10">
               {events.map((event) => (
                 <Link
                   key={event.id}
                   href={`/organizer/events/${event.slug}`}
-                  className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-white/[0.03]"
+                  className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-line/[0.03]"
                 >
                   <div className="min-w-0">
                     <p className="truncate font-medium text-chalk group-hover:text-podium">

@@ -3,7 +3,6 @@ import type {
   AthleteProfile,
   DivisionSummary,
   EventDetail,
-  MedalResult,
   RegistrationSummary,
 } from '@openmat/types';
 
@@ -712,56 +711,49 @@ for (const seed of registrationSeeds) {
   });
 }
 
-// A handful of podium results, attached to both athletes and their academies.
-interface AchievementSeed {
-  athleteId: string;
-  eventId: string;
-  divisionIndex: number;
-  place: number;
-}
+// Give each athlete a believable podium history derived from their record,
+// spread across real events. Gold count comes straight from the record; silver
+// and bronze are scaled from it so medal shelves and recent-results lists feel
+// lived-in on both athlete and academy profiles.
+athletes.forEach((athlete, idx) => {
+  const gold = Math.min(athlete.record.goldMedals, 12);
+  const silver = Math.round(athlete.record.goldMedals * 0.5);
+  const bronze = Math.round(athlete.record.goldMedals * 0.35);
+  const places = [
+    ...Array<number>(gold).fill(1),
+    ...Array<number>(silver).fill(2),
+    ...Array<number>(bronze).fill(3),
+  ];
+  places.forEach((place, i) => {
+    const event = events[(idx * 3 + i) % events.length]!;
+    const division = event.divisions[i % Math.max(1, event.divisions.length)];
+    athlete.achievements.push({
+      eventName: event.name,
+      eventSlug: event.slug,
+      divisionName: division?.name ?? 'Adult / Open',
+      place,
+      date: event.startDate,
+    });
+  });
+});
 
-const achievementSeeds: AchievementSeed[] = [
-  { athleteId: 'ath_costa', eventId: 'evt_sao_paulo_open', divisionIndex: 0, place: 1 },
-  { athleteId: 'ath_silva', eventId: 'evt_sao_paulo_open', divisionIndex: 1, place: 1 },
-  { athleteId: 'ath_okafor', eventId: 'evt_sao_paulo_open', divisionIndex: 3, place: 2 },
-  { athleteId: 'ath_mendoza', eventId: 'evt_sao_paulo_open', divisionIndex: 2, place: 3 },
-];
-
-for (const seed of achievementSeeds) {
-  const athlete = athletes.find((a) => a.id === seed.athleteId);
-  const event = events.find((e) => e.id === seed.eventId);
-  if (!athlete || !event) continue;
-  const division = event.divisions[seed.divisionIndex];
-  if (!division) continue;
-  const medal: MedalResult = {
-    eventName: event.name,
-    eventSlug: event.slug,
-    divisionName: division.name,
-    place: seed.place,
-    date: event.startDate,
-  };
-  athlete.achievements.push(medal);
-  const academy = academies.find((a) => a.id === athlete.academyId);
-  if (academy) academy.achievements.push(medal);
-}
-
-// Populate each academy's roster from the athlete list.
+// Populate each academy's roster and aggregate its members' podium results.
 for (const academy of academies) {
-  academy.athletes = athletes
-    .filter((a) => a.academyId === academy.id)
-    .map((a) => ({
-      id: a.id,
-      slug: a.slug,
-      firstName: a.firstName,
-      lastName: a.lastName,
-      beltRank: a.beltRank,
-      discipline: a.discipline,
-      academyId: a.academyId,
-      academyName: a.academyName,
-      academySlug: a.academySlug,
-      country: a.country,
-      avatarUrl: a.avatarUrl,
-    }));
+  const members = athletes.filter((a) => a.academyId === academy.id);
+  academy.athletes = members.map((a) => ({
+    id: a.id,
+    slug: a.slug,
+    firstName: a.firstName,
+    lastName: a.lastName,
+    beltRank: a.beltRank,
+    discipline: a.discipline,
+    academyId: a.academyId,
+    academyName: a.academyName,
+    academySlug: a.academySlug,
+    country: a.country,
+    avatarUrl: a.avatarUrl,
+  }));
+  academy.achievements = members.flatMap((a) => a.achievements);
 }
 
 // --- The signed-in user (account pages) ------------------------------------

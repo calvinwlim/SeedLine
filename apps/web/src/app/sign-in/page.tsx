@@ -78,7 +78,7 @@ export default function SignInPage() {
     <Suspense
       fallback={
         <Container className="py-14">
-          <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+          <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
         </Container>
       }
     >

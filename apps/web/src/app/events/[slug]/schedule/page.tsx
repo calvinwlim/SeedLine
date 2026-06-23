@@ -76,7 +76,7 @@ export default function SchedulePage() {
   if (isLoading) {
     return (
       <Container className="py-12">
-        <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }
@@ -99,7 +99,7 @@ export default function SchedulePage() {
 
   return (
     <main>
-      <div className="border-b border-white/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface/40">
         <Container className="py-10">
           <Link
             href={`/events/${schedule.eventSlug}`}
@@ -135,7 +135,7 @@ export default function SchedulePage() {
               </ButtonLink>
             </div>
           </div>
-          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-white/10">
+          <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-line/10">
             <div className="h-full rounded-full bg-podium" style={{ width: `${progress}%` }} />
           </div>
         </Container>
@@ -155,7 +155,7 @@ export default function SchedulePage() {
                   <h2 className="font-display text-lg font-bold">{mat.name}</h2>
                   <span className="text-xs text-muted">{mat.matches.length} bouts</span>
                 </div>
-                <Card className="divide-y divide-white/10">
+                <Card className="divide-y divide-line/10">
                   {mat.matches.map((match) => (
                     <MatchRow key={match.id} match={match} />
                   ))}

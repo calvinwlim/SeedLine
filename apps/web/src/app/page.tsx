@@ -11,7 +11,7 @@ import { FeaturedEvents } from '../components/featured-events';
 function BracketMark() {
   return (
     <svg viewBox="0 0 320 260" fill="none" className="h-full w-full" aria-hidden="true">
-      <g stroke="currentColor" strokeWidth="1.5" className="text-white/15">
+      <g stroke="currentColor" strokeWidth="1.5" className="text-line/15">
         <path d="M16 30 H88 V70 H160" />
         <path d="M16 110 H88 V70" />
         <path d="M16 150 H88 V190 H160" />
@@ -76,7 +76,7 @@ export default function HomePage() {
       </Container>
 
       <Container size="wide">
-        <section className="grid gap-4 border-t border-white/10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="grid gap-4 border-t border-line/10 py-14 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((feature) => (
             <div key={feature.title}>
               <h3 className="font-display text-base font-bold">{feature.title}</h3>
@@ -87,7 +87,7 @@ export default function HomePage() {
       </Container>
 
       <Container size="wide">
-        <section className="border-t border-white/10 py-14">
+        <section className="border-t border-line/10 py-14">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="font-display text-2xl font-bold">Upcoming events</h2>

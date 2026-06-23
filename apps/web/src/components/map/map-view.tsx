@@ -34,7 +34,7 @@ export function MapView({
   height?: string;
 }) {
   return (
-    <div className={cn('overflow-hidden rounded-lg border border-white/10', height, className)}>
+    <div className={cn('overflow-hidden rounded-lg border border-line/10', height, className)}>
       <LeafletMap markers={markers} />
     </div>
   );

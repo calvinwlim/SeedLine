@@ -25,7 +25,7 @@ export default function AcademyDetailPage() {
   if (isLoading) {
     return (
       <Container className="py-12">
-        <div className="h-24 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-24 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }
@@ -51,7 +51,7 @@ export default function AcademyDetailPage() {
 
   return (
     <main>
-      <div className="border-b border-white/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface/40">
         <Container className="py-10">
           <Link href="/academies" className="text-sm text-muted hover:text-chalk">
             ← All academies
@@ -94,7 +94,7 @@ export default function AcademyDetailPage() {
           {academy.achievements.length > 0 && (
             <section>
               <h2 className="font-display text-xl font-bold">Recent results</h2>
-              <Card className="mt-4 divide-y divide-white/10">
+              <Card className="mt-4 divide-y divide-line/10">
                 {academy.achievements.map((medal, i) => (
                   <div key={i} className="flex items-center justify-between gap-4 px-5 py-3">
                     <div className="min-w-0">

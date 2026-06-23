@@ -36,7 +36,7 @@ export default function AcademiesPage() {
             {[0, 1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-24 animate-pulse rounded-lg border border-white/10 bg-surface"
+                className="h-24 animate-pulse rounded-lg border border-line/10 bg-surface"
               />
             ))}
           </div>

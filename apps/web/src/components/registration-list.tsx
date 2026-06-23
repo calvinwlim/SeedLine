@@ -10,7 +10,7 @@ export function RegistrationList({ registrations }: { registrations: Registratio
     return <p className="text-sm text-muted">No registrations yet.</p>;
   }
   return (
-    <Card className="divide-y divide-white/10">
+    <Card className="divide-y divide-line/10">
       {registrations.map((reg) => (
         <div key={reg.id} className="flex items-center justify-between gap-4 px-5 py-3.5">
           <div className="min-w-0">

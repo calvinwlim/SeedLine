@@ -28,7 +28,7 @@ export function AuthGate({ roles, children }: { roles?: UserRole[]; children: Re
   if (!ready || !user) {
     return (
       <Container className="py-12">
-        <div className="h-40 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-40 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }

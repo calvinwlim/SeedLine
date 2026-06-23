@@ -32,7 +32,7 @@ export function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-md border border-white/10 bg-surface py-2.5 pl-10 pr-3 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none"
+        className="w-full rounded-md border border-line/10 bg-surface py-2.5 pl-10 pr-3 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none"
       />
     </div>
   );
@@ -55,7 +55,7 @@ export function FilterSelect<T extends string>({
       value={value}
       onChange={(e) => onChange(e.target.value as T | '')}
       className={cn(
-        'rounded-md border border-white/10 bg-surface px-3 py-2.5 text-sm text-chalk focus:border-podium/50 focus:outline-none',
+        'rounded-md border border-line/10 bg-surface px-3 py-2.5 text-sm text-chalk focus:border-podium/50 focus:outline-none',
         className,
       )}
     >

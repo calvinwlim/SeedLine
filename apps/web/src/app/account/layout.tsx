@@ -20,7 +20,7 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
   return (
     <AuthGate>
       <main>
-        <div className="border-b border-white/10 bg-surface/40">
+        <div className="border-b border-line/10 bg-surface/40">
           <Container className="pt-10">
             <h1 className="font-display text-3xl font-bold">Your account</h1>
             <p className="mt-2 text-muted">Manage your registrations, profile, and settings.</p>

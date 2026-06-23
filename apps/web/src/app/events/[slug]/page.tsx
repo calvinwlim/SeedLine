@@ -25,7 +25,7 @@ function DivisionRow({ division, eventSlug }: { division: DivisionSummary; event
   return (
     <Link
       href={`/events/${eventSlug}/divisions/${division.id}`}
-      className="group flex items-center justify-between gap-4 px-5 py-3.5 transition-colors hover:bg-white/[0.03]"
+      className="group flex items-center justify-between gap-4 px-5 py-3.5 transition-colors hover:bg-line/[0.03]"
     >
       <div className="min-w-0">
         <p className="truncate text-sm font-medium text-chalk group-hover:text-podium">
@@ -68,7 +68,7 @@ export default function EventDetailPage() {
     return (
       <Container className="py-12">
         <div className="h-8 w-64 animate-pulse rounded bg-surface" />
-        <div className="mt-6 h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="mt-6 h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }
@@ -91,7 +91,7 @@ export default function EventDetailPage() {
 
   return (
     <main>
-      <div className="border-b border-white/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface/40">
         <Container className="py-10">
           <Link href="/events" className="text-sm text-muted hover:text-chalk">
             ← All events
@@ -130,7 +130,7 @@ export default function EventDetailPage() {
             <h2 className="font-display text-xl font-bold">About this event</h2>
             <p className="mt-3 whitespace-pre-line text-muted">{event.description}</p>
             {event.scheduleNote && (
-              <p className="mt-4 rounded-md border border-white/10 bg-surface px-4 py-3 text-sm text-muted">
+              <p className="mt-4 rounded-md border border-line/10 bg-surface px-4 py-3 text-sm text-muted">
                 <span className="font-medium text-chalk">Schedule: </span>
                 {event.scheduleNote}
               </p>
@@ -142,7 +142,7 @@ export default function EventDetailPage() {
               <h2 className="font-display text-xl font-bold">Divisions</h2>
               <span className="text-sm text-muted">{event.divisions.length} total</span>
             </div>
-            <Card className="mt-4 divide-y divide-white/10">
+            <Card className="mt-4 divide-y divide-line/10">
               {event.divisions.map((division) => (
                 <DivisionRow key={division.id} division={division} eventSlug={event.slug} />
               ))}
@@ -207,7 +207,7 @@ export default function EventDetailPage() {
           <Card>
             <CardBody>
               <p className="text-xs uppercase tracking-wide text-muted">Details</p>
-              <div className="mt-2 divide-y divide-white/5">
+              <div className="mt-2 divide-y divide-line/5">
                 <InfoRow label="Dates" value={formatDateRange(event.startDate, event.endDate)} />
                 <InfoRow
                   label="Registration opens"

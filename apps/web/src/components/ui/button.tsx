@@ -9,8 +9,8 @@ const VARIANTS: Record<Variant, string> = {
   primary:
     'bg-podium text-ink hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-podium',
   secondary:
-    'border border-white/15 text-chalk hover:border-white/40 focus-visible:outline-white/40',
-  ghost: 'text-muted hover:text-chalk focus-visible:outline-white/40',
+    'border border-line/15 text-chalk hover:border-line/40 focus-visible:outline-line/40',
+  ghost: 'text-muted hover:text-chalk focus-visible:outline-line/40',
 };
 
 const SIZES: Record<Size, string> = {

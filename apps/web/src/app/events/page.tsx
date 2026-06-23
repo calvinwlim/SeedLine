@@ -67,7 +67,7 @@ export default function EventsPage() {
         <button
           type="button"
           onClick={() => setShowMap((v) => !v)}
-          className="rounded-md border border-white/15 px-4 py-2 text-sm font-semibold text-chalk transition-colors hover:border-white/40"
+          className="rounded-md border border-line/15 px-4 py-2 text-sm font-semibold text-chalk transition-colors hover:border-line/40"
         >
           {showMap ? 'Hide map' : 'Show map'}
         </button>
@@ -96,7 +96,7 @@ export default function EventsPage() {
             {[0, 1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
-                className="h-44 animate-pulse rounded-lg border border-white/10 bg-surface"
+                className="h-44 animate-pulse rounded-lg border border-line/10 bg-surface"
               />
             ))}
           </div>

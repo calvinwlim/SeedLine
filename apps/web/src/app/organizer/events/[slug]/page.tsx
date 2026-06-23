@@ -34,7 +34,7 @@ import {
 } from '../../../../lib/format';
 
 const fieldClass =
-  'mt-1 w-full rounded-md border border-white/10 bg-ink px-3 py-2 text-sm text-chalk focus:border-podium/50 focus:outline-none';
+  'mt-1 w-full rounded-md border border-line/10 bg-bg px-3 py-2 text-sm text-chalk focus:border-podium/50 focus:outline-none';
 
 function AddDivisionForm({ eventId, onAdded }: { eventId: string; onAdded: () => void }) {
   const [open, setOpen] = useState(false);
@@ -238,7 +238,7 @@ export default function ManageEventPage() {
   if (isLoading) {
     return (
       <Container className="py-12">
-        <div className="h-64 animate-pulse rounded-lg border border-white/10 bg-surface" />
+        <div className="h-64 animate-pulse rounded-lg border border-line/10 bg-surface" />
       </Container>
     );
   }
@@ -256,7 +256,7 @@ export default function ManageEventPage() {
 
   return (
     <main>
-      <div className="border-b border-white/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface/40">
         <Container className="py-10">
           <Link href="/organizer" className="text-sm text-muted hover:text-chalk">
             ← Organizer
@@ -295,7 +295,7 @@ export default function ManageEventPage() {
                   'rounded-md border px-3 py-1.5 text-sm transition-colors disabled:cursor-not-allowed',
                   status === event.status
                     ? 'border-podium bg-podium/10 text-chalk'
-                    : 'border-white/10 text-muted hover:border-white/30 hover:text-chalk',
+                    : 'border-line/10 text-muted hover:border-line/30 hover:text-chalk',
                 )}
               >
                 {eventStatusLabel(status)}
@@ -316,7 +316,7 @@ export default function ManageEventPage() {
                 description="Add at least one division so athletes can register."
               />
             ) : (
-              <Card className="divide-y divide-white/10">
+              <Card className="divide-y divide-line/10">
                 {event.divisions.map((d) => (
                   <div key={d.id} className="flex items-center justify-between gap-4 px-5 py-3.5">
                     <div className="min-w-0">
@@ -344,14 +344,14 @@ export default function ManageEventPage() {
               <Card className="overflow-hidden">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-white/[0.02] text-left text-xs uppercase tracking-wide text-muted">
+                    <tr className="bg-line/[0.02] text-left text-xs uppercase tracking-wide text-muted">
                       <th className="px-5 py-2.5 font-medium">Competitor</th>
                       <th className="px-5 py-2.5 font-medium">Academy</th>
                       <th className="px-5 py-2.5 font-medium">Division</th>
                       <th className="px-5 py-2.5 font-medium">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-line/5">
                     {registrations.map((reg) => (
                       <tr key={reg.id}>
                         <td className="px-5 py-3 text-chalk">

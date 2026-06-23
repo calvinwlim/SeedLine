@@ -4,7 +4,9 @@ import { cn } from '../../lib/cn';
 /** A surface panel used for grouping content. */
 export function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn('rounded-lg border border-white/10 bg-surface', className)}>{children}</div>
+    <div className={cn('rounded-xl border border-line/10 bg-surface shadow-card', className)}>
+      {children}
+    </div>
   );
 }
 
@@ -34,9 +36,11 @@ export function SectionHeading({
 
 export function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-surface px-4 py-3">
+    <div className="rounded-xl border border-line/10 bg-surface px-4 py-3.5 shadow-card">
       <div className="font-display text-2xl font-bold leading-none">{value}</div>
-      <div className="mt-1 text-xs uppercase tracking-wide text-muted">{label}</div>
+      <div className="mt-1.5 text-[11px] font-medium uppercase tracking-wider text-muted">
+        {label}
+      </div>
     </div>
   );
 }
@@ -51,7 +55,7 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-dashed border-white/15 bg-surface/40 px-6 py-14 text-center">
+    <div className="rounded-lg border border-dashed border-line/15 bg-surface/40 px-6 py-14 text-center">
       <p className="font-display text-lg font-semibold">{title}</p>
       {description && <p className="mx-auto mt-2 max-w-md text-sm text-muted">{description}</p>}
       {action && <div className="mt-5 flex justify-center">{action}</div>}
