@@ -3,10 +3,7 @@
  * Extends the shared base and layers in Next's recommended rules.
  */
 module.exports = {
-  extends: [
-    '@openmat/eslint-config',
-    'next/core-web-vitals',
-  ],
+  extends: ['@openmat/eslint-config', 'next/core-web-vitals'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'warn',
   },

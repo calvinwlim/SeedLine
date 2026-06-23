@@ -15,13 +15,7 @@ export const beltRankEnum = pgEnum('belt_rank', [
   'brown',
   'black',
 ]);
-export const rulesetEnum = pgEnum('ruleset', [
-  'ibjjf',
-  'adcc',
-  'ebi',
-  'submission_only',
-  'points',
-]);
+export const rulesetEnum = pgEnum('ruleset', ['ibjjf', 'adcc', 'ebi', 'submission_only', 'points']);
 export const bracketFormatEnum = pgEnum('bracket_format', [
   'single_elimination',
   'double_elimination',
