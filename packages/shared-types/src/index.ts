@@ -28,11 +28,7 @@ export type BeltRank = (typeof BELT_RANKS)[number];
 export const RULESETS = ['ibjjf', 'adcc', 'ebi', 'submission_only', 'points'] as const;
 export type Ruleset = (typeof RULESETS)[number];
 
-export const BRACKET_FORMATS = [
-  'single_elimination',
-  'double_elimination',
-  'round_robin',
-] as const;
+export const BRACKET_FORMATS = ['single_elimination', 'double_elimination', 'round_robin'] as const;
 export type BracketFormat = (typeof BRACKET_FORMATS)[number];
 
 export const EVENT_STATUSES = [

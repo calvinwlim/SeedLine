@@ -6,9 +6,7 @@ describe('standardSeedOrder', () => {
     expect(standardSeedOrder(2)).toEqual([1, 2]);
     expect(standardSeedOrder(4)).toEqual([1, 4, 2, 3]);
     expect(standardSeedOrder(8)).toEqual([1, 8, 4, 5, 2, 7, 3, 6]);
-    expect(standardSeedOrder(16)).toEqual([
-      1, 16, 8, 9, 4, 13, 5, 12, 2, 15, 7, 10, 3, 14, 6, 11,
-    ]);
+    expect(standardSeedOrder(16)).toEqual([1, 16, 8, 9, 4, 13, 5, 12, 2, 15, 7, 10, 3, 14, 6, 11]);
   });
 
   it('keeps seeds 1 and 2 in opposite halves', () => {

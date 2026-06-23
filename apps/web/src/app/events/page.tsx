@@ -20,8 +20,8 @@ export default function EventsPage() {
 
         {isError && (
           <p className="text-muted">
-            Could not reach the API. Start it with <code className="text-chalk">npm run dev</code> and
-            check <code className="text-chalk">NEXT_PUBLIC_API_URL</code>.
+            Could not reach the API. Start it with <code className="text-chalk">npm run dev</code>{' '}
+            and check <code className="text-chalk">NEXT_PUBLIC_API_URL</code>.
           </p>
         )}
 
