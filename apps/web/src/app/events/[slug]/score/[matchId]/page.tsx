@@ -9,6 +9,7 @@ import { Container } from '../../../../../components/ui/container';
 import { Badge } from '../../../../../components/ui/badge';
 import { Button, ButtonLink } from '../../../../../components/ui/button';
 import { Card, EmptyState } from '../../../../../components/ui/card';
+import { AuthGate } from '../../../../../components/auth/auth-gate';
 import { api } from '../../../../../lib/api';
 import { cn } from '../../../../../lib/cn';
 
@@ -145,7 +146,7 @@ function ScorePanel({
   );
 }
 
-export default function ScoreConsolePage() {
+function ScoreConsole() {
   const params = useParams<{ slug: string; matchId: string }>();
   const { slug, matchId } = params;
   const queryClient = useQueryClient();
@@ -316,5 +317,13 @@ export default function ScoreConsolePage() {
         </div>
       </div>
     </Container>
+  );
+}
+
+export default function ScoreConsolePage() {
+  return (
+    <AuthGate roles={['organizer', 'staff', 'admin']}>
+      <ScoreConsole />
+    </AuthGate>
   );
 }

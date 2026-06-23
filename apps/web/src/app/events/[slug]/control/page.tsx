@@ -7,7 +7,10 @@ import type { MatControl, ScoreableMatch } from '@openmat/types';
 import { Container } from '../../../../components/ui/container';
 import { ButtonLink } from '../../../../components/ui/button';
 import { Card, CardBody, EmptyState } from '../../../../components/ui/card';
+import { AuthGate } from '../../../../components/auth/auth-gate';
 import { api } from '../../../../lib/api';
+
+const STAFF_ROLES = ['organizer', 'staff', 'admin'] as const;
 
 function ScoreLine({ match }: { match: ScoreableMatch }) {
   return (
@@ -89,46 +92,48 @@ export default function MatControlPage() {
   });
 
   return (
-    <main>
-      <div className="border-b border-white/10 bg-surface/40">
+    <AuthGate roles={[...STAFF_ROLES]}>
+      <main>
+        <div className="border-b border-white/10 bg-surface/40">
+          <Container className="py-10">
+            <Link href={`/events/${slug}/schedule`} className="text-sm text-muted hover:text-chalk">
+              ← Schedule
+            </Link>
+            <h1 className="mt-3 font-display text-3xl font-bold">Mat control</h1>
+            <p className="mt-2 text-muted">
+              Staff view — open a scoreboard to run a match. Results flow to the live board.
+            </p>
+          </Container>
+        </div>
+
         <Container className="py-10">
-          <Link href={`/events/${slug}/schedule`} className="text-sm text-muted hover:text-chalk">
-            ← Schedule
-          </Link>
-          <h1 className="mt-3 font-display text-3xl font-bold">Mat control</h1>
-          <p className="mt-2 text-muted">
-            Staff view — open a scoreboard to run a match. Results flow to the live board.
-          </p>
+          {isLoading && (
+            <div className="grid gap-5 md:grid-cols-2">
+              {[0, 1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="h-56 animate-pulse rounded-lg border border-white/10 bg-surface"
+                />
+              ))}
+            </div>
+          )}
+
+          {mats && mats.length === 0 && (
+            <EmptyState
+              title="No mats running"
+              description="Once the event has scheduled matches, mats appear here."
+            />
+          )}
+
+          {mats && mats.length > 0 && (
+            <div className="grid gap-5 md:grid-cols-2">
+              {mats.map((mat) => (
+                <MatCard key={mat.name} mat={mat} slug={slug} />
+              ))}
+            </div>
+          )}
         </Container>
-      </div>
-
-      <Container className="py-10">
-        {isLoading && (
-          <div className="grid gap-5 md:grid-cols-2">
-            {[0, 1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-56 animate-pulse rounded-lg border border-white/10 bg-surface"
-              />
-            ))}
-          </div>
-        )}
-
-        {mats && mats.length === 0 && (
-          <EmptyState
-            title="No mats running"
-            description="Once the event has scheduled matches, mats appear here."
-          />
-        )}
-
-        {mats && mats.length > 0 && (
-          <div className="grid gap-5 md:grid-cols-2">
-            {mats.map((mat) => (
-              <MatCard key={mat.name} mat={mat} slug={slug} />
-            ))}
-          </div>
-        )}
-      </Container>
-    </main>
+      </main>
+    </AuthGate>
   );
 }

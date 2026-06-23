@@ -130,9 +130,11 @@ The frontend covers, end to end on mock data:
   console (`/events/[slug]/score/[matchId]`) with IBJJF points/advantages/penalties, a match
   clock, and submission/points finishes. Results are held in a stateful in-memory store and
   flow straight back to the live board.
-- **Account area** — dashboard, registrations, profile, settings.
+- **Accounts & roles** — a client session (`/sign-in`) with switchable demo personas
+  (athlete / organizer / staff); role-gated areas redirect or show a not-authorized notice.
+- **Account area** — dashboard, registrations, profile, settings, reflecting the signed-in user.
 - **Organizer side** — a dashboard, event creation, status lifecycle control, division
-  management, and a registrations roster (`/organizer`).
+  management, and a registrations roster (`/organizer`), gated to organizers.
 
 ## Scripts
 

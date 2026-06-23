@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import { QueryProvider } from '../lib/query-provider';
+import { AuthProvider } from '../lib/auth/auth-context';
 import { SiteHeader } from '../components/layout/site-header';
 import { SiteFooter } from '../components/layout/site-footer';
 import './globals.css';
@@ -24,11 +25,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="font-sans">
         <QueryProvider>
-          <div className="flex min-h-screen flex-col">
-            <SiteHeader />
-            <div className="flex-1">{children}</div>
-            <SiteFooter />
-          </div>
+          <AuthProvider>
+            <div className="flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="flex-1">{children}</div>
+              <SiteFooter />
+            </div>
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>

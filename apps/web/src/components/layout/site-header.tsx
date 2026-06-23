@@ -4,12 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { cn } from '../../lib/cn';
+import { useAuth } from '../../lib/auth/auth-context';
 
-const NAV = [
+const BASE_NAV = [
   { href: '/events', label: 'Events' },
   { href: '/academies', label: 'Academies' },
   { href: '/athletes', label: 'Athletes' },
-  { href: '/organizer', label: 'Organize' },
 ];
 
 function Wordmark() {
@@ -23,8 +23,11 @@ function Wordmark() {
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const { user, ready, signOut } = useAuth();
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const canOrganize = user?.role === 'organizer' || user?.role === 'admin';
+  const nav = canOrganize ? [...BASE_NAV, { href: '/organizer', label: 'Organize' }] : BASE_NAV;
 
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur">
@@ -32,7 +35,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-8">
           <Wordmark />
           <nav className="hidden items-center gap-6 md:flex">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -48,21 +51,33 @@ export function SiteHeader() {
         </div>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            href="/account"
-            className={cn(
-              'text-sm transition-colors hover:text-chalk',
-              isActive('/account') ? 'text-chalk' : 'text-muted',
-            )}
-          >
-            Account
-          </Link>
-          <Link
-            href="/account"
-            className="rounded-md bg-podium px-4 py-2 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
-          >
-            Sign in
-          </Link>
+          {ready && user ? (
+            <>
+              <Link
+                href="/account"
+                className={cn(
+                  'text-sm transition-colors hover:text-chalk',
+                  isActive('/account') ? 'text-chalk' : 'text-muted',
+                )}
+              >
+                {user.name}
+              </Link>
+              <button
+                type="button"
+                onClick={signOut}
+                className="rounded-md border border-white/15 px-3 py-1.5 text-sm font-medium text-chalk transition-colors hover:border-white/40"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <Link
+              href="/sign-in"
+              className="rounded-md bg-podium px-4 py-2 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
 
         <button
@@ -90,7 +105,7 @@ export function SiteHeader() {
 
       {open && (
         <nav className="border-t border-white/10 px-6 py-3 md:hidden">
-          {[...NAV, { href: '/account', label: 'Account' }].map((item) => (
+          {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -103,6 +118,37 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
+          <div className="mt-2 border-t border-white/10 pt-2">
+            {ready && user ? (
+              <>
+                <Link
+                  href="/account"
+                  onClick={() => setOpen(false)}
+                  className="block py-2 text-sm text-muted hover:text-chalk"
+                >
+                  Account ({user.name})
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    signOut();
+                  }}
+                  className="block py-2 text-sm text-muted hover:text-chalk"
+                >
+                  Sign out
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/sign-in"
+                onClick={() => setOpen(false)}
+                className="block py-2 text-sm text-muted hover:text-chalk"
+              >
+                Sign in
+              </Link>
+            )}
+          </div>
         </nav>
       )}
     </header>

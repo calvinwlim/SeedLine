@@ -24,15 +24,8 @@ import type {
   ScoreableMatch,
 } from '@openmat/types';
 import type { ApiClient } from '../api-types';
-import {
-  academies,
-  athletes,
-  currentAccountAthleteId,
-  currentOrganizer,
-  currentOrganizerId,
-  events,
-  slugify,
-} from './data';
+import { academies, athletes, currentOrganizer, currentOrganizerId, events, slugify } from './data';
+import { getSessionAthleteId, getSessionUser } from '../auth/session';
 import { buildEntrants } from './entrants';
 import {
   applyScore as storeApplyScore,
@@ -139,7 +132,7 @@ export const mockClient: ApiClient = {
     if (!event || !division) {
       return Promise.reject(new Error('Event or division not found'));
     }
-    const athlete = athletes.find((a) => a.id === currentAccountAthleteId);
+    const athlete = athletes.find((a) => a.id === getSessionAthleteId());
     const registration: RegistrationSummary = {
       id: `reg_${Date.now()}`,
       eventId: event.id,
@@ -193,12 +186,15 @@ export const mockClient: ApiClient = {
   },
 
   getAccount() {
-    const athlete = athletes.find((a) => a.id === currentAccountAthleteId) ?? null;
+    const user = getSessionUser();
+    const athlete = user?.athleteId
+      ? (athletes.find((a) => a.id === user.athleteId) ?? null)
+      : null;
     const account: AccountProfile = {
-      id: 'usr_demo',
-      name: athlete ? `${athlete.firstName} ${athlete.lastName}` : 'Demo Athlete',
-      email: 'demo@openmat.dev',
-      role: 'organizer',
+      id: user?.id ?? 'usr_guest',
+      name: user?.name ?? 'Guest',
+      email: user?.email ?? 'guest@openmat.dev',
+      role: user?.role ?? 'athlete',
       memberSince: '2023-02-14T00:00:00.000Z',
       avatarUrl: null,
       athlete,
