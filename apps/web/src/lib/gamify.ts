@@ -44,7 +44,12 @@ export function countMedals(achievements: MedalResult[]): MedalCounts {
 export function deriveMedals(record: AthleteRecord, achievements: MedalResult[]): MedalCounts {
   const counted = countMedals(achievements);
   const gold = Math.max(record.goldMedals, counted.gold);
-  return { gold, silver: counted.silver, bronze: counted.bronze, total: gold + counted.silver + counted.bronze };
+  return {
+    gold,
+    silver: counted.silver,
+    bronze: counted.bronze,
+    total: gold + counted.silver + counted.bronze,
+  };
 }
 
 /** Most-recent-first podium results, capped for display. */

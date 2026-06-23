@@ -16,7 +16,12 @@ import { StatTile } from '../../../components/stats/stat-tile';
 import { MedalShelf } from '../../../components/stats/medal-shelf';
 import { AchievementGrid } from '../../../components/stats/achievement-grid';
 import { api } from '../../../lib/api';
-import { deriveAchievements, deriveKeyStats, deriveMedals } from '../../../lib/gamify';
+import {
+  deriveAchievements,
+  deriveKeyStats,
+  deriveMedals,
+  recentMedals,
+} from '../../../lib/gamify';
 import { fullName, humanize, initials } from '../../../lib/format';
 
 export default function AthleteProfilePage() {
@@ -137,7 +142,7 @@ export default function AthleteProfilePage() {
 
           <section>
             <h2 className="mb-3 font-display text-xl font-bold">Podium results</h2>
-            <MedalList medals={athlete.achievements} />
+            <MedalList medals={recentMedals(athlete.achievements, 8)} />
           </section>
         </div>
       </Container>
