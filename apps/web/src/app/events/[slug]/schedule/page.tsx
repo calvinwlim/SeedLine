@@ -23,7 +23,11 @@ function MatchRow({ match }: { match: ScheduleMatch }) {
   const done = match.status === 'completed';
 
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 ${live ? 'bg-podium/5' : ''}`}>
+    <div
+      className={`flex items-center gap-3 px-4 py-3 ${
+        live ? 'border-l-2 border-podium bg-podium/5' : 'border-l-2 border-transparent'
+      }`}
+    >
       <span className="w-5 shrink-0 text-center text-xs text-muted">{match.order}</span>
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2 text-sm">
@@ -99,7 +103,7 @@ export default function SchedulePage() {
 
   return (
     <main>
-      <div className="border-b border-line/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface">
         <Container className="py-10">
           <Link
             href={`/events/${schedule.eventSlug}`}

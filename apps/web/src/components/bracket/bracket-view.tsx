@@ -32,17 +32,25 @@ function Slot({
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-2 px-3 py-1.5 text-sm',
-        isWinner ? 'text-chalk' : 'text-muted',
+        'flex items-center justify-between gap-2 px-2.5 py-2 text-sm',
+        isWinner && 'bg-podium/[0.07]',
       )}
     >
       <span className="flex min-w-0 items-center gap-2">
         {info && (
-          <span className="w-4 shrink-0 text-right text-[10px] text-muted">{info.seed}</span>
+          <span className="grid h-4 w-4 shrink-0 place-items-center rounded bg-line/[0.07] text-[10px] font-medium text-muted">
+            {info.seed}
+          </span>
         )}
-        <span className="truncate">{label}</span>
+        <span className={cn('truncate', isWinner ? 'font-medium text-chalk' : 'text-muted')}>
+          {label}
+        </span>
       </span>
-      {isWinner && <span className="shrink-0 text-podium">✓</span>}
+      {isWinner && (
+        <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-podium text-[10px] font-bold text-ink">
+          ✓
+        </span>
+      )}
     </div>
   );
 }
@@ -55,7 +63,7 @@ function MatchBox({
   names: Map<string, { name: string; seed: number }>;
 }) {
   return (
-    <div className="w-52 overflow-hidden rounded-md border border-line/10 bg-surface">
+    <div className="w-52 overflow-hidden rounded-lg border border-line/10 bg-surface shadow-card">
       <Slot
         entrantId={match.entrantA}
         isBye={match.sideA.kind === 'bye'}

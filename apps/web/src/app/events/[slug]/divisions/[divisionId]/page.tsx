@@ -63,7 +63,7 @@ export default function DivisionBracketPage() {
 
   return (
     <main>
-      <div className="border-b border-line/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface">
         <Container className="py-10">
           <Link
             href={`/events/${division.eventSlug}`}

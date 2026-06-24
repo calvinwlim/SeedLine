@@ -94,7 +94,7 @@ export default function MatControlPage() {
   return (
     <AuthGate roles={[...STAFF_ROLES]}>
       <main>
-        <div className="border-b border-line/10 bg-surface/40">
+        <div className="border-b border-line/10 bg-surface">
           <Container className="py-10">
             <Link href={`/events/${slug}/schedule`} className="text-sm text-muted hover:text-chalk">
               ← Schedule

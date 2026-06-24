@@ -30,7 +30,7 @@ function formatClock(seconds: number): string {
 }
 
 const tallyBtn =
-  'rounded-md border border-line/15 px-3 py-1.5 text-sm font-medium text-chalk transition-colors hover:border-podium hover:text-podium disabled:opacity-40';
+  'rounded-lg border border-line/15 px-3.5 py-2 text-sm font-semibold text-chalk transition-colors hover:border-podium hover:text-podium disabled:opacity-40';
 
 function ScorePanel({
   side,
@@ -51,14 +51,14 @@ function ScorePanel({
 }) {
   return (
     <Card className={cn('p-5', highlight && 'ring-2 ring-podium')}>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-line/10 pb-3">
         <h2 className="truncate font-display text-lg font-bold">{name}</h2>
-        <span className="text-xs uppercase tracking-wide text-muted">
+        <span className="shrink-0 rounded-full bg-line/[0.07] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted">
           {side === 'a' ? 'Side A' : 'Side B'}
         </span>
       </div>
 
-      <div className="mt-3 text-center">
+      <div className="mt-4 text-center">
         <div className="font-display text-7xl font-bold tabular-nums">{score.points}</div>
         <div className="text-xs uppercase tracking-wide text-muted">points</div>
       </div>
@@ -247,7 +247,7 @@ function ScoreConsole() {
         <p className="text-sm text-muted">
           {match.divisionName} · {match.roundLabel}
         </p>
-        <div className="mt-2 font-display text-5xl font-bold tabular-nums">
+        <div className="mt-3 inline-flex items-center rounded-xl border border-line/10 bg-surface px-7 py-2.5 font-display text-5xl font-bold tabular-nums shadow-card">
           {formatClock(seconds)}
         </div>
         <div className="mt-2 flex justify-center gap-2">
@@ -274,7 +274,7 @@ function ScoreConsole() {
       </div>
 
       {done && (
-        <div className="mt-6 rounded-lg border border-podium/40 bg-podium/10 p-4 text-center">
+        <div className="mt-6 rounded-xl border border-podium/40 bg-podium/10 p-4 text-center shadow-card">
           <p className="text-sm text-muted">Winner</p>
           <p className="font-display text-xl font-bold text-podium">{match.winner}</p>
           <p className="mt-1 text-xs text-muted">by {match.score.method}</p>

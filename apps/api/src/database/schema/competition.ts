@@ -123,6 +123,28 @@ export const matches = pgTable(
   }),
 );
 
+/**
+ * A podium result an athlete earned at an event — the source for the medal
+ * shelves and "recent results" on athlete and academy profiles. Denormalized
+ * alongside the live match data for now; a later phase derives it from results.
+ */
+export const medals = pgTable(
+  'medals',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    athleteId: uuid('athlete_id')
+      .notNull()
+      .references(() => athletes.id, { onDelete: 'cascade' }),
+    eventId: uuid('event_id').references(() => events.id, { onDelete: 'set null' }),
+    divisionName: varchar('division_name', { length: 200 }).notNull(),
+    place: integer('place').notNull(),
+    awardedAt: timestamp('awarded_at', { withTimezone: true }).notNull(),
+  },
+  (table) => ({
+    athleteIdx: index('medals_athlete_idx').on(table.athleteId),
+  }),
+);
+
 /** A payment for a registration, routed to the organizer via Stripe Connect. */
 export const payments = pgTable('payments', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -169,4 +191,9 @@ export const bracketsRelations = relations(brackets, ({ one, many }) => ({
 export const matchesRelations = relations(matches, ({ one }) => ({
   bracket: one(brackets, { fields: [matches.bracketId], references: [brackets.id] }),
   mat: one(mats, { fields: [matches.matId], references: [mats.id] }),
+}));
+
+export const medalsRelations = relations(medals, ({ one }) => ({
+  athlete: one(athletes, { fields: [medals.athleteId], references: [athletes.id] }),
+  event: one(events, { fields: [medals.eventId], references: [events.id] }),
 }));

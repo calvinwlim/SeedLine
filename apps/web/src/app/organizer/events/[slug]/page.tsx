@@ -256,7 +256,7 @@ export default function ManageEventPage() {
 
   return (
     <main>
-      <div className="border-b border-line/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface">
         <Container className="py-10">
           <Link href="/organizer" className="text-sm text-muted hover:text-chalk">
             ← Organizer

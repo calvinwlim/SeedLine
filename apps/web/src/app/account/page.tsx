@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { Avatar } from '../../components/ui/avatar';
 import { Belt } from '../../components/ui/belt';
-import { Card, CardBody, Stat } from '../../components/ui/card';
+import { Card, CardBody } from '../../components/ui/card';
 import { ButtonLink } from '../../components/ui/button';
+import { StatTile } from '../../components/stats/stat-tile';
 import { RegistrationList } from '../../components/registration-list';
 import { useAccount } from '../../lib/use-account';
 import { initials } from '../../lib/format';
@@ -54,10 +55,10 @@ export default function AccountDashboardPage() {
 
       {athlete && (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Stat label="Registrations" value={athlete.registrations.length} />
-          <Stat label="Wins" value={athlete.record.wins} />
-          <Stat label="Submissions" value={athlete.record.submissions} />
-          <Stat label="Gold medals" value={athlete.record.goldMedals} />
+          <StatTile label="Registrations" value={athlete.registrations.length} />
+          <StatTile label="Wins" value={athlete.record.wins} accent="win" />
+          <StatTile label="Submissions" value={athlete.record.submissions} accent="win" />
+          <StatTile label="Gold medals" value={athlete.record.goldMedals} accent="gold" />
         </div>
       )}
 

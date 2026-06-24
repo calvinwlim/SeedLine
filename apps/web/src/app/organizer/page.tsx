@@ -5,7 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Container } from '../../components/ui/container';
 import { Badge } from '../../components/ui/badge';
 import { ButtonLink } from '../../components/ui/button';
-import { Card, EmptyState, Stat } from '../../components/ui/card';
+import { Card, EmptyState } from '../../components/ui/card';
+import { StatTile } from '../../components/stats/stat-tile';
 import { api } from '../../lib/api';
 import { eventStatusLabel, eventStatusTone, formatDateRange } from '../../lib/format';
 
@@ -21,7 +22,7 @@ export default function OrganizerDashboardPage() {
 
   return (
     <main>
-      <div className="border-b border-line/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface">
         <Container className="py-10">
           <p className="text-sm text-muted">Organizer</p>
           <div className="mt-1 flex flex-wrap items-end justify-between gap-4">
@@ -30,9 +31,9 @@ export default function OrganizerDashboardPage() {
           </div>
           {organizer && (
             <div className="mt-6 grid grid-cols-3 gap-3 sm:max-w-md">
-              <Stat label="Events" value={organizer.eventCount} />
-              <Stat label="Upcoming" value={organizer.upcomingCount} />
-              <Stat label="Athletes" value={organizer.athleteCount} />
+              <StatTile label="Events" value={organizer.eventCount} />
+              <StatTile label="Upcoming" value={organizer.upcomingCount} accent="gold" />
+              <StatTile label="Athletes" value={organizer.athleteCount} />
             </div>
           )}
         </Container>

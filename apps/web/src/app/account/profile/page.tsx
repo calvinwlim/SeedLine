@@ -114,7 +114,7 @@ export default function AccountProfilePage() {
       <div className="flex items-center gap-4">
         <Button type="submit">Save changes</Button>
         {saved && (
-          <span className="text-sm text-emerald-300">
+          <span className="text-sm text-win">
             Saved locally. Wiring to the API is the next step.
           </span>
         )}

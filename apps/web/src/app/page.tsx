@@ -24,24 +24,77 @@ function BracketMark() {
   );
 }
 
-const FEATURES = [
+type FeatureIconName = 'register' | 'bracket' | 'score' | 'profile';
+
+function FeatureIcon({ name }: { name: FeatureIconName }) {
+  const common = {
+    width: 22,
+    height: 22,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1.8,
+    strokeLinecap: 'round' as const,
+    strokeLinejoin: 'round' as const,
+    'aria-hidden': true,
+  };
+  switch (name) {
+    case 'register':
+      return (
+        <svg {...common}>
+          <path d="M9 5h6a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v0a1 1 0 0 1 1-1z" />
+          <path d="M16 5h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2" />
+          <path d="M9 13l2 2 4-4" />
+        </svg>
+      );
+    case 'bracket':
+      return (
+        <svg {...common}>
+          <path d="M4 6h5v5h6M4 18h5v-5" />
+          <path d="M15 11h5M15 11l-2-2M15 11l-2 2" />
+        </svg>
+      );
+    case 'score':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="13" r="7" />
+          <path d="M12 13V9M12 4h0M10 4h4M18.5 6.5l-1.4 1.4" />
+        </svg>
+      );
+    case 'profile':
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="8" r="3.2" />
+          <path d="M6 20c0-3 2.7-5 6-5s6 2 6 5" />
+        </svg>
+      );
+  }
+}
+
+const FEATURES: Array<{ icon: FeatureIconName; title: string; body: string }> = [
   {
+    icon: 'register',
     title: 'Registration & payments',
     body: 'Open divisions, take entries, handle waitlists and weigh-ins, and route fees to organizers.',
   },
   {
+    icon: 'bracket',
     title: 'Seeding & brackets',
     body: 'Single elimination, round robin, and double elimination with academy separation and automatic byes.',
   },
   {
+    icon: 'score',
     title: 'Matside scoring',
     body: 'Score IBJJF, ADCC, EBI, and submission-only rulesets on the mat — and keep going when the Wi-Fi drops.',
   },
   {
+    icon: 'profile',
     title: 'Profiles & academies',
     body: 'Competitor records, academy rosters, and a public directory of events across the world.',
   },
 ];
+
+const HERO_HIGHLIGHTS = ['3 bracket formats', 'Offline-ready scoring', 'Global event directory'];
 
 export default function HomePage() {
   return (
@@ -67,9 +120,17 @@ export default function HomePage() {
                 Explore academies
               </ButtonLink>
             </div>
+            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+              {HERO_HIGHLIGHTS.map((item) => (
+                <span key={item} className="flex items-center gap-2 text-sm text-muted">
+                  <span className="h-1.5 w-1.5 rounded-full bg-podium" aria-hidden="true" />
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
 
-          <div className="hidden h-64 md:block">
+          <div className="hidden h-64 rounded-2xl border border-line/10 bg-surface p-6 shadow-card md:block">
             <BracketMark />
           </div>
         </section>
@@ -78,8 +139,14 @@ export default function HomePage() {
       <Container size="wide">
         <section className="grid gap-4 border-t border-line/10 py-14 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((feature) => (
-            <div key={feature.title}>
-              <h3 className="font-display text-base font-bold">{feature.title}</h3>
+            <div
+              key={feature.title}
+              className="rounded-xl border border-line/10 bg-surface p-5 shadow-card transition-transform hover:-translate-y-0.5"
+            >
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-podium/15 text-podium">
+                <FeatureIcon name={feature.icon} />
+              </span>
+              <h3 className="mt-4 font-display text-base font-bold">{feature.title}</h3>
               <p className="mt-2 text-sm text-muted">{feature.body}</p>
             </div>
           ))}

@@ -1,4 +1,13 @@
-import type { EventListQuery, EventSummary } from '@openmat/types';
+import type {
+  AcademyDetail,
+  AcademySummary,
+  AthleteProfile,
+  AthleteSummary,
+  DivisionDetail,
+  EventDetail,
+  EventListQuery,
+  EventSummary,
+} from '@openmat/types';
 import type { ApiClient } from './api-types';
 import { mockClient } from './mock/client';
 
@@ -9,9 +18,10 @@ import { mockClient } from './mock/client';
  * on its own — no API, no database, no Docker. Set `NEXT_PUBLIC_DATA_SOURCE=live`
  * (and point `NEXT_PUBLIC_API_URL` at a running API) to use the real backend.
  *
- * The live client only overrides the endpoints the API actually serves today
- * (the public events list); everything else falls back to the mock client so
- * the rest of the app keeps rendering while the backend catches up.
+ * The live client overrides the endpoints the API serves today (the public
+ * directory: events, divisions, academies, athletes); everything else still
+ * falls back to the mock client so the rest of the app keeps rendering while
+ * the backend catches up (scoring, account, organizer, registration writes).
  */
 const DATA_SOURCE = process.env.NEXT_PUBLIC_DATA_SOURCE ?? 'mock';
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000/api';
@@ -20,6 +30,18 @@ async function request<T>(path: string): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, {
     headers: { 'Content-Type': 'application/json' },
   });
+  if (!response.ok) {
+    throw new Error(`Request failed (${response.status}) for ${path}`);
+  }
+  return response.json() as Promise<T>;
+}
+
+/** Like `request`, but a 404 resolves to null (for "get by slug" lookups). */
+async function requestOrNull<T>(path: string): Promise<T | null> {
+  const response = await fetch(`${API_URL}${path}`, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (response.status === 404) return null;
   if (!response.ok) {
     throw new Error(`Request failed (${response.status}) for ${path}`);
   }
@@ -37,10 +59,24 @@ function buildEventQuery(query?: EventListQuery): string {
   return qs ? `?${qs}` : '';
 }
 
+function searchQuery(search?: string): string {
+  return search ? `?search=${encodeURIComponent(search)}` : '';
+}
+
 const liveClient: ApiClient = {
   ...mockClient,
+  // Public directory — served by the live API.
   listEvents: (query?: EventListQuery) =>
     request<EventSummary[]>(`/events${buildEventQuery(query)}`),
+  getEvent: (slug: string) => requestOrNull<EventDetail>(`/events/${slug}`),
+  getDivision: (eventSlug: string, divisionId: string) =>
+    requestOrNull<DivisionDetail>(`/events/${eventSlug}/divisions/${divisionId}`),
+  listAcademies: (search?: string) =>
+    request<AcademySummary[]>(`/academies${searchQuery(search)}`),
+  getAcademy: (slug: string) => requestOrNull<AcademyDetail>(`/academies/${slug}`),
+  listAthletes: (search?: string) =>
+    request<AthleteSummary[]>(`/athletes${searchQuery(search)}`),
+  getAthlete: (slug: string) => requestOrNull<AthleteProfile>(`/athletes/${slug}`),
 };
 
 export const api: ApiClient = DATA_SOURCE === 'live' ? liveClient : mockClient;

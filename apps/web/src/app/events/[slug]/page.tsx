@@ -89,9 +89,22 @@ export default function EventDetailPage() {
   const registrationOpen = event.status === 'registration_open';
   const closesInDays = event.registrationClosesAt ? daysUntil(event.registrationClosesAt) : null;
 
+  const heroStats: Array<{ label: string; value: React.ReactNode }> = [
+    { label: 'Divisions', value: event.divisions.length },
+    { label: 'Registered', value: event.registeredCount ?? '—' },
+    {
+      label: 'From',
+      value:
+        typeof event.startingPriceCents === 'number' ? formatPrice(event.startingPriceCents) : '—',
+    },
+  ];
+  if (registrationOpen && closesInDays != null && closesInDays >= 0) {
+    heroStats.push({ label: 'Closes in', value: `${closesInDays}d` });
+  }
+
   return (
     <main>
-      <div className="border-b border-line/10 bg-surface/40">
+      <div className="border-b border-line/10 bg-surface">
         <Container className="py-10">
           <Link href="/events" className="text-sm text-muted hover:text-chalk">
             ← All events
@@ -120,6 +133,17 @@ export default function EventDetailPage() {
                 {registrationOpen ? 'Register' : 'View divisions'}
               </ButtonLink>
             </div>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-line/10 pt-5">
+            {heroStats.map((stat) => (
+              <div key={stat.label}>
+                <div className="font-display text-xl font-bold leading-none">{stat.value}</div>
+                <div className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </Container>
       </div>

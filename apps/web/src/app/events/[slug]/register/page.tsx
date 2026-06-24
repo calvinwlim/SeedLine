@@ -29,9 +29,9 @@ function Stepper({ step }: { step: number }) {
           <li key={label} className="flex items-center gap-2">
             <span
               className={cn(
-                'flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold',
+                'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold',
                 state === 'active' && 'bg-podium text-ink',
-                state === 'done' && 'bg-emerald-400/20 text-emerald-300',
+                state === 'done' && 'bg-win/15 text-win ring-1 ring-inset ring-win/30',
                 state === 'todo' && 'bg-line/5 text-muted',
               )}
             >
@@ -117,7 +117,7 @@ function RegisterFlow() {
       <Container size="narrow" className="py-16">
         <Card>
           <CardBody className="text-center">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-400/20 text-2xl text-emerald-300">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-win/15 text-2xl text-win ring-1 ring-inset ring-win/30">
               ✓
             </div>
             <h1 className="mt-4 font-display text-2xl font-bold">You&apos;re registered</h1>

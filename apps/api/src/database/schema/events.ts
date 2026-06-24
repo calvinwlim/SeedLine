@@ -30,6 +30,8 @@ export const events = pgTable(
     name: varchar('name', { length: 200 }).notNull(),
     slug: varchar('slug', { length: 220 }).notNull().unique(),
     description: text('description'),
+    scheduleNote: text('schedule_note'),
+    coverImageUrl: varchar('cover_image_url', { length: 500 }),
     venueName: varchar('venue_name', { length: 200 }),
     address: varchar('address', { length: 400 }),
     city: varchar('city', { length: 120 }),

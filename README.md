@@ -180,14 +180,15 @@ This is a foundation, and it is honest about its edges:
 
 - **Real and tested:** the bracket engine (single elimination, double elimination, round
   robin), the database schema, the shared config, and the build/lint/test/CI pipeline.
-- **Wired but minimal:** the API (`/api/health` pings the database; `/api/events` reads from
-  the events table).
-- **Built out on the frontend, served by mock data:** the web app is a full standalone
-  experience — landing page, event directory with search/filters/maps, event detail pages,
-  academy and athlete profiles, and a signed-in account area — all developable with no
-  backend via the mock data layer, ready to be wired to real endpoints as the API grows.
-- **Deliberately not done yet:** payments (Stripe Connect), the offline scoring/sync layer, and
-  real-time spectator updates. The structure leaves clear seams for each.
+- **Wired, served by the live API:** the public directory read surface — events (list +
+  detail), divisions, academies, and athletes — backed by Drizzle queries over Postgres, with
+  a seed script (`apps/api/src/database/seed.ts`). Flip the web app to it with
+  `NEXT_PUBLIC_DATA_SOURCE=live`. See [docs/backend-setup.md](./docs/backend-setup.md).
+- **Still served by mock data:** the live schedule, matside scoring, registration writes, and
+  the account/organizer areas keep using the mock layer (the latter pending auth), so the whole
+  app renders with no backend while those endpoints are built.
+- **Deliberately not done yet:** authentication, payments (Stripe Connect), the offline
+  scoring/sync layer, and real-time spectator updates. The structure leaves clear seams for each.
 
 ## Deployment notes
 
