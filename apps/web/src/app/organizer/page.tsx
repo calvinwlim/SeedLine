@@ -63,7 +63,7 @@ export default function OrganizerDashboardPage() {
                   className="group flex items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-line/[0.03]"
                 >
                   <div className="min-w-0">
-                    <p className="truncate font-medium text-chalk group-hover:text-podium">
+                    <p className="truncate font-medium text-chalk group-hover:text-accent">
                       {event.name}
                     </p>
                     <p className="mt-0.5 text-xs text-muted">
@@ -75,7 +75,7 @@ export default function OrganizerDashboardPage() {
                     <Badge tone={eventStatusTone(event.status)}>
                       {eventStatusLabel(event.status)}
                     </Badge>
-                    <span className="text-muted transition-colors group-hover:text-podium">→</span>
+                    <span className="text-muted transition-colors group-hover:text-accent">→</span>
                   </div>
                 </Link>
               ))}

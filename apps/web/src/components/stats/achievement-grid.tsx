@@ -2,7 +2,7 @@ import type { Achievement, BadgeIcon } from '../../lib/gamify';
 import { cn } from '../../lib/cn';
 
 const TONE: Record<Achievement['tone'], { bg: string; fg: string }> = {
-  gold: { bg: 'bg-podium/15', fg: 'text-podium' },
+  gold: { bg: 'bg-accent/15', fg: 'text-accent' },
   win: { bg: 'bg-win/15', fg: 'text-win' },
   corner: { bg: 'bg-corner/15', fg: 'text-corner' },
 };

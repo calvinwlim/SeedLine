@@ -30,7 +30,7 @@ function formatClock(seconds: number): string {
 }
 
 const tallyBtn =
-  'rounded-lg border border-line/15 px-3.5 py-2 text-sm font-semibold text-chalk transition-colors hover:border-podium hover:text-podium disabled:opacity-40';
+  'rounded-lg border border-line/15 px-3.5 py-2 text-sm font-semibold text-chalk transition-colors hover:border-accent hover:text-accent disabled:opacity-40';
 
 function ScorePanel({
   side,
@@ -50,7 +50,7 @@ function ScorePanel({
   highlight: boolean;
 }) {
   return (
-    <Card className={cn('p-5', highlight && 'ring-2 ring-podium')}>
+    <Card className={cn('p-5', highlight && 'ring-2 ring-accent')}>
       <div className="flex items-center justify-between border-b border-line/10 pb-3">
         <h2 className="truncate font-display text-lg font-bold">{name}</h2>
         <span className="shrink-0 rounded-full bg-line/[0.07] px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted">
@@ -274,9 +274,9 @@ function ScoreConsole() {
       </div>
 
       {done && (
-        <div className="mt-6 rounded-xl border border-podium/40 bg-podium/10 p-4 text-center shadow-card">
+        <div className="mt-6 rounded-xl border border-accent/40 bg-accent/10 p-4 text-center shadow-card">
           <p className="text-sm text-muted">Winner</p>
-          <p className="font-display text-xl font-bold text-podium">{match.winner}</p>
+          <p className="font-display text-xl font-bold text-accent">{match.winner}</p>
           <p className="mt-1 text-xs text-muted">by {match.score.method}</p>
         </div>
       )}

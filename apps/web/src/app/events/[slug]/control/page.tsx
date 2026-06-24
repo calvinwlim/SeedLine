@@ -16,7 +16,7 @@ function ScoreLine({ match }: { match: ScoreableMatch }) {
   return (
     <div className="flex items-center justify-between gap-3 text-sm">
       <span className="truncate text-chalk">{match.competitorA}</span>
-      <span className="shrink-0 font-display font-bold tabular-nums text-podium">
+      <span className="shrink-0 font-display font-bold tabular-nums text-accent">
         {match.score.a.points}–{match.score.b.points}
       </span>
       <span className="truncate text-right text-chalk">{match.competitorB}</span>
@@ -38,7 +38,7 @@ function MatCard({ mat, slug }: { mat: MatControl; slug: string }) {
         <div className="mt-4">
           <p className="text-xs uppercase tracking-wide text-muted">On the mat</p>
           {mat.current ? (
-            <div className="mt-2 rounded-md border border-podium/30 bg-podium/5 p-3">
+            <div className="mt-2 rounded-md border border-accent/30 bg-accent/5 p-3">
               <p className="mb-2 truncate text-xs text-muted">
                 {mat.current.divisionName} · {mat.current.roundLabel}
               </p>

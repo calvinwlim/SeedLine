@@ -4,7 +4,7 @@ import { cn } from '../../lib/cn';
 /** A surface panel used for grouping content. */
 export function Card({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={cn('rounded-xl border border-line/10 bg-surface shadow-card', className)}>
+    <div className={cn('rounded-2xl border border-line/10 bg-surface shadow-card', className)}>
       {children}
     </div>
   );

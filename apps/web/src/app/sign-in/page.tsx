@@ -46,7 +46,7 @@ function SignInForm() {
               className="w-full text-left"
             >
               <Card
-                className={`transition-colors hover:border-podium/50 ${active ? 'border-podium/60' : ''}`}
+                className={`transition-colors hover:border-accent/50 ${active ? 'border-accent/60' : ''}`}
               >
                 <CardBody className="flex items-center gap-4">
                   <Avatar initials={initials(first, last)} />

@@ -4,7 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { EventCard } from './event-card';
 import { api } from '../lib/api';
 
-/** The three soonest events with registration open, for the landing page. */
+/**
+ * Upcoming open events as a horizontal snap rail — the product-carousel pattern
+ * from sportswear sites. The rail bleeds to the container edges and scrolls.
+ */
 export function FeaturedEvents() {
   const { data, isLoading } = useQuery({
     queryKey: ['events', { status: 'registration_open' }],
@@ -13,26 +16,28 @@ export function FeaturedEvents() {
 
   if (isLoading) {
     return (
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {[0, 1, 2].map((i) => (
+      <div className="flex gap-5 overflow-hidden px-6">
+        {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
-            className="h-44 animate-pulse rounded-lg border border-line/10 bg-surface"
+            className="h-52 w-[300px] shrink-0 animate-pulse rounded-2xl border border-line/10 bg-surface"
           />
         ))}
       </div>
     );
   }
 
-  const events = (data ?? []).slice(0, 3);
+  const events = (data ?? []).slice(0, 6);
   if (events.length === 0) {
-    return <p className="text-muted">No open events right now. Check back soon.</p>;
+    return <p className="px-6 text-muted">No open events right now. Check back soon.</p>;
   }
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-6 px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       {events.map((event) => (
-        <EventCard key={event.id} event={event} />
+        <div key={event.id} className="w-[300px] shrink-0 snap-start">
+          <EventCard event={event} />
+        </div>
       ))}
     </div>
   );

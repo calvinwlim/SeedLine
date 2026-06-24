@@ -92,7 +92,7 @@ export default function AthleteProfilePage() {
                   {athlete.country ? ` · ${athlete.country}` : ''}
                 </p>
                 <p className="mt-3 text-sm text-muted">
-                  <span className="font-display text-base font-bold text-podium">
+                  <span className="font-display text-base font-bold text-accent">
                     {athlete.record.wins}–{athlete.record.losses}
                   </span>{' '}
                   record · {athlete.record.submissions} submissions ·{' '}

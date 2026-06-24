@@ -24,7 +24,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 sm:grid-cols-2 md:grid-cols-4">
         <div className="sm:col-span-2 md:col-span-2">
           <span className="font-display text-lg font-bold tracking-tight">
-            open<span className="text-podium">mat</span>
+            open<span className="text-accent">mat</span>
           </span>
           <p className="mt-3 max-w-xs text-sm text-muted">
             Tournament and competition management for grappling and combat sports — built to keep

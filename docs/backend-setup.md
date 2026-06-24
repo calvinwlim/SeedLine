@@ -17,11 +17,16 @@ migrate/seed steps. Until then the web app runs entirely on its mock data layer
   - `GET /api/events/:slug/divisions/:divisionId` — division + entrants
   - `GET /api/academies` · `GET /api/academies/:slug`
   - `GET /api/athletes` · `GET /api/athletes/:slug`
+  - **Live ops:** `GET /api/events/:slug/schedule`, `GET /api/events/:slug/mat-controls`,
+    `GET /api/events/:slug/matches/:matchId`, and the scoring mutations
+    (`POST …/matches/:matchId/{score,start,reset,finish}`). Brackets and match rows are
+    generated lazily on first schedule request; finishing a match advances the result through
+    the engine and propagates winner (and loser, for double elim) to downstream matches.
 - **Seed** (`apps/api/src/database/seed.ts`) — a representative dataset whose
   slugs mirror the mock fixtures, so `live` mode looks continuous with `mock`.
 - **Web live client** (`apps/web/src/lib/api.ts`) — calls the above when
   `NEXT_PUBLIC_DATA_SOURCE=live`, and falls back to mock for everything not yet
-  served (scoring, account, organizer, registration writes).
+  served (account, organizer, registration writes).
 
 ## External dependencies to provision
 

@@ -25,7 +25,7 @@ function MatchRow({ match }: { match: ScheduleMatch }) {
   return (
     <div
       className={`flex items-center gap-3 px-4 py-3 ${
-        live ? 'border-l-2 border-podium bg-podium/5' : 'border-l-2 border-transparent'
+        live ? 'border-l-2 border-accent bg-accent/5' : 'border-l-2 border-transparent'
       }`}
     >
       <span className="w-5 shrink-0 text-center text-xs text-muted">{match.order}</span>
@@ -53,7 +53,7 @@ function MatchRow({ match }: { match: ScheduleMatch }) {
       </div>
       <div className="flex shrink-0 items-center gap-2">
         {scoreText(match) && (
-          <span className="font-display text-sm font-bold tabular-nums text-podium">
+          <span className="font-display text-sm font-bold tabular-nums text-accent">
             {scoreText(match)}
           </span>
         )}
@@ -119,8 +119,8 @@ export default function SchedulePage() {
                   {eventStatusLabel(schedule.status)}
                 </Badge>
                 {schedule.status === 'in_progress' && (
-                  <span className="flex items-center gap-1.5 text-sm text-podium">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-podium" />
+                  <span className="flex items-center gap-1.5 text-sm text-accent">
+                    <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
                     Live
                   </span>
                 )}
@@ -140,7 +140,7 @@ export default function SchedulePage() {
             </div>
           </div>
           <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-line/10">
-            <div className="h-full rounded-full bg-podium" style={{ width: `${progress}%` }} />
+            <div className="h-full rounded-full bg-accent" style={{ width: `${progress}%` }} />
           </div>
         </Container>
       </div>

@@ -16,7 +16,7 @@ export function RegistrationList({ registrations }: { registrations: Registratio
           <div className="min-w-0">
             <Link
               href={`/events/${reg.eventSlug}`}
-              className="truncate text-sm font-medium text-chalk hover:text-podium"
+              className="truncate text-sm font-medium text-chalk hover:text-accent"
             >
               {reg.eventName}
             </Link>

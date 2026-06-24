@@ -84,10 +84,15 @@ export class EventsService {
       limit: 100,
     });
 
-    const counts = await this.registrationCounts(registrations.eventId, rows.map((r) => r.id));
+    const counts = await this.registrationCounts(
+      registrations.eventId,
+      rows.map((r) => r.id),
+    );
 
     return rows
-      .filter((row) => !query.discipline || row.divisions.some((d) => d.discipline === query.discipline))
+      .filter(
+        (row) => !query.discipline || row.divisions.some((d) => d.discipline === query.discipline),
+      )
       .map((row) => toEventSummary(row, row.divisions, counts.get(row.id) ?? 0));
   }
 

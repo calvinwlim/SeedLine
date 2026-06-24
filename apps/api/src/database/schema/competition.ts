@@ -104,6 +104,8 @@ export const matches = pgTable(
     engineMatchId: varchar('engine_match_id', { length: 40 }).notNull(),
     round: integer('round').notNull(),
     position: integer('position').notNull(),
+    // Human label computed at generation, e.g. "Final", "Winners R1", "RR Round 2".
+    roundLabel: varchar('round_label', { length: 60 }),
     athleteAId: uuid('athlete_a_id').references(() => athletes.id, { onDelete: 'set null' }),
     athleteBId: uuid('athlete_b_id').references(() => athletes.id, { onDelete: 'set null' }),
     winnerId: uuid('winner_id').references(() => athletes.id, { onDelete: 'set null' }),

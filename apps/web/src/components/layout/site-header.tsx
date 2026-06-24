@@ -16,7 +16,7 @@ const BASE_NAV = [
 function Wordmark() {
   return (
     <Link href="/" className="font-display text-lg font-bold tracking-tight">
-      open<span className="text-podium">mat</span>
+      open<span className="text-accent">mat</span>
     </Link>
   );
 }
@@ -75,7 +75,7 @@ export function SiteHeader() {
           ) : (
             <Link
               href="/sign-in"
-              className="rounded-md bg-podium px-4 py-2 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+              className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               Sign in
             </Link>

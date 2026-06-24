@@ -14,7 +14,7 @@ export function AcademyCard({ academy }: { academy: AcademySummary }) {
   return (
     <Link
       href={`/academies/${academy.slug}`}
-      className="group flex items-center gap-4 rounded-xl border border-line/10 bg-surface p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-podium/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-podium"
+      className="group flex items-center gap-4 rounded-2xl border border-line/10 bg-surface p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-accent/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
       <Avatar initials={initials} />
       <div className="min-w-0">

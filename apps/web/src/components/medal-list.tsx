@@ -4,7 +4,7 @@ import { Card } from './ui/card';
 import { formatDate, ordinalPlace } from '../lib/format';
 
 function medalTone(place: number): string {
-  if (place === 1) return 'text-podium';
+  if (place === 1) return 'text-accent';
   if (place === 2) return 'text-muted';
   if (place === 3) return 'text-corner';
   return 'text-chalk';
@@ -22,7 +22,7 @@ export function MedalList({ medals }: { medals: MedalResult[] }) {
           <div className="min-w-0">
             <Link
               href={`/events/${medal.eventSlug}`}
-              className="truncate text-sm font-medium text-chalk hover:text-podium"
+              className="truncate text-sm font-medium text-chalk hover:text-accent"
             >
               {medal.eventName}
             </Link>

@@ -34,7 +34,7 @@ import {
 } from '../../../../lib/format';
 
 const fieldClass =
-  'mt-1 w-full rounded-md border border-line/10 bg-bg px-3 py-2 text-sm text-chalk focus:border-podium/50 focus:outline-none';
+  'mt-1 w-full rounded-md border border-line/10 bg-bg px-3 py-2 text-sm text-chalk focus:border-accent/50 focus:outline-none';
 
 function AddDivisionForm({ eventId, onAdded }: { eventId: string; onAdded: () => void }) {
   const [open, setOpen] = useState(false);
@@ -294,7 +294,7 @@ export default function ManageEventPage() {
                 className={cn(
                   'rounded-md border px-3 py-1.5 text-sm transition-colors disabled:cursor-not-allowed',
                   status === event.status
-                    ? 'border-podium bg-podium/10 text-chalk'
+                    ? 'border-accent bg-accent/10 text-chalk'
                     : 'border-line/10 text-muted hover:border-line/30 hover:text-chalk',
                 )}
               >
@@ -358,7 +358,7 @@ export default function ManageEventPage() {
                           {reg.athleteSlug ? (
                             <Link
                               href={`/athletes/${reg.athleteSlug}`}
-                              className="hover:text-podium"
+                              className="hover:text-accent"
                             >
                               {reg.athleteName}
                             </Link>

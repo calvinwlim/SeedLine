@@ -28,7 +28,7 @@ function DivisionRow({ division, eventSlug }: { division: DivisionSummary; event
       className="group flex items-center justify-between gap-4 px-5 py-3.5 transition-colors hover:bg-line/[0.03]"
     >
       <div className="min-w-0">
-        <p className="truncate text-sm font-medium text-chalk group-hover:text-podium">
+        <p className="truncate text-sm font-medium text-chalk group-hover:text-accent">
           {division.name}
         </p>
         <p className="mt-0.5 text-xs text-muted">
@@ -39,7 +39,7 @@ function DivisionRow({ division, eventSlug }: { division: DivisionSummary; event
       <div className="flex shrink-0 items-center gap-3">
         <span className="text-sm text-chalk">{formatPrice(division.priceCents)}</span>
         {full ? <Badge tone="muted">Full</Badge> : <Badge tone="green">Open</Badge>}
-        <span className="text-muted transition-colors group-hover:text-podium">→</span>
+        <span className="text-muted transition-colors group-hover:text-accent">→</span>
       </div>
     </Link>
   );
@@ -121,7 +121,7 @@ export default function EventDetailPage() {
               </div>
               <h1 className="mt-3 font-display text-4xl font-bold">{event.name}</h1>
               <p className="mt-2 text-muted">{location || 'Location to be announced'}</p>
-              <p className="mt-1 font-medium text-podium">
+              <p className="mt-1 font-medium text-accent">
                 {formatDateRange(event.startDate, event.endDate)}
               </p>
             </div>
@@ -210,7 +210,7 @@ export default function EventDetailPage() {
                 )}
               </p>
               {registrationOpen && closesInDays != null && closesInDays >= 0 && (
-                <p className="mt-1 text-sm text-podium">
+                <p className="mt-1 text-sm text-accent">
                   Closes in {closesInDays} {closesInDays === 1 ? 'day' : 'days'}
                 </p>
               )}

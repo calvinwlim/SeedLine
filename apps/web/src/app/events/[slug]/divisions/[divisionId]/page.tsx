@@ -100,7 +100,7 @@ export default function DivisionBracketPage() {
               {podium.map((p) => (
                 <Card key={p.place}>
                   <CardBody className="flex items-center gap-3">
-                    <span className="font-display text-2xl font-bold text-podium">
+                    <span className="font-display text-2xl font-bold text-accent">
                       {ordinalPlace(p.place)}
                     </span>
                     <span className="font-medium text-chalk">{p.name}</span>

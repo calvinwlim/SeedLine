@@ -65,7 +65,7 @@ export default function AccountDashboardPage() {
       <section>
         <div className="flex items-end justify-between">
           <h2 className="font-display text-xl font-bold">Upcoming events</h2>
-          <Link href="/account/registrations" className="text-sm text-podium hover:underline">
+          <Link href="/account/registrations" className="text-sm text-accent hover:underline">
             All registrations →
           </Link>
         </div>

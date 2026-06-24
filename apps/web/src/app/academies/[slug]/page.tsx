@@ -74,7 +74,7 @@ export default function AcademyDetailPage() {
                 <p className="mt-0.5 text-sm text-muted">Affiliation: {academy.affiliation}</p>
               )}
               <p className="mt-3 text-sm text-muted">
-                <span className="font-display text-base font-bold text-podium">{medals.gold}</span>{' '}
+                <span className="font-display text-base font-bold text-accent">{medals.gold}</span>{' '}
                 gold · <span className="text-chalk">{stats.podiums}</span> podiums ·{' '}
                 <span className="text-chalk">{stats.competitors}</span> competitors
               </p>
@@ -136,13 +136,13 @@ export default function AcademyDetailPage() {
                     <div className="min-w-0">
                       <Link
                         href={`/events/${medal.eventSlug}`}
-                        className="truncate text-sm font-medium text-chalk hover:text-podium"
+                        className="truncate text-sm font-medium text-chalk hover:text-accent"
                       >
                         {medal.eventName}
                       </Link>
                       <p className="truncate text-xs text-muted">{medal.divisionName}</p>
                     </div>
-                    <span className="shrink-0 text-sm font-semibold text-podium">
+                    <span className="shrink-0 text-sm font-semibold text-accent">
                       {ordinalPlace(medal.place)}
                     </span>
                   </div>
@@ -179,7 +179,7 @@ export default function AcademyDetailPage() {
                       href={academy.website}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-podium hover:underline"
+                      className="text-accent hover:underline"
                     >
                       Visit website →
                     </a>

@@ -13,7 +13,7 @@ import { cn } from '../../../../lib/cn';
 import { humanize } from '../../../../lib/format';
 
 const inputClass =
-  'mt-1.5 w-full rounded-md border border-line/10 bg-bg px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none';
+  'mt-1.5 w-full rounded-md border border-line/10 bg-bg px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-accent/50 focus:outline-none';
 
 function toIso(date: string): string {
   // A bare yyyy-mm-dd from <input type="date">; anchor to midday UTC.
@@ -168,7 +168,7 @@ export default function NewEventPage() {
                   className={cn(
                     'rounded-md border px-4 py-2 text-sm transition-colors',
                     disciplines.includes(d)
-                      ? 'border-podium bg-podium/10 text-chalk'
+                      ? 'border-accent bg-accent/10 text-chalk'
                       : 'border-line/10 text-muted hover:border-line/30',
                   )}
                 >

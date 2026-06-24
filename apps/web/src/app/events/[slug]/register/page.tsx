@@ -18,7 +18,7 @@ const STEPS = ['Division', 'Competitor', 'Review'] as const;
 const SERVICE_FEE_RATE = 0.05;
 
 const inputClass =
-  'w-full rounded-md border border-line/10 bg-bg px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-podium/50 focus:outline-none';
+  'w-full rounded-md border border-line/10 bg-bg px-3 py-2.5 text-sm text-chalk placeholder:text-muted focus:border-accent/50 focus:outline-none';
 
 function Stepper({ step }: { step: number }) {
   return (
@@ -30,7 +30,7 @@ function Stepper({ step }: { step: number }) {
             <span
               className={cn(
                 'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold',
-                state === 'active' && 'bg-podium text-ink',
+                state === 'active' && 'bg-accent text-white',
                 state === 'done' && 'bg-win/15 text-win ring-1 ring-inset ring-win/30',
                 state === 'todo' && 'bg-line/5 text-muted',
               )}
@@ -186,7 +186,7 @@ function RegisterFlow() {
                   onClick={() => setDivisionId(d.id)}
                   className={cn(
                     'flex w-full items-center justify-between gap-4 rounded-lg border px-5 py-4 text-left transition-colors',
-                    selected ? 'border-podium bg-podium/5' : 'border-line/10 bg-surface',
+                    selected ? 'border-accent bg-accent/5' : 'border-line/10 bg-surface',
                     full ? 'cursor-not-allowed opacity-50' : 'hover:border-line/30',
                   )}
                 >
@@ -318,7 +318,7 @@ function RegisterFlow() {
                 </div>
                 <div className="flex justify-between border-t border-line/10 pt-2 font-semibold">
                   <span>Total</span>
-                  <span className="text-podium">{formatPrice(total)}</span>
+                  <span className="text-accent">{formatPrice(total)}</span>
                 </div>
               </CardBody>
             </Card>

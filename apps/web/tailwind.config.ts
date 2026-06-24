@@ -16,9 +16,9 @@ const config: Config = {
         muted: token('--muted'),
         faint: token('--faint'),
         line: token('--line'),
-        // Fixed dark used for text sitting on light/gold accents (e.g. buttons).
+        // Fixed dark used where a dark chip needs to read on a light surface.
         ink: '#11161d',
-        podium: token('--podium'),
+        accent: token('--accent'),
         corner: token('--corner'),
         win: token('--win'),
       },

@@ -14,7 +14,7 @@ function ToggleRow({ label, description }: { label: string; description: string 
         <p className="text-sm font-medium text-chalk">{label}</p>
         <p className="text-xs text-muted">{description}</p>
       </div>
-      <span className="inline-flex h-6 w-11 items-center rounded-full bg-podium/80 px-0.5">
+      <span className="inline-flex h-6 w-11 items-center rounded-full bg-accent/80 px-0.5">
         <span className="h-5 w-5 translate-x-5 rounded-full bg-bg transition-transform" />
       </span>
     </div>

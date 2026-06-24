@@ -8,34 +8,34 @@
  * opacity modifiers via rgb(var(--token) / <alpha-value>).
  */
 :root {
-  --bg: 250 250 249;
+  --bg: 250 248 244;
   --surface: 255 255 255;
-  --elevated: 244 245 247;
-  --fg: 17 23 31;
-  --muted: 90 100 114;
-  --faint: 138 149 165;
-  --line: 15 22 32;
-  --podium: 200 142 22;
-  --corner: 199 46 46;
-  --win: 21 128 84;
-  --shadow-card: 0 1px 2px rgb(15 22 32 / 0.05), 0 6px 18px rgb(15 22 32 / 0.06);
-  --shadow-pop: 0 10px 34px rgb(15 22 32 / 0.12);
+  --elevated: 244 241 235;
+  --fg: 24 20 16;
+  --muted: 99 92 84;
+  --faint: 146 138 128;
+  --line: 24 20 16;
+  --accent: 235 78 18;
+  --corner: 200 50 44;
+  --win: 22 132 86;
+  --shadow-card: 0 1px 2px rgb(24 20 16 / 0.05), 0 8px 24px rgb(24 20 16 / 0.07);
+  --shadow-pop: 0 12px 36px rgb(24 20 16 / 0.14);
   color-scheme: light;
 }
 
 .dark {
-  --bg: 13 19 28;
-  --surface: 21 29 41;
-  --elevated: 29 39 54;
-  --fg: 244 246 248;
-  --muted: 139 151 167;
-  --faint: 110 122 138;
+  --bg: 12 13 15;
+  --surface: 22 24 28;
+  --elevated: 30 33 39;
+  --fg: 244 245 247;
+  --muted: 150 156 166;
+  --faint: 110 116 126;
   --line: 255 255 255;
-  --podium: 233 185 73;
-  --corner: 226 74 74;
+  --accent: 255 95 40;
+  --corner: 233 80 74;
   --win: 52 197 142;
-  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 22px rgb(0 0 0 / 0.36);
-  --shadow-pop: 0 12px 36px rgb(0 0 0 / 0.5);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.35), 0 10px 26px rgb(0 0 0 / 0.4);
+  --shadow-pop: 0 14px 40px rgb(0 0 0 / 0.55);
   color-scheme: dark;
 }
 
@@ -50,6 +50,27 @@ body {
     background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
+}
+
+/* Kinetic ticker: a seamless horizontal marquee (pauses on hover). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  overflow: hidden;
+}
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {

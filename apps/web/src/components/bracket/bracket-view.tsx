@@ -33,7 +33,7 @@ function Slot({
     <div
       className={cn(
         'flex items-center justify-between gap-2 px-2.5 py-2 text-sm',
-        isWinner && 'bg-podium/[0.07]',
+        isWinner && 'bg-accent/[0.07]',
       )}
     >
       <span className="flex min-w-0 items-center gap-2">
@@ -47,7 +47,7 @@ function Slot({
         </span>
       </span>
       {isWinner && (
-        <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-podium text-[10px] font-bold text-ink">
+        <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-accent text-[10px] font-bold text-white">
           ✓
         </span>
       )}

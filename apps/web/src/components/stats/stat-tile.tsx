@@ -6,7 +6,7 @@ import { useCountUp } from '../../lib/use-count-up';
 type Accent = 'gold' | 'win' | 'corner' | 'plain';
 
 const ACCENT: Record<Accent, string> = {
-  gold: 'text-podium',
+  gold: 'text-accent',
   win: 'text-win',
   corner: 'text-corner',
   plain: 'text-chalk',

@@ -34,7 +34,7 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
                     className={cn(
                       'whitespace-nowrap border-b-2 px-4 py-3 text-sm transition-colors',
                       active
-                        ? 'border-podium text-chalk'
+                        ? 'border-accent text-chalk'
                         : 'border-transparent text-muted hover:text-chalk',
                     )}
                   >

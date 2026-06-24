@@ -56,7 +56,7 @@ export function WinRateRing({
           cy="66"
           r={r}
           fill="none"
-          stroke="rgb(var(--win))"
+          stroke="rgb(var(--accent))"
           strokeWidth="11"
           strokeLinecap="round"
           strokeDasharray={circumference}

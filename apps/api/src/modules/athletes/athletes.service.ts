@@ -7,7 +7,14 @@ import type {
   RegistrationSummary,
 } from '@openmat/types';
 import { DATABASE, type Database } from '../../database/database.module';
-import { academies, athletes, divisions, events, medals, registrations } from '../../database/schema';
+import {
+  academies,
+  athletes,
+  divisions,
+  events,
+  medals,
+  registrations,
+} from '../../database/schema';
 import { toAthleteRecord, toAthleteSummary } from '../../common/mappers';
 
 @Injectable()
