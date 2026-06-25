@@ -23,14 +23,18 @@ export default function OrganizerDashboardPage() {
   return (
     <main>
       <div className="border-b border-line/10 bg-surface">
-        <Container className="py-10">
-          <p className="text-sm text-muted">Organizer</p>
-          <div className="mt-1 flex flex-wrap items-end justify-between gap-4">
-            <h1 className="font-display text-3xl font-bold">{organizer?.name ?? 'Your events'}</h1>
+        <Container className="py-12 md:py-14" size="wide">
+          <p className="font-display text-xs font-bold uppercase tracking-[0.3em] text-accent">
+            Organizer
+          </p>
+          <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
+            <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              {organizer?.name ?? 'Your events'}
+            </h1>
             <ButtonLink href="/organizer/events/new">+ New event</ButtonLink>
           </div>
           {organizer && (
-            <div className="mt-6 grid grid-cols-3 gap-3 sm:max-w-md">
+            <div className="mt-8 grid grid-cols-3 gap-3 sm:max-w-md">
               <StatTile label="Events" value={organizer.eventCount} />
               <StatTile label="Upcoming" value={organizer.upcomingCount} accent="gold" />
               <StatTile label="Athletes" value={organizer.athleteCount} />
@@ -39,7 +43,7 @@ export default function OrganizerDashboardPage() {
         </Container>
       </div>
 
-      <Container className="py-10">
+      <Container className="py-12" size="wide">
         <h2 className="font-display text-xl font-bold">Your events</h2>
         <div className="mt-4">
           {isLoading && (

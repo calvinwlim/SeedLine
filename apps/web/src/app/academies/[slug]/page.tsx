@@ -61,29 +61,55 @@ export default function AcademyDetailPage() {
   return (
     <main>
       <div className="border-b border-line/10 bg-surface">
-        <Container className="py-10">
-          <Link href="/academies" className="text-sm text-muted hover:text-chalk">
+        <Container className="py-12 md:py-16" size="wide">
+          <Link
+            href="/academies"
+            className="text-xs font-bold uppercase tracking-wide text-muted hover:text-chalk"
+          >
             ← All academies
           </Link>
-          <div className="mt-6 flex flex-wrap items-center gap-5">
+          <div className="mt-8 flex flex-wrap items-center gap-6">
             <Avatar initials={initials} size="lg" />
-            <div>
-              <h1 className="font-display text-3xl font-bold sm:text-4xl">{academy.name}</h1>
-              <p className="mt-2 text-muted">{location || 'Location TBA'}</p>
-              {academy.affiliation && (
-                <p className="mt-0.5 text-sm text-muted">Affiliation: {academy.affiliation}</p>
-              )}
-              <p className="mt-3 text-sm text-muted">
-                <span className="font-display text-base font-bold text-accent">{medals.gold}</span>{' '}
-                gold · <span className="text-chalk">{stats.podiums}</span> podiums ·{' '}
-                <span className="text-chalk">{stats.competitors}</span> competitors
+            <div className="min-w-0">
+              <p className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
+                Academy{academy.affiliation ? ` · ${academy.affiliation}` : ''}
               </p>
+              <h1 className="mt-3 font-display text-5xl font-bold tracking-tight sm:text-6xl">
+                {academy.name}
+              </h1>
+              <p className="mt-3 text-muted">{location || 'Location TBA'}</p>
+            </div>
+          </div>
+          <div className="mt-8 flex flex-wrap gap-x-12 gap-y-4">
+            <div>
+              <div className="font-display text-4xl font-bold tracking-tight tabular-nums text-accent">
+                {medals.gold}
+              </div>
+              <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
+                Gold
+              </div>
+            </div>
+            <div>
+              <div className="font-display text-4xl font-bold tracking-tight tabular-nums">
+                {stats.podiums}
+              </div>
+              <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
+                Podiums
+              </div>
+            </div>
+            <div>
+              <div className="font-display text-4xl font-bold tracking-tight tabular-nums">
+                {stats.competitors}
+              </div>
+              <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
+                Competitors
+              </div>
             </div>
           </div>
         </Container>
       </div>
 
-      <Container className="grid gap-8 py-10 lg:grid-cols-[1fr_300px]">
+      <Container className="grid gap-8 py-12 lg:grid-cols-[1fr_300px]" size="wide">
         <div className="space-y-10">
           <section>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">

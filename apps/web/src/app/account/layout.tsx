@@ -21,10 +21,15 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
     <AuthGate>
       <main>
         <div className="border-b border-line/10 bg-surface">
-          <Container className="pt-10">
-            <h1 className="font-display text-3xl font-bold">Your account</h1>
-            <p className="mt-2 text-muted">Manage your registrations, profile, and settings.</p>
-            <nav className="mt-6 flex gap-1 overflow-x-auto">
+          <Container className="pt-12">
+            <p className="font-display text-xs font-bold uppercase tracking-[0.3em] text-accent">
+              Account
+            </p>
+            <h1 className="mt-3 font-display text-4xl font-bold tracking-tight sm:text-5xl">
+              Your account
+            </h1>
+            <p className="mt-3 text-muted">Manage your registrations, profile, and settings.</p>
+            <nav className="mt-7 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {TABS.map((tab) => {
                 const active = pathname === tab.href;
                 return (
@@ -32,10 +37,10 @@ export default function AccountLayout({ children }: { children: ReactNode }) {
                     key={tab.href}
                     href={tab.href}
                     className={cn(
-                      'whitespace-nowrap border-b-2 px-4 py-3 text-sm transition-colors',
+                      'whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors',
                       active
-                        ? 'border-accent text-chalk'
-                        : 'border-transparent text-muted hover:text-chalk',
+                        ? 'bg-accent text-white'
+                        : 'border border-line/15 text-muted hover:border-line/40 hover:text-chalk',
                     )}
                   >
                     {tab.label}

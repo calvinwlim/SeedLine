@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Container } from '../../../components/ui/container';
 import { Avatar } from '../../../components/ui/avatar';
-import { Belt } from '../../../components/ui/belt';
-import { Badge } from '../../../components/ui/badge';
 import { EmptyState } from '../../../components/ui/card';
 import { ButtonLink } from '../../../components/ui/button';
 import { RegistrationList } from '../../../components/registration-list';
@@ -64,26 +62,31 @@ export default function AthleteProfilePage() {
   return (
     <main>
       <div className="border-b border-line/10 bg-surface">
-        <Container className="py-10">
-          <Link href="/athletes" className="text-sm text-muted hover:text-chalk">
+        <Container className="py-12 md:py-16" size="wide">
+          <Link
+            href="/athletes"
+            className="text-xs font-bold uppercase tracking-wide text-muted hover:text-chalk"
+          >
             ← All athletes
           </Link>
 
-          <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="flex items-center gap-5">
+          <div className="mt-8 flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex items-center gap-6">
               <Avatar initials={initials(athlete.firstName, athlete.lastName)} size="lg" />
-              <div>
-                <h1 className="font-display text-3xl font-bold sm:text-4xl">
+              <div className="min-w-0">
+                <p className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
+                  {humanize(athlete.beltRank)} belt · {humanize(athlete.discipline)}
+                  {athlete.weightClass ? ` · ${athlete.weightClass}` : ''}
+                </p>
+                <h1 className="mt-3 font-display text-5xl font-bold tracking-tight sm:text-6xl">
                   {fullName(athlete.firstName, athlete.lastName)}
                 </h1>
-                <div className="mt-3 flex flex-wrap items-center gap-2.5">
-                  <Belt rank={athlete.beltRank} />
-                  <Badge tone="outline">{humanize(athlete.discipline)}</Badge>
-                  {athlete.weightClass && <Badge tone="muted">{athlete.weightClass}</Badge>}
-                </div>
                 <p className="mt-3 text-sm text-muted">
                   {athlete.academySlug ? (
-                    <Link href={`/academies/${athlete.academySlug}`} className="hover:text-chalk">
+                    <Link
+                      href={`/academies/${athlete.academySlug}`}
+                      className="font-medium text-chalk hover:text-accent"
+                    >
                       {athlete.academyName}
                     </Link>
                   ) : (
@@ -91,19 +94,31 @@ export default function AthleteProfilePage() {
                   )}
                   {athlete.country ? ` · ${athlete.country}` : ''}
                 </p>
-                <p className="mt-3 text-sm text-muted">
-                  <span className="font-display text-base font-bold text-accent">
-                    {athlete.record.wins}–{athlete.record.losses}
-                  </span>{' '}
-                  record · {athlete.record.submissions} submissions ·{' '}
-                  <span className="text-chalk">{medals.gold}</span> gold
-                </p>
+                <div className="mt-6 flex items-end gap-8">
+                  <div>
+                    <div className="font-display text-4xl font-bold tracking-tight tabular-nums text-accent">
+                      {athlete.record.wins}–{athlete.record.losses}
+                    </div>
+                    <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
+                      Record
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-display text-4xl font-bold tracking-tight tabular-nums">
+                      {athlete.record.submissions}
+                    </div>
+                    <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
+                      Submissions
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
             <div className="shrink-0 self-center lg:self-auto">
               <WinRateRing
                 value={stats.winRate}
+                size={160}
                 sub={`${athlete.record.wins} of ${stats.matches}`}
               />
             </div>
@@ -111,8 +126,8 @@ export default function AthleteProfilePage() {
         </Container>
       </div>
 
-      <Container className="space-y-10 py-10">
-        {athlete.bio && <p className="max-w-2xl text-muted">{athlete.bio}</p>}
+      <Container className="space-y-12 py-12" size="wide">
+        {athlete.bio && <p className="max-w-2xl text-lg text-muted">{athlete.bio}</p>}
 
         <section>
           <h2 className="mb-3 font-display text-xl font-bold">Record</h2>

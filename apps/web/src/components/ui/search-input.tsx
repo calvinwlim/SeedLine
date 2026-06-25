@@ -2,7 +2,7 @@
 
 import { cn } from '../../lib/cn';
 
-/** A controlled search box used by the directory pages. */
+/** A pill search box used across the directory pages. */
 export function SearchInput({
   value,
   onChange,
@@ -18,7 +18,7 @@ export function SearchInput({
     <div className={cn('relative', className)}>
       <svg
         viewBox="0 0 24 24"
-        className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+        className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -32,38 +32,8 @@ export function SearchInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-md border border-line/10 bg-surface py-2.5 pl-10 pr-3 text-sm text-chalk placeholder:text-muted focus:border-accent/50 focus:outline-none"
+        className="h-12 w-full rounded-full border border-line/15 bg-surface pl-11 pr-4 text-sm text-chalk shadow-card placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/25"
       />
     </div>
-  );
-}
-
-/** A simple select styled to match the search box. */
-export function FilterSelect<T extends string>({
-  value,
-  onChange,
-  options,
-  className,
-}: {
-  value: T | '';
-  onChange: (value: T | '') => void;
-  options: Array<{ value: T; label: string }>;
-  className?: string;
-}) {
-  return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value as T | '')}
-      className={cn(
-        'rounded-md border border-line/10 bg-surface px-3 py-2.5 text-sm text-chalk focus:border-accent/50 focus:outline-none',
-        className,
-      )}
-    >
-      {options.map((opt) => (
-        <option key={opt.value} value={opt.value} className="bg-surface">
-          {opt.label}
-        </option>
-      ))}
-    </select>
   );
 }

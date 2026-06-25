@@ -105,13 +105,24 @@ export default function EventDetailPage() {
   return (
     <main>
       <div className="border-b border-line/10 bg-surface">
-        <Container className="py-10">
-          <Link href="/events" className="text-sm text-muted hover:text-chalk">
+        <Container className="py-12 md:py-16" size="wide">
+          <Link
+            href="/events"
+            className="text-xs font-bold uppercase tracking-wide text-muted hover:text-chalk"
+          >
             ← All events
           </Link>
-          <div className="mt-4 flex flex-wrap items-start justify-between gap-4">
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
+          <div className="mt-8 flex flex-wrap items-start justify-between gap-6">
+            <div className="min-w-0">
+              <p className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-accent">
+                {formatDateRange(event.startDate, event.endDate)}
+                {event.country ? ` · ${event.country}` : ''}
+              </p>
+              <h1 className="mt-3 font-display text-5xl font-bold tracking-tight sm:text-6xl">
+                {event.name}
+              </h1>
+              <p className="mt-3 text-muted">{location || 'Location to be announced'}</p>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
                 <Badge tone={eventStatusTone(event.status)}>{eventStatusLabel(event.status)}</Badge>
                 {(event.disciplines ?? []).map((d) => (
                   <Badge key={d} tone="outline">
@@ -119,11 +130,6 @@ export default function EventDetailPage() {
                   </Badge>
                 ))}
               </div>
-              <h1 className="mt-3 font-display text-4xl font-bold">{event.name}</h1>
-              <p className="mt-2 text-muted">{location || 'Location to be announced'}</p>
-              <p className="mt-1 font-medium text-accent">
-                {formatDateRange(event.startDate, event.endDate)}
-              </p>
             </div>
             <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
               <ButtonLink href={`/events/${event.slug}/schedule`} variant="secondary">
@@ -135,11 +141,13 @@ export default function EventDetailPage() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3 border-t border-line/10 pt-5">
+          <div className="mt-8 flex flex-wrap gap-x-12 gap-y-4 border-t border-line/10 pt-6">
             {heroStats.map((stat) => (
               <div key={stat.label}>
-                <div className="font-display text-xl font-bold leading-none">{stat.value}</div>
-                <div className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted">
+                <div className="font-display text-3xl font-bold leading-none tracking-tight tabular-nums">
+                  {stat.value}
+                </div>
+                <div className="mt-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-muted">
                   {stat.label}
                 </div>
               </div>
@@ -148,7 +156,7 @@ export default function EventDetailPage() {
         </Container>
       </div>
 
-      <Container className="grid gap-8 py-10 lg:grid-cols-[1fr_320px]">
+      <Container className="grid gap-8 py-12 lg:grid-cols-[1fr_320px]" size="wide">
         <div className="space-y-10">
           <section>
             <h2 className="font-display text-xl font-bold">About this event</h2>
