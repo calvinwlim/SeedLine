@@ -1,5 +1,5 @@
 import { Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
-import type { AthleteProfile, AthleteSummary } from '@openmat/types';
+import type { AthleteProfile, AthleteSummary } from '@seedline/types';
 import { AthletesService } from './athletes.service';
 
 @Controller('athletes')

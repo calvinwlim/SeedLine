@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import type { CompetitorScore, MatchScore, ScoreSide, ScoreableMatch } from '@openmat/types';
+import type { CompetitorScore, MatchScore, ScoreSide, ScoreableMatch } from '@seedline/types';
 import { Container } from '../../../../../components/ui/container';
 import { Badge } from '../../../../../components/ui/badge';
 import { Button, ButtonLink } from '../../../../../components/ui/button';

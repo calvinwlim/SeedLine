@@ -1,6 +1,6 @@
 /**
  * Shared base ESLint config for all packages in the monorepo.
- * Apps and packages extend this via `extends: ["@openmat/eslint-config"]`.
+ * Apps and packages extend this via `extends: ["@seedline/eslint-config"]`.
  */
 module.exports = {
   root: true,

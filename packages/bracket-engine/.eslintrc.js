@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['@openmat/eslint-config'],
+  extends: ['@seedline/eslint-config'],
 };

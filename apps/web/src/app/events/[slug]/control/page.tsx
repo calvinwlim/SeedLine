@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import type { MatControl, ScoreableMatch } from '@openmat/types';
+import type { MatControl, ScoreableMatch } from '@seedline/types';
 import { Container } from '../../../../components/ui/container';
 import { ButtonLink } from '../../../../components/ui/button';
 import { Card, CardBody, EmptyState } from '../../../../components/ui/card';

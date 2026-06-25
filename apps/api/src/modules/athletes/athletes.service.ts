@@ -5,7 +5,7 @@ import type {
   AthleteSummary,
   MedalResult,
   RegistrationSummary,
-} from '@openmat/types';
+} from '@seedline/types';
 import { DATABASE, type Database } from '../../database/database.module';
 import {
   academies,

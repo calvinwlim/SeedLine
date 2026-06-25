@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
-import type { DivisionSummary } from '@openmat/types';
+import type { DivisionSummary } from '@seedline/types';
 import { Container } from '../../../components/ui/container';
 import { Badge } from '../../../components/ui/badge';
 import { ButtonLink, Button } from '../../../components/ui/button';

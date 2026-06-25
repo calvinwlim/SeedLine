@@ -6,15 +6,15 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: openmat
-      POSTGRES_PASSWORD: openmat
-      POSTGRES_DB: openmat
+      POSTGRES_USER: seedline
+      POSTGRES_PASSWORD: seedline
+      POSTGRES_DB: seedline
     ports:
       - '5432:5432'
     volumes:
-      - openmat_pg:/var/lib/postgresql/data
+      - seedline_pg:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U openmat']
+      test: ['CMD-SHELL', 'pg_isready -U seedline']
       interval: 5s
       timeout: 5s
       retries: 5
@@ -25,7 +25,7 @@ services:
     ports:
       - '6379:6379'
     volumes:
-      - openmat_redis:/data
+      - seedline_redis:/data
     healthcheck:
       test: ['CMD', 'redis-cli', 'ping']
       interval: 5s
@@ -33,5 +33,5 @@ services:
       retries: 5
 
 volumes:
-  openmat_pg:
-  openmat_redis:
+  seedline_pg:
+  seedline_redis:

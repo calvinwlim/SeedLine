@@ -1,4 +1,4 @@
-import type { BeltRank } from '@openmat/types';
+import type { BeltRank } from '@seedline/types';
 import { beltColor, humanize } from '../../lib/format';
 import { cn } from '../../lib/cn';
 

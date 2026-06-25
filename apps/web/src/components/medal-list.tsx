@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { MedalResult } from '@openmat/types';
+import type { MedalResult } from '@seedline/types';
 import { Card } from './ui/card';
 import { formatDate, ordinalPlace } from '../lib/format';
 

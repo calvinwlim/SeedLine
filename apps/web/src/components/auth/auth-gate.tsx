@@ -2,7 +2,7 @@
 
 import { useEffect, type ReactNode } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import type { UserRole } from '@openmat/types';
+import type { UserRole } from '@seedline/types';
 import { useAuth } from '../../lib/auth/auth-context';
 import { Container } from '../ui/container';
 import { EmptyState } from '../ui/card';

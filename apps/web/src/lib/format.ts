@@ -1,4 +1,4 @@
-import type { BeltRank, EventStatus, RegistrationStatus } from '@openmat/types';
+import type { BeltRank, EventStatus, RegistrationStatus } from '@seedline/types';
 
 /** Format a single date, e.g. "Jul 10, 2026". */
 export function formatDate(iso: string): string {

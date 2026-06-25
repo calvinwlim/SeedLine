@@ -10,7 +10,7 @@ import {
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
-import type { Bracket } from '@openmat/bracket-engine';
+import type { Bracket } from '@seedline/bracket-engine';
 import {
   bracketFormatEnum,
   bracketStatusEnum,

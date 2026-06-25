@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { RegistrationSummary } from '@openmat/types';
+import type { RegistrationSummary } from '@seedline/types';
 import { Badge } from './ui/badge';
 import { Card } from './ui/card';
 import { formatDate, registrationStatusLabel, registrationStatusTone } from '../lib/format';

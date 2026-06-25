@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { desc, eq, inArray, sql } from 'drizzle-orm';
-import type { AcademyDetail, AcademySummary, MedalResult } from '@openmat/types';
+import type { AcademyDetail, AcademySummary, MedalResult } from '@seedline/types';
 import { DATABASE, type Database } from '../../database/database.module';
 import { academies, athletes, events, medals } from '../../database/schema';
 import { toAthleteSummary, toCoordinates } from '../../common/mappers';

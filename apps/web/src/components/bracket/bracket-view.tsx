@@ -1,5 +1,5 @@
-import type { Bracket, BracketMatch } from '@openmat/bracket-engine';
-import { computeRoundRobinStandings } from '@openmat/bracket-engine';
+import type { Bracket, BracketMatch } from '@seedline/bracket-engine';
+import { computeRoundRobinStandings } from '@seedline/bracket-engine';
 import { cn } from '../../lib/cn';
 
 function nameMap(bracket: Bracket): Map<string, { name: string; seed: number }> {

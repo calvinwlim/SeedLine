@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['@openmat/eslint-config/next'],
+  extends: ['@seedline/eslint-config/next'],
 };

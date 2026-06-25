@@ -1,4 +1,4 @@
-import type { UserRole } from '@openmat/types';
+import type { UserRole } from '@seedline/types';
 
 /** A demo identity you can sign in as. Standalone auth has no real backend, so
  *  these personas stand in for accounts of each role. */
@@ -18,7 +18,7 @@ export const DEMO_USERS: AuthUser[] = [
   {
     id: 'usr_athlete',
     name: 'Yara Haddad',
-    email: 'yara@openmat.dev',
+    email: 'yara@seedline.dev',
     role: 'athlete',
     athleteId: 'ath_haddad',
     organizerId: null,
@@ -27,16 +27,16 @@ export const DEMO_USERS: AuthUser[] = [
   {
     id: 'usr_organizer',
     name: 'André Galvão',
-    email: 'andre@openmat.dev',
+    email: 'andre@seedline.dev',
     role: 'organizer',
     athleteId: null,
-    organizerId: 'org_openmat',
+    organizerId: 'org_seedline',
     blurb: 'Organize: create events, manage divisions, and view registrations.',
   },
   {
     id: 'usr_staff',
     name: 'Mat Staff',
-    email: 'staff@openmat.dev',
+    email: 'staff@seedline.dev',
     role: 'staff',
     athleteId: null,
     organizerId: null,

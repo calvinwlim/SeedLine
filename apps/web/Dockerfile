@@ -1,5 +1,5 @@
 # Build from the repository root:
-#   docker build -f apps/web/Dockerfile -t openmat-web .
+#   docker build -f apps/web/Dockerfile -t seedline-web .
 
 FROM node:20-slim AS base
 WORKDIR /app
@@ -8,7 +8,7 @@ FROM base AS build
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY . .
 RUN npm ci
-RUN npx turbo run build --filter=@openmat/web
+RUN npx turbo run build --filter=@seedline/web
 
 FROM base AS runtime
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1

@@ -1,5 +1,5 @@
 # Build from the repository root:
-#   docker build -f apps/api/Dockerfile -t openmat-api .
+#   docker build -f apps/api/Dockerfile -t seedline-api .
 
 # ---- Base ----
 FROM node:20-slim AS base
@@ -10,7 +10,7 @@ FROM base AS build
 COPY . .
 RUN npm ci
 # Turbo builds workspace dependencies (bracket-engine, types) before the API.
-RUN npx turbo run build --filter=@openmat/api
+RUN npx turbo run build --filter=@seedline/api
 # Drop dev dependencies to slim the runtime image.
 RUN npm prune --omit=dev
 

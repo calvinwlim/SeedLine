@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 
 export type Theme = 'light' | 'dark';
 
-const STORAGE_KEY = 'openmat-theme';
+const STORAGE_KEY = 'seedline-theme';
 
 interface ThemeContextValue {
   theme: Theme;

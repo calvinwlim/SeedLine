@@ -1,5 +1,5 @@
 {
-  "extends": "@openmat/tsconfig/base.json",
+  "extends": "@seedline/tsconfig/base.json",
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "Node",

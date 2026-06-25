@@ -1,5 +1,5 @@
 import { Controller, Get, NotFoundException, Param, Query } from '@nestjs/common';
-import type { AcademyDetail, AcademySummary } from '@openmat/types';
+import type { AcademyDetail, AcademySummary } from '@seedline/types';
 import { AcademiesService } from './academies.service';
 
 @Controller('academies')

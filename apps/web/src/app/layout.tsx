@@ -21,7 +21,7 @@ const display = Space_Grotesk({
 const body = Inter({ subsets: ['latin'], variable: '--font-body' });
 
 export const metadata: Metadata = {
-  title: 'OpenMat — Tournament management for grappling',
+  title: 'SeedLine — Tournament management for grappling',
   description:
     'Registration, brackets, and matside scoring for grappling and combat-sports tournaments — built to keep working on event day.',
 };

@@ -1,4 +1,4 @@
-import type { AthleteRecord, AthleteSummary, Coordinates } from '@openmat/types';
+import type { AthleteRecord, AthleteSummary, Coordinates } from '@seedline/types';
 import { athletes } from '../database/schema';
 
 type AthleteRow = typeof athletes.$inferSelect;

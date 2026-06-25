@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { BELT_RANKS, type BeltRank } from '@openmat/types';
+import { BELT_RANKS, type BeltRank } from '@seedline/types';
 import { Card, CardBody } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Belt } from '../../../components/ui/belt';

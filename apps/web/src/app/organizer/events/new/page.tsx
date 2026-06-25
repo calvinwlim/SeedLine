@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
-import { DISCIPLINES, type Discipline } from '@openmat/types';
+import { DISCIPLINES, type Discipline } from '@seedline/types';
 import { Container } from '../../../../components/ui/container';
 import { Card, CardBody } from '../../../../components/ui/card';
 import { Button } from '../../../../components/ui/button';

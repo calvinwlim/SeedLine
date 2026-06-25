@@ -5,7 +5,7 @@ import type {
   EventDetail,
   EventStatus,
   EventSummary,
-} from '@openmat/types';
+} from '@seedline/types';
 import { EventsService } from './events.service';
 
 @Controller('events')

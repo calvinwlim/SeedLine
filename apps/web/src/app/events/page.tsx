@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import type { Discipline, EventStatus } from '@openmat/types';
+import type { Discipline, EventStatus } from '@seedline/types';
 import { EventCard } from '../../components/event-card';
 import { FeaturedEventCard } from '../../components/featured-event-card';
 import { Container } from '../../components/ui/container';

@@ -1,5 +1,5 @@
 {
-  "extends": "@openmat/tsconfig/node.json",
+  "extends": "@seedline/tsconfig/node.json",
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",

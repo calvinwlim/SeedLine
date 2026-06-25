@@ -22,7 +22,7 @@ import type {
   ScoreMethod,
   ScoreSide,
   ScoreableMatch,
-} from '@openmat/types';
+} from '@seedline/types';
 import type { ApiClient } from '../api-types';
 import { academies, athletes, currentOrganizer, currentOrganizerId, events, slugify } from './data';
 import { getSessionAthleteId, getSessionUser } from '../auth/session';
@@ -193,7 +193,7 @@ export const mockClient: ApiClient = {
     const account: AccountProfile = {
       id: user?.id ?? 'usr_guest',
       name: user?.name ?? 'Guest',
-      email: user?.email ?? 'guest@openmat.dev',
+      email: user?.email ?? 'guest@seedline.dev',
       role: user?.role ?? 'athlete',
       memberSince: '2023-02-14T00:00:00.000Z',
       avatarUrl: null,

@@ -1,4 +1,4 @@
-import type { AthleteRecord, AthleteSummary, BeltRank, MedalResult } from '@openmat/types';
+import type { AthleteRecord, AthleteSummary, BeltRank, MedalResult } from '@seedline/types';
 
 /** Headline performance numbers derived from a competition record. */
 export interface KeyStats {

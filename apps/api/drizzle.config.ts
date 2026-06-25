@@ -5,7 +5,7 @@ export default defineConfig({
   out: './drizzle',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL ?? 'postgres://openmat:openmat@localhost:5432/openmat',
+    url: process.env.DATABASE_URL ?? 'postgres://seedline:seedline@localhost:5432/seedline',
   },
   verbose: true,
   strict: true,

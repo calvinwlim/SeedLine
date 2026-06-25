@@ -4,12 +4,12 @@ import type {
   DivisionSummary,
   EventDetail,
   RegistrationSummary,
-} from '@openmat/types';
+} from '@seedline/types';
 
 /**
  * In-memory fixtures that let the web app run, and be developed against, with
  * no API and no database. They mirror the shape of the real DTOs in
- * `@openmat/types`, so swapping `NEXT_PUBLIC_DATA_SOURCE=live` later is a
+ * `@seedline/types`, so swapping `NEXT_PUBLIC_DATA_SOURCE=live` later is a
  * drop-in change rather than a rewrite.
  *
  * The data is intentionally cross-linked (athletes belong to academies, register
@@ -300,8 +300,8 @@ interface MockEvent extends EventDetail {}
 export const events: MockEvent[] = [
   {
     id: 'evt_summer_open',
-    slug: 'openmat-summer-open-2026',
-    name: 'OpenMat Summer Open 2026',
+    slug: 'seedline-summer-open-2026',
+    name: 'SeedLine Summer Open 2026',
     venueName: 'San Diego Convention Center',
     address: '111 W Harbor Dr',
     city: 'San Diego',
@@ -319,9 +319,9 @@ export const events: MockEvent[] = [
     registeredCount: 248,
     startingPriceCents: usd(85),
     description:
-      'A two-day gi and no-gi tournament for all belt levels, run on six mats with live brackets and matside scoring. The flagship OpenMat event of the summer.',
+      'A two-day gi and no-gi tournament for all belt levels, run on six mats with live brackets and matside scoring. The flagship SeedLine event of the summer.',
     scheduleNote: 'Day 1: gi (white–purple). Day 2: gi (brown/black) + all no-gi.',
-    organizer: { id: 'org_openmat', slug: 'openmat-events', name: 'OpenMat Events', logoUrl: null },
+    organizer: { id: 'org_seedline', slug: 'seedline-events', name: 'SeedLine Events', logoUrl: null },
     divisions: divisions('evt_summer_open', [
       {
         name: 'Adult / Gi / Male / White / Feather',
@@ -382,7 +382,7 @@ export const events: MockEvent[] = [
     description:
       'A no-gi only championship under ADCC and submission-only rulesets, with a black-belt absolute superfight to close the night.',
     scheduleNote: 'Absolute and superfight brackets seeded from division results.',
-    organizer: { id: 'org_openmat', slug: 'openmat-events', name: 'OpenMat Events', logoUrl: null },
+    organizer: { id: 'org_seedline', slug: 'seedline-events', name: 'SeedLine Events', logoUrl: null },
     divisions: divisions('evt_no_gi_worlds', [
       {
         name: 'Adult / No-Gi / Male / Advanced / Light',
@@ -503,7 +503,7 @@ export const events: MockEvent[] = [
     description:
       'A friendly, well-run kids and juvenile gi tournament — happening today. Follow the live mat schedule and results.',
     scheduleNote: 'Check-in opens 7:30am. Coaches meeting at 8:15am.',
-    organizer: { id: 'org_openmat', slug: 'openmat-events', name: 'OpenMat Events', logoUrl: null },
+    organizer: { id: 'org_seedline', slug: 'seedline-events', name: 'SeedLine Events', logoUrl: null },
     divisions: divisions('evt_kids_classic', [
       {
         name: 'Kids / Gi / Male / Gray / 6-7yo',
@@ -761,11 +761,11 @@ for (const academy of academies) {
 export const currentAccountAthleteId = 'ath_haddad';
 
 /** The organizer the demo account manages, for the organizer dashboard. */
-export const currentOrganizerId = 'org_openmat';
+export const currentOrganizerId = 'org_seedline';
 export const currentOrganizer = {
-  id: 'org_openmat',
-  slug: 'openmat-events',
-  name: 'OpenMat Events',
+  id: 'org_seedline',
+  slug: 'seedline-events',
+  name: 'SeedLine Events',
   logoUrl: null as string | null,
 };
 

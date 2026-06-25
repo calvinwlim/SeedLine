@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { EventSummary } from '@openmat/types';
+import type { EventSummary } from '@seedline/types';
 import { Badge } from './ui/badge';
 import {
   eventStatusLabel,

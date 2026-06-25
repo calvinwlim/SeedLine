@@ -1,5 +1,5 @@
 {
-  "name": "openmat",
+  "name": "seedline",
   "version": "0.1.0",
   "private": true,
   "description": "Tournament & competition management platform for grappling and combat sports",
@@ -16,16 +16,16 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "dev:web": "turbo run dev --filter=@openmat/web...",
-    "dev:api": "turbo run dev --filter=@openmat/api...",
+    "dev:web": "turbo run dev --filter=@seedline/web...",
+    "dev:api": "turbo run dev --filter=@seedline/api...",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
-    "db:generate": "npm run db:generate --workspace @openmat/api",
-    "db:migrate": "npm run db:migrate --workspace @openmat/api",
-    "db:push": "npm run db:push --workspace @openmat/api",
+    "db:generate": "npm run db:generate --workspace @seedline/api",
+    "db:migrate": "npm run db:migrate --workspace @seedline/api",
+    "db:push": "npm run db:push --workspace @seedline/api",
     "clean": "turbo run clean && rm -rf node_modules"
   },
   "devDependencies": {

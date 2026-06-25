@@ -9,8 +9,8 @@ import type {
   ScoreSide,
   ScoreableMatch,
   ScheduleMat,
-} from '@openmat/types';
-import type { Bracket } from '@openmat/bracket-engine';
+} from '@seedline/types';
+import type { Bracket } from '@seedline/bracket-engine';
 import { buildBracket } from '../bracket';
 import { buildEntrants } from './entrants';
 import type { events as EventsArray } from './data';

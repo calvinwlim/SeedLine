@@ -6,7 +6,7 @@ import type {
   ScoreMethod,
   ScoreSide,
   ScoreableMatch,
-} from '@openmat/types';
+} from '@seedline/types';
 import { LiveService } from './live.service';
 
 interface FinishBody {

@@ -13,7 +13,7 @@ import type {
   ScoreMethod,
   ScoreSide,
   ScoreableMatch,
-} from '@openmat/types';
+} from '@seedline/types';
 import type { ApiClient } from './api-types';
 import { mockClient } from './mock/client';
 

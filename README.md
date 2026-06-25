@@ -1,11 +1,11 @@
-# OpenMat
+# SeedLine
 
 Tournament and competition management for grappling and combat sports — registration,
 seeding, bracket generation, and matside scoring designed to keep working when the venue
 Wi-Fi does not.
 
-> `openmat` is a working codename. To rename, search-and-replace the `@openmat/*` package
-> scope and the `openmat` references (image names, database name in `docker-compose.yml` and
+> `seedline` is a working codename. To rename, search-and-replace the `@seedline/*` package
+> scope and the `seedline` references (image names, database name in `docker-compose.yml` and
 > the `.env` files) across the repo.
 
 ## What's in here
@@ -16,7 +16,7 @@ runs identically on the server (authoritative) and, later, on the offline scorin
 (optimistic), then reconciles.
 
 ```
-openmat/
+seedline/
 ├── apps/
 │   ├── api/                 NestJS + Drizzle + PostgreSQL backend
 │   └── web/                 Next.js (App Router) web app
@@ -45,7 +45,7 @@ foundation. It is pure (no I/O, no dependencies) and covered by tests.
   The losers-bracket drop pattern is reversed each drop round to avoid immediate rematches.
 
 ```ts
-import { generateBracket, applyResult } from '@openmat/bracket-engine';
+import { generateBracket, applyResult } from '@seedline/bracket-engine';
 
 let bracket = generateBracket('single_elimination', [
   { id: 'a', seed: 1 },
@@ -60,7 +60,7 @@ bracket = applyResult(bracket, 'W-R1-M1', 'a'); // immutable: returns a new brac
 Run the engine's tests:
 
 ```bash
-npm test --workspace @openmat/bracket-engine
+npm test --workspace @seedline/bracket-engine
 ```
 
 ## Prerequisites
@@ -104,7 +104,7 @@ entire frontend without running the API, Postgres, or Docker:
 
 ```bash
 npm install
-npm run build --workspace @openmat/types   # build the shared types once
+npm run build --workspace @seedline/types   # build the shared types once
 npm run dev:web                             # web + its watchers only, on :3000
 ```
 
@@ -125,7 +125,7 @@ The frontend covers, end to end on mock data:
   maps (Leaflet + OpenStreetMap, no API key required).
 - **Event pages** — detail, divisions, venue map, a multi-step **registration flow** that writes
   back to your account, and per-division **bracket viewer** rendered with the real
-  `@openmat/bracket-engine` (single elimination, double elimination, and round robin, with
+  `@seedline/bracket-engine` (single elimination, double elimination, and round robin, with
   podium results).
 - **Live schedule & results** — a per-mat running order with live/on-deck/done states, live
   scores, and a completion bar (`/events/[slug]/schedule`).
@@ -193,7 +193,7 @@ This is a foundation, and it is honest about its edges:
 ## Deployment notes
 
 Both apps ship with a multi-stage `Dockerfile` (build from the repo root, e.g.
-`docker build -f apps/api/Dockerfile -t openmat-api .`). The web app uses Next's `standalone`
+`docker build -f apps/api/Dockerfile -t seedline-api .`). The web app uses Next's `standalone`
 output for a small runtime image.
 
 A reasonable starting target is a container PaaS (Fly.io or Render) with managed Postgres

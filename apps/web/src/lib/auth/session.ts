@@ -7,7 +7,7 @@ import { findUser, type AuthUser } from './users';
  * an in-memory value mirrored to localStorage so a refresh keeps you signed in.
  */
 
-const STORAGE_KEY = 'openmat.session.userId';
+const STORAGE_KEY = 'seedline.session.userId';
 
 // `undefined` = not yet hydrated from storage; `null` = signed out.
 let currentUserId: string | null | undefined;

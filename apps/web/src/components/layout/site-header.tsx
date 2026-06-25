@@ -16,7 +16,7 @@ const BASE_NAV = [
 function Wordmark() {
   return (
     <Link href="/" className="font-display text-lg font-bold tracking-tight">
-      open<span className="text-accent">mat</span>
+      Seed<span className="text-accent">Line</span>
     </Link>
   );
 }

@@ -1,6 +1,6 @@
 import { pgEnum } from 'drizzle-orm/pg-core';
 
-// These mirror @openmat/types. Keep both in sync; the database is the source of truth.
+// These mirror @seedline/types. Keep both in sync; the database is the source of truth.
 export const userRoleEnum = pgEnum('user_role', ['athlete', 'organizer', 'staff', 'admin']);
 export const disciplineEnum = pgEnum('discipline', ['gi', 'nogi']);
 export const genderEnum = pgEnum('gender', ['male', 'female', 'mixed']);

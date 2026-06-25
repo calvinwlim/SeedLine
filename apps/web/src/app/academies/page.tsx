@@ -57,7 +57,7 @@ export default function AcademiesPage() {
         Directory
       </p>
       <h1 className="mt-3 font-display text-5xl font-bold tracking-tight sm:text-6xl">Academies</h1>
-      <p className="mt-3 text-muted">Teams and gyms competing on OpenMat.</p>
+      <p className="mt-3 text-muted">Teams and gyms competing on SeedLine.</p>
 
       <div className="mt-10 space-y-5 border-y border-line/10 py-6">
         <SearchInput

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { AcademySummary } from '@openmat/types';
+import type { AcademySummary } from '@seedline/types';
 import { Avatar } from './ui/avatar';
 
 export function AcademyCard({ academy }: { academy: AcademySummary }) {

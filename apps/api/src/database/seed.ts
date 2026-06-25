@@ -1,6 +1,6 @@
 /**
  * Seed a representative dataset so the web app renders real data in `live`
- * mode. Run with: `npm run db:seed --workspace @openmat/api` (after db:push).
+ * mode. Run with: `npm run db:seed --workspace @seedline/api` (after db:push).
  *
  * Idempotent: clears the seeded tables first, then re-inserts. Slugs mirror the
  * web app's mock fixtures so live mode feels continuous with mock mode.
@@ -20,7 +20,7 @@ import {
 } from './schema';
 
 const DATABASE_URL =
-  process.env.DATABASE_URL ?? 'postgres://openmat:openmat@localhost:5432/openmat';
+  process.env.DATABASE_URL ?? 'postgres://seedline:seedline@localhost:5432/seedline';
 
 const DAY = 86_400_000;
 const now = Date.now();
@@ -153,8 +153,8 @@ const athleteSeed: AthleteSeed[] = [
 
 const eventSeed = [
   {
-    slug: 'openmat-summer-open-2026',
-    name: 'OpenMat Summer Open 2026',
+    slug: 'seedline-summer-open-2026',
+    name: 'SeedLine Summer Open 2026',
     venueName: 'San Diego Convention Center',
     address: '111 W Harbor Dr',
     city: 'San Diego',
@@ -242,11 +242,11 @@ async function main(): Promise<void> {
 
   const [orgUser] = await db
     .insert(users)
-    .values({ email: 'organizer@openmat.dev', name: 'OpenMat Events', role: 'organizer' })
+    .values({ email: 'organizer@seedline.dev', name: 'SeedLine Events', role: 'organizer' })
     .returning();
   const [organizer] = await db
     .insert(organizers)
-    .values({ userId: orgUser!.id, name: 'OpenMat Events', slug: 'openmat-events' })
+    .values({ userId: orgUser!.id, name: 'SeedLine Events', slug: 'seedline-events' })
     .returning();
 
   const academyRows = await db.insert(academies).values(academySeed).returning();

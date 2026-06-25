@@ -1,4 +1,4 @@
-import type { AthleteRecord } from '@openmat/types';
+import type { AthleteRecord } from '@seedline/types';
 import { Stat } from './ui/card';
 
 /** The win/loss/finish summary shown on competitor profiles. */

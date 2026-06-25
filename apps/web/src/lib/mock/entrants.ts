@@ -1,4 +1,4 @@
-import type { BracketEntrant, DivisionSummary } from '@openmat/types';
+import type { BracketEntrant, DivisionSummary } from '@seedline/types';
 import { academies, athletes, events } from './data';
 
 /**

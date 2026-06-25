@@ -17,7 +17,7 @@ import {
   type EventStatus,
   type Gender,
   type Ruleset,
-} from '@openmat/types';
+} from '@seedline/types';
 import { Container } from '../../../../components/ui/container';
 import { Badge } from '../../../../components/ui/badge';
 import { Button, ButtonLink } from '../../../../components/ui/button';

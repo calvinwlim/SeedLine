@@ -22,7 +22,7 @@ import type {
   ScoreMethod,
   ScoreSide,
   ScoreableMatch,
-} from '@openmat/types';
+} from '@seedline/types';
 
 /**
  * The data-access surface the web app depends on. Both the mock client (for

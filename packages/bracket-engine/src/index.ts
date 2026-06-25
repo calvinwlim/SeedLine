@@ -1,5 +1,5 @@
 /**
- * @openmat/bracket-engine
+ * @seedline/bracket-engine
  *
  * Pure, deterministic bracket generation and result propagation. No I/O, no
  * dependencies — safe to run on the server (authoritative) and on the offline

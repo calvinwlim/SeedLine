@@ -1,5 +1,5 @@
-import type { Bracket, BracketMatch } from '@openmat/bracket-engine';
-import type { MatchScore } from '@openmat/types';
+import type { Bracket, BracketMatch } from '@seedline/bracket-engine';
+import type { MatchScore } from '@seedline/types';
 
 /** A fresh, zeroed score for a new match. */
 export function zeroScore(): MatchScore {

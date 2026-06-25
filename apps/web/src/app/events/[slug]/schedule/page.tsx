@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import type { ScheduleMatch } from '@openmat/types';
+import type { ScheduleMatch } from '@seedline/types';
 import { Container } from '../../../../components/ui/container';
 import { Badge } from '../../../../components/ui/badge';
 import { ButtonLink } from '../../../../components/ui/button';

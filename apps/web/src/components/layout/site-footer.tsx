@@ -24,7 +24,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 sm:grid-cols-2 md:grid-cols-4">
         <div className="sm:col-span-2 md:col-span-2">
           <span className="font-display text-lg font-bold tracking-tight">
-            open<span className="text-accent">mat</span>
+            Seed<span className="text-accent">Line</span>
           </span>
           <p className="mt-3 max-w-xs text-sm text-muted">
             Tournament and competition management for grappling and combat sports — built to keep
@@ -51,7 +51,7 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-line/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <span>© {new Date().getFullYear()} OpenMat. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} SeedLine. All rights reserved.</span>
           <span>Three rulesets, offline-first scoring, one source of truth.</span>
         </div>
       </div>

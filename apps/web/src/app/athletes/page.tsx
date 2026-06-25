@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import type { BeltRank, Discipline } from '@openmat/types';
+import type { BeltRank, Discipline } from '@seedline/types';
 import { AthleteCard } from '../../components/athlete-card';
 import { FeaturedAthleteCard } from '../../components/featured-athlete-card';
 import { Container } from '../../components/ui/container';

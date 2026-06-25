@@ -1,5 +1,5 @@
 /**
- * @openmat/types
+ * @seedline/types
  *
  * Shared domain vocabulary. These enums mirror the database schema and are the
  * single source of truth for valid values across the API and the web app.

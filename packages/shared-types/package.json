@@ -1,5 +1,5 @@
 {
-  "name": "@openmat/types",
+  "name": "@seedline/types",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
@@ -23,8 +23,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "devDependencies": {
-    "@openmat/eslint-config": "*",
-    "@openmat/tsconfig": "*",
+    "@seedline/eslint-config": "*",
+    "@seedline/tsconfig": "*",
     "eslint": "^8.57.0",
     "typescript": "^5.5.4"
   }

@@ -3,6 +3,7 @@ import { ButtonLink } from '../components/ui/button';
 import { Container } from '../components/ui/container';
 import { FeaturedEvents } from '../components/featured-events';
 import { Marquee } from '../components/editorial/marquee';
+import { LiveMatchCard } from '../components/home/live-match-card';
 
 /**
  * Page signature: a single-elimination bracket reduced to its essential lines,
@@ -63,25 +64,53 @@ export default function HomePage() {
     <main>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-line/10">
+        {/* Branded backdrop the glass refracts: warm accent glow + bracket motif
+            (no stock photography — the line motif is the house signature). */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-40 -top-40 h-[460px] w-[460px] rounded-full bg-accent/25 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-1/4 top-1/3 hidden h-[360px] w-[360px] rounded-full bg-accent/10 blur-3xl lg:block"
+        />
         <BracketMark className="pointer-events-none absolute right-[-60px] top-1/2 hidden w-[760px] -translate-y-1/2 text-line/[0.07] lg:block" />
-        <Container size="wide" className="relative py-24 md:py-36">
-          <p className="font-display text-xs font-bold uppercase tracking-[0.3em] text-accent">
-            Tournament software for combat sports
-          </p>
-          <h1 className="mt-7 max-w-5xl font-display text-6xl font-bold leading-[0.9] tracking-tight sm:text-8xl">
-            Run the whole bracket,
-            <br />
-            from sign-up to the <span className="text-accent">podium.</span>
-          </h1>
-          <p className="mt-8 max-w-xl text-lg text-muted">
-            Registration, seeding, and matside scoring for grappling and combat sports — built to
-            keep working when the venue Wi-Fi doesn&apos;t.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <ButtonLink href="/events">Browse events</ButtonLink>
-            <ButtonLink href="/academies" variant="secondary">
-              Explore academies
-            </ButtonLink>
+
+        <Container size="wide" className="relative py-20 md:py-28">
+          <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+            {/* Left: the pitch */}
+            <div className="lg:col-span-7">
+              <span className="inline-flex items-center gap-2 rounded-full border border-line/10 bg-surface/70 px-3.5 py-1.5 backdrop-blur-md">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
+                </span>
+                <span className="font-display text-[11px] font-bold uppercase tracking-[0.22em] text-muted">
+                  Tournament software for combat sports
+                </span>
+              </span>
+
+              <h1 className="mt-7 max-w-2xl font-display text-6xl font-bold leading-[0.9] tracking-tight sm:text-7xl xl:text-8xl">
+                Run the whole bracket,
+                <br />
+                from sign-up to the <span className="text-accent">podium.</span>
+              </h1>
+              <p className="mt-8 max-w-xl text-lg text-muted">
+                Registration, seeding, and matside scoring for grappling and combat sports — built
+                to keep working when the venue Wi-Fi doesn&apos;t.
+              </p>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <ButtonLink href="/events">Browse events</ButtonLink>
+                <ButtonLink href="/academies" variant="secondary">
+                  Explore academies
+                </ButtonLink>
+              </div>
+            </div>
+
+            {/* Right: the product, mid-match */}
+            <div className="lg:col-span-5">
+              <LiveMatchCard />
+            </div>
           </div>
         </Container>
       </section>

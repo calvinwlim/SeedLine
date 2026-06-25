@@ -8,7 +8,7 @@ import type {
   EventDetail,
   EventListQuery,
   EventSummary,
-} from '@openmat/types';
+} from '@seedline/types';
 import { DATABASE, type Database } from '../../database/database.module';
 import { academies, athletes, divisions, events, registrations } from '../../database/schema';
 

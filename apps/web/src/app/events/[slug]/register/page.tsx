@@ -4,7 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { BELT_RANKS, type BeltRank, type DivisionSummary } from '@openmat/types';
+import { BELT_RANKS, type BeltRank, type DivisionSummary } from '@seedline/types';
 import { Container } from '../../../../components/ui/container';
 import { Card, CardBody, EmptyState } from '../../../../components/ui/card';
 import { Badge } from '../../../../components/ui/badge';

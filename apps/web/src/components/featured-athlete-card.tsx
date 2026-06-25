@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { AthleteSummary } from '@openmat/types';
+import type { AthleteSummary } from '@seedline/types';
 import { Belt } from './ui/belt';
 import { fullName, humanize, initials } from '../lib/format';
 

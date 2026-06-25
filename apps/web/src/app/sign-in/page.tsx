@@ -27,7 +27,7 @@ function SignInForm() {
       </p>
       <h1 className="mt-3 font-display text-5xl font-bold tracking-tight sm:text-6xl">Sign in</h1>
       <p className="mt-4 max-w-md text-muted">
-        OpenMat runs standalone for development, so pick a demo identity to explore each role.
+        SeedLine runs standalone for development, so pick a demo identity to explore each role.
         {user && (
           <>
             {' '}

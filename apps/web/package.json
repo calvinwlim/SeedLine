@@ -1,9 +1,9 @@
 {
-  "name": "@openmat/web",
+  "name": "@seedline/web",
   "version": "0.1.0",
   "private": true,
   "license": "UNLICENSED",
-  "description": "OpenMat web app (Next.js) for athletes and organizers.",
+  "description": "SeedLine web app (Next.js) for athletes and organizers.",
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
@@ -13,8 +13,8 @@
     "clean": "rm -rf .next .turbo"
   },
   "dependencies": {
-    "@openmat/bracket-engine": "*",
-    "@openmat/types": "*",
+    "@seedline/bracket-engine": "*",
+    "@seedline/types": "*",
     "@tanstack/react-query": "^5.59.0",
     "leaflet": "^1.9.4",
     "next": "^14.2.13",
@@ -23,8 +23,8 @@
     "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
-    "@openmat/eslint-config": "*",
-    "@openmat/tsconfig": "*",
+    "@seedline/eslint-config": "*",
+    "@seedline/tsconfig": "*",
     "@types/leaflet": "^1.9.12",
     "@types/node": "^20.16.5",
     "@types/react": "^18.3.8",

@@ -4,8 +4,8 @@ import {
   generateBracket,
   type Bracket,
   type Standing,
-} from '@openmat/bracket-engine';
-import type { BracketEntrant, BracketFormat } from '@openmat/types';
+} from '@seedline/bracket-engine';
+import type { BracketEntrant, BracketFormat } from '@seedline/types';
 
 /** Build an engine bracket from a division's entrant list. */
 export function buildBracket(format: BracketFormat, entrants: BracketEntrant[]): Bracket {

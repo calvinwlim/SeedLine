@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, isNotNull, isNull } from 'drizzle-orm';
-import { generateBracket, type Entrant } from '@openmat/bracket-engine';
+import { generateBracket, type Entrant } from '@seedline/bracket-engine';
 import { DATABASE, type Database } from '../../database/database.module';
 import { athletes, brackets, divisions, mats, matches, registrations } from '../../database/schema';
 import { isRealMatch, roundLabelFor, zeroScore } from './scoring.util';

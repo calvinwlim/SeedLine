@@ -21,7 +21,7 @@ npm run build
 - TypeScript everywhere; keep the strict compiler settings.
 - The bracket engine stays pure — no I/O, no framework imports, and every behavior change
   comes with a test.
-- Domain enums live in `@openmat/types` and are mirrored by the database enums in
+- Domain enums live in `@seedline/types` and are mirrored by the database enums in
   `apps/api/src/database/schema/enums.ts`. Change both together.
 - Prefer generating Drizzle migrations (`npm run db:generate`) over editing the database by hand.
 - Formatting is handled by Prettier (`npm run format`); don't hand-format.

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { and, eq, max } from 'drizzle-orm';
 import { alias } from 'drizzle-orm/pg-core';
-import { applyResult, type AdvanceTarget, type Bracket } from '@openmat/bracket-engine';
+import { applyResult, type AdvanceTarget, type Bracket } from '@seedline/bracket-engine';
 import type {
   CompetitorScore,
   EventSchedule,
@@ -14,7 +14,7 @@ import type {
   ScoreMethod,
   ScoreSide,
   ScoreableMatch,
-} from '@openmat/types';
+} from '@seedline/types';
 import { DATABASE, type Database } from '../../database/database.module';
 import {
   athletes,

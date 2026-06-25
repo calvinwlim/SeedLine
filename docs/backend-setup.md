@@ -55,7 +55,7 @@ npm run build
 
 # 4. Create the tables, then seed representative data
 npm run db:push                            # or db:generate + db:migrate
-npm run db:seed --workspace @openmat/api
+npm run db:seed --workspace @seedline/api
 
 # 5. Run the API + web together
 npm run dev
@@ -90,4 +90,4 @@ These remain mock-served and are the next things to build into the API:
 
 - The athlete `record` columns and `medals` rows are denormalized for now so
   profiles render before the scoring pipeline exists; item 4 above retires them.
-- Enums in `schema/enums.ts` mirror `@openmat/types`; keep them in sync.
+- Enums in `schema/enums.ts` mirror `@seedline/types`; keep them in sync.
