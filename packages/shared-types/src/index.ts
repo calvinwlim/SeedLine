@@ -179,6 +179,7 @@ export interface AcademySummary {
   city: string | null;
   country: string | null;
   logoUrl?: string | null;
+  bannerUrl?: string | null;
   memberCount: number;
 }
 

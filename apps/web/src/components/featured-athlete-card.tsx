@@ -14,10 +14,15 @@ export function FeaturedAthleteCard({ athlete }: { athlete: AthleteSummary }) {
       href={`/athletes/${athlete.slug}`}
       className="group grid overflow-hidden rounded-3xl border border-line/10 bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-line/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:grid-cols-[300px_1fr]"
     >
-      {/* Cover: oversized monogram + belt */}
+      {/* Cover: oversized photo or monogram + belt */}
       <div className="flex min-h-[220px] flex-col items-center justify-center gap-4 bg-elevated p-8">
-        <span className="grid h-28 w-28 place-items-center rounded-3xl bg-gradient-to-br from-accent/25 to-corner/15 font-display text-4xl font-bold text-chalk ring-1 ring-inset ring-line/10">
-          {initials(athlete.firstName, athlete.lastName)}
+        <span className="grid h-28 w-28 place-items-center overflow-hidden rounded-3xl bg-gradient-to-br from-accent/25 to-corner/15 font-display text-4xl font-bold text-chalk ring-1 ring-inset ring-line/10">
+          {athlete.avatarUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- arbitrary host; plain img avoids next/image domain config.
+            <img src={athlete.avatarUrl} alt="" className="h-full w-full object-cover" />
+          ) : (
+            initials(athlete.firstName, athlete.lastName)
+          )}
         </span>
         <Belt rank={athlete.beltRank} />
       </div>

@@ -65,6 +65,7 @@ function toAcademySummary(academy: AcademyDetail): AcademySummary {
     city: academy.city,
     country: academy.country,
     logoUrl: academy.logoUrl,
+    bannerUrl: academy.bannerUrl,
     memberCount: academy.memberCount,
   };
 }

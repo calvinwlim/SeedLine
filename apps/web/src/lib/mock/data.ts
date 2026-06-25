@@ -42,6 +42,7 @@ export const academies: MockAcademy[] = [
     city: 'San Diego',
     country: 'United States',
     logoUrl: null,
+    bannerUrl: null,
     memberCount: 184,
     description:
       'Atos Jiu-Jitsu headquarters in San Diego, founded on a pressure-passing, position-before-submission style that has produced a generation of world champions.',
@@ -60,6 +61,7 @@ export const academies: MockAcademy[] = [
     city: 'Costa Mesa',
     country: 'United States',
     logoUrl: null,
+    bannerUrl: null,
     memberCount: 142,
     description:
       'Known as "the blue basement," AOJ is built around a precise, modern guard game and the Mendes brothers’ competition methodology.',
@@ -78,6 +80,7 @@ export const academies: MockAcademy[] = [
     city: 'London',
     country: 'United Kingdom',
     logoUrl: null,
+    bannerUrl: null,
     memberCount: 96,
     description:
       'A flagship Gracie Barra school bringing the "organized jiu-jitsu" curriculum to central London for hobbyists and competitors alike.',
@@ -96,6 +99,7 @@ export const academies: MockAcademy[] = [
     city: 'São Paulo',
     country: 'Brazil',
     logoUrl: null,
+    bannerUrl: null,
     memberCount: 210,
     description:
       'The winningest team in IBJJF history, Alliance’s São Paulo headquarters is a relentless competition factory.',
@@ -114,6 +118,7 @@ export const academies: MockAcademy[] = [
     city: 'Austin',
     country: 'United States',
     logoUrl: null,
+    bannerUrl: null,
     memberCount: 88,
     description:
       'A no-gi specialist school built on the 10th Planet system — rubber guard, the truck, and a leg-lock-heavy approach to submission-only competition.',

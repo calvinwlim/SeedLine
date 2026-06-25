@@ -14,7 +14,11 @@ export function AthleteCard({ athlete }: { athlete: AthleteSummary }) {
       href={`/athletes/${athlete.slug}`}
       className="group flex items-center gap-4 rounded-2xl border border-line/10 bg-surface p-5 shadow-card transition-all hover:-translate-y-1 hover:border-line/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
     >
-      <Avatar initials={initials(athlete.firstName, athlete.lastName)} size="md" />
+      <Avatar
+        initials={initials(athlete.firstName, athlete.lastName)}
+        src={athlete.avatarUrl}
+        size="md"
+      />
       <div className="min-w-0 flex-1">
         <h3 className="truncate font-display text-lg font-bold tracking-tight transition-colors group-hover:text-accent">
           {fullName(athlete.firstName, athlete.lastName)}

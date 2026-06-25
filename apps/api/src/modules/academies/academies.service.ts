@@ -15,6 +15,7 @@ function toAcademySummary(a: AcademyRow, memberCount: number): AcademySummary {
     city: a.city,
     country: a.country,
     logoUrl: a.logoUrl,
+    bannerUrl: a.bannerUrl,
     memberCount,
   };
 }

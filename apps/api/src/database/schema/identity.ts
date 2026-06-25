@@ -58,6 +58,7 @@ export const academies = pgTable('academies', {
   affiliation: varchar('affiliation', { length: 200 }),
   website: varchar('website', { length: 500 }),
   logoUrl: varchar('logo_url', { length: 500 }),
+  bannerUrl: varchar('banner_url', { length: 500 }),
   latitude: doublePrecision('latitude'),
   longitude: doublePrecision('longitude'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
